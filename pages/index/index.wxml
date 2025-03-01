@@ -1,0 +1,39 @@
+<view class="container" style="height: 1193rpx; display: flex; box-sizing: border-box">
+  <!-- 顶部校友会导航栏 -->
+  <view class="top-bar" style="height: 160rpx; display: flex; box-sizing: border-box">
+    <image src="/images/logo.png" class="logo"></image>
+    <text class="title">校友会</text>
+  </view>
+
+  <!-- 轮播图 -->
+  <swiper class="swiper" autoplay="true" interval="3000" duration="500">
+    <swiper-item><image src="/images/banner1.jpg" class="slide-image"></image></swiper-item>
+    <swiper-item><image src="/images/banner2.jpg" class="slide-image"></image></swiper-item>
+    <swiper-item><image src="/images/banner3.jpg" class="slide-image"></image></swiper-item>
+  </swiper>
+
+  <!-- 轮播图文字提示 -->
+  <view class="banner-text">
+    <text>学校校友会第三届理事会第一次会议召开</text>
+  </view>
+
+  <!-- 菜单按钮 -->
+  <view class="menu" style="height: 160rpx; display: flex; box-sizing: border-box">
+    <view class="menu-item" bindtap="goToPage" data-url="/pages/apply/apply">
+      <image src="/images/apply.png"></image>
+      <text>校友申报</text>
+    </view>
+    <view class="menu-item" bindtap="goToPage" data-url="/pages/check/check">
+      <image src="/images/check.png"></image>
+      <text>校友审核</text>
+    </view>
+    <view class="menu-item" bindtap="goToPage" data-url="/pages/famous/famous">
+      <image src="/images/famous.png"></image>
+      <text>知名校友</text>
+    </view>
+    <view class="menu-item" bindtap="goToPage" data-url="/pages/activity/activity">
+      <image src="/images/activity.png"></image>
+      <text>校友活动</text>
+    </view>
+  </view>
+</view>

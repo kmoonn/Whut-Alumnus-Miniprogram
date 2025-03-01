@@ -1,0 +1,32 @@
+{
+  "pages": [ 
+    "pages/login/login",
+    "pages/index/index",
+    "pages/apply/apply",
+    "pages/check/check",
+    "pages/famous/famous",
+    "pages/activity/activity",
+    "pages/logs/logs",
+    "pages/home/home"
+  ],
+  "window": { 
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom"
+  },
+  "tabBar": {
+    "list": [{
+      "pagePath": "pages/index/index",
+      "text": "首页"
+    }, {
+      "pagePath": "pages/home/home",
+      "text": "我的"
+    }]
+  },
+  "style": "v2",
+  "useExtendedLib": {
+    "kbone": true,
+    "weui": true
+  },
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

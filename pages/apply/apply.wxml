@@ -1,0 +1,67 @@
+<view class="container">
+<!-- 顶部校友会导航栏 -->
+<view class="top-bar" style="height: 160rpx; display: flex; box-sizing: border-box">
+  <image src="/images/logo.png" class="logo"></image>
+    <text class="title">校友申报</text>
+  </view>
+  <view class="header">
+    <text class="title">信息填写</text>
+  </view>
+
+  <view class="form">
+    <view class="form-item">
+      <text class="label">姓名</text>
+      <input class="input" placeholder="请输入姓名" bindinput="onInputChange" data-field="name" />
+    </view>
+
+    <view class="form-item">
+  <text class="label">性别</text>
+  <radio-group class="radio-group" bindchange="onGenderChange">
+    <label class="radio-label">
+      <radio value="男" checked="{{gender === '男'}}" /> 男
+    </label>
+    <label class="radio-label">
+      <radio value="女" checked="{{gender === '女'}}" /> 女
+    </label>
+  </radio-group>
+</view>
+
+
+    <view class="form-item">
+      <text class="label">毕业年份</text>
+      <picker mode="date" fields="year" bindchange="onDateChange">
+        <view class="picker">{{graduateYear || '请选择毕业年份'}}</view>
+      </picker>
+    </view>
+
+    <view class="form-item">
+      <text class="label">学院</text>
+      <input class="input" placeholder="请输入学院" bindinput="onInputChange" data-field="college" />
+    </view>
+
+    <view class="form-item">
+      <text class="label">专业</text>
+      <input class="input" placeholder="请输入专业" bindinput="onInputChange" data-field="major" />
+    </view>
+
+    <view class="form-item">
+      <text class="label">工作单位</text>
+      <input class="input" placeholder="请输入工作单位" bindinput="onInputChange" data-field="company" />
+    </view>
+
+    <view class="form-item">
+      <text class="label">职务</text>
+      <input class="input" placeholder="请输入职务" bindinput="onInputChange" data-field="position" />
+    </view>
+
+    <view class="agreement">
+      <checkbox-group bindchange="onAgreeChange">
+        <label>
+          <checkbox value="agree" checked="{{isAgreed}}" /> 我已阅读并同意 <text class="link">《校友信息服务协议》</text>
+        </label>
+      </checkbox-group>
+    </view>
+
+    <button class="submit-btn" bindtap="submitForm" disabled="{{!isAgreed}}">提交</button>
+  </view>
+</view>

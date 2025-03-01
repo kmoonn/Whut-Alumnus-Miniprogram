@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "mysql2": "^3.12.0",
+    "wx-server-sdk": "^3.0.1"
+  }
+}

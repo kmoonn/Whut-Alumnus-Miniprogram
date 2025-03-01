@@ -1,0 +1,81 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f8f8f8;
+}
+
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 120rpx;
+  background: linear-gradient(to right, #0056b3, #007bff);
+  color: white;
+  font-size: 36rpx;
+  font-weight: bold;
+  padding: 20rpx;
+}
+
+.logo {
+  width: 500rpx;
+  height: 80rpx;
+  margin-right: 10rpx;
+}
+
+.title {
+  font-size: 34rpx;
+  font-weight: bold;
+}
+
+.swiper {
+  width: 90%;
+  height: 350rpx;
+  border-radius: 20rpx;
+  overflow: hidden;
+  margin-top: 20rpx;
+}
+
+.slide-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 20rpx;
+}
+
+.banner-text {
+  margin-top: 10rpx;
+  font-size: 28rpx;
+  color: #333;
+}
+
+.menu {
+  display: flex;
+  justify-content: space-around;
+  width: 90%;
+  margin-top: 40rpx;
+}
+
+.menu-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 160rpx;
+  height: 160rpx;
+  background-color: #ffffff;
+  border-radius: 50%;
+  box-shadow: 2rpx 2rpx 10rpx rgba(0, 0, 0, 0.1);
+}
+
+.menu-item image {
+  width: 80rpx;
+  height: 80rpx;
+}
+
+.menu-item text {
+  margin-top: 10rpx;
+  font-size: 28rpx;
+  color: #333;
+}
+

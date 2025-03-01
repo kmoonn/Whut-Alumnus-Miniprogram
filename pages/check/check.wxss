@@ -1,0 +1,88 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 21%;
+  padding: 0px;
+}
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 120rpx;
+  background: linear-gradient(to right, #0056b3, #007bff);
+  color: white;
+  font-size: 36rpx;
+  font-weight: bold;
+  padding: 20rpx;
+}
+.logo {
+  width: 500rpx;
+  height: 80rpx;
+  margin-right: 10rpx;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 250px;
+}
+
+.badge {
+  background-color: red;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 10px;
+  margin-left: 5px;
+}
+
+.swiper-container {
+  width: 100%;
+  height: 500rpx;
+}
+
+.card {
+  background: #fff;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.name {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.info {
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.reject {
+  background-color: #ff4d4d;
+  color: white;
+  padding: 10px;
+  width: 45%;
+  border-radius: 10px;
+}
+
+.approve {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px;
+  width: 45%;
+  border-radius: 10px;
+}

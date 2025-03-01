@@ -1,0 +1,37 @@
+<view class="login-container">
+  <!-- 背景图 -->
+  <image class="background-image" src="/images/login-bg.png" mode="aspectFill"></image>
+
+  <!-- Logo容器 -->
+  <view class="logo-container">
+    <image class="logo" src="/images/logo-bg.jpg" mode="widthFix"></image>
+  </view>
+
+  <!-- 登录选项 -->
+  <view class="login-options">
+    <!-- 学工号 -->
+    <text class="login-btn quick-login">
+      <text class="icon">🙎‍♂️</text> 学工号
+    </text>
+    <input class="name" placeholder="请输入学工号" placeholder-class="placeholderStyle" placeholder-style="color:#ffffff;" type="text" bindinput="onUsernameChange" value="{{username}}" />
+    <!-- 密码 -->
+    <text class="login-btn account-login">
+      <text class="icon">🔑</text> 密码
+    </text>
+    <input class="password" placeholder="请输入密码" placeholder-class="placeholderStyle" placeholder-style="color:#ffffff;" type="password" bindinput="onPasswordChange" value="{{password}}" />
+  </view>
+
+  <!-- 用户协议 -->
+  <view class="agreement">
+    <checkbox-group bindchange="onAgreeChange">
+      <label>
+        <checkbox value="agree" /> 我已阅读并同意 <text class="link">《服务协议》</text>
+      </label>
+    </checkbox-group>
+  </view>
+
+  <!-- 登录按钮 -->
+  <view class="login-submit">
+    <button class="submit-btn" bindtap="onLogin">登录</button>
+  </view>
+</view>

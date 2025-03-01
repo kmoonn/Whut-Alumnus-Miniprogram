@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f8f8f8;
+}
+
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 120rpx;
+  background: linear-gradient(to right, #0056b3, #007bff);
+  color: white;
+  font-size: 36rpx;
+  font-weight: bold;
+  padding: 20rpx;
+}
+
+.logo {
+  width: 500rpx;
+  height: 80rpx;
+  margin-right: 10rpx;
+}
+
+.title {
+  font-size: 34rpx;
+  font-weight: bold;
+}
+
+
