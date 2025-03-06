@@ -1,0 +1,34 @@
+/**index.wxss**/
+.top-bar {
+  display: flex;
+  padding: 15px 25px;
+  background: linear-gradient(to right, #0056b3, #007bff);
+  color: white;
+  font-size: 40rpx;
+  font-weight: bold;
+}
+
+.logo {
+  width: 250px;
+  height: 50px;
+  margin-right: 40px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+
+
+.my-group-margin{
+  margin-top: 10px;
+}
+
+.copyright{
+  color: #8c8c8c;
+  text-align: center;
+  margin-top: 320px;
+  font-size: 14px;
+}

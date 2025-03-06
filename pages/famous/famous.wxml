@@ -1,7 +1,0 @@
-<view class="container" style="height: 1193rpx; display: flex; box-sizing: border-box">
-  <!-- 顶部校友会导航栏 -->
-  <view class="top-bar" style="height: 160rpx; display: flex; box-sizing: border-box">
-    <image src="/images/logo.png" class="logo"></image>
-    <text class="title">知名校友</text>
-  </view>
-</view>

@@ -1,0 +1,36 @@
+<view class="top-bar">
+  <image src="/images/logo.png" class="logo"></image>
+  <text class="title">我的</text>
+</view>
+
+<view>
+  <i-cell-group i-class="my-group-margin">
+    <i-cell title="个人资料" is-link url="/pages/my/info/index">
+      <i-icon type="mine_fill" slot="icon" size="20" />
+    </i-cell>
+  </i-cell-group>
+</view>
+
+<view>
+  <i-cell-group i-class="my-group-margin">
+    <i-cell title="反馈" is-link url="/pages/dashboard/index">
+      <i-icon type="praise_fill" slot="icon" size="20" />
+    </i-cell>
+    <i-cell title="关于" is-link url="/pages/dashboard/index">
+      <i-icon type="prompt_fill" slot="icon" size="20" />
+    </i-cell>
+  </i-cell-group>
+</view>
+
+<view>
+  <i-cell-group i-class="my-group-margin">
+    <i-cell title="退出账号" bind:click="logOut">
+      <i-icon type="flashlight_fill" slot="icon" size="20" />
+    </i-cell>
+  </i-cell-group>
+</view>
+
+<view class="copyright">学海楼815实验室 提供技术支持</view>
+
+<i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin>
+<i-message id="message" />

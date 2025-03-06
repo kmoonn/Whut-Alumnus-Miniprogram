@@ -1,5 +1,7 @@
 const cloud = require('wx-server-sdk');
 const mysql = require('mysql2/promise');
+const config = require('config.js'); // 引入配置文件
+
 
 cloud.init();
 
@@ -7,13 +9,7 @@ exports.main = async (event, context) => {
   const { action, alumniId, reviewerId, status } = event;
   
   // 连接 MySQL
-  const connection = await mysql.createConnection({
-    host: '124.223.63.202',      // 你的 MySQL 地址
-    user: 'wut815',      // MySQL 用户名
-    password: 'zdd.410@K39Y@sct.815', // MySQL 密码
-    database: 'whutalumnus_miniprogram', // MySQL 数据库
-    port: 3306                    // 端口号，默认为 3306
-  });
+  const connection = await mysql.createConnection(config.MYSQL); // 使用数据库配置
 
   try {
     if (action === 'getPending') {
@@ -53,8 +49,8 @@ exports.main = async (event, context) => {
         SELECT COUNT(*) AS total, SUM(status) AS approved FROM alumnus_review WHERE alumni_id = ?
       `, [alumniId]);
 
-      if (reviews[0].total >= 3) { // 至少 3 个人审核
-        const finalStatus = reviews[0].approved >= 2 ? 1 : 0; // 多数通过才算通过
+      if (reviews[0].total >= 10) { // 至少 3 个人审核
+        const finalStatus = reviews[0].approved >= 8 ? 1 : 0; // 多数通过才算通过
         await connection.execute(`
           UPDATE alumnus SET status = ? WHERE id = ?
         `, [finalStatus, alumniId]);

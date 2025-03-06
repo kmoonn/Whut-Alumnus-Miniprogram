@@ -4,21 +4,26 @@
 
   <!-- Logo容器 -->
   <view class="logo-container">
-    <image class="logo" src="/images/logo-bg.jpg" mode="widthFix"></image>
+    <image class="logo" src="https://alumni.whut.edu.cn/xyh/d5695da9-0e35-45de-b232-d886065efaa3/static/home-new/school-logo-blue.png" mode="widthFix"></image>
   </view>
 
   <!-- 登录选项 -->
   <view class="login-options">
     <!-- 学工号 -->
-    <text class="login-btn quick-login">
-      <text class="icon">🙎‍♂️</text> 学工号
-    </text>
-    <input class="name" placeholder="请输入学工号" placeholder-class="placeholderStyle" placeholder-style="color:#ffffff;" type="text" bindinput="onUsernameChange" value="{{username}}" />
+    <view class="input-container">
+      <text class="login-btn">
+        <text class="icon">🙎‍♂️</text> 学工号
+      </text>
+      <input class="name" placeholder="请输入学工号" type="text" bindinput="onUsernameChange" value="{{username}}" />
+    </view>
+
     <!-- 密码 -->
-    <text class="login-btn account-login">
-      <text class="icon">🔑</text> 密码
-    </text>
-    <input class="password" placeholder="请输入密码" placeholder-class="placeholderStyle" placeholder-style="color:#ffffff;" type="password" bindinput="onPasswordChange" value="{{password}}" />
+    <view class="input-container">
+      <text class="login-btn">
+        <text class="icon">🔑</text> 密码
+      </text>
+      <input class="password" placeholder="请输入密码" type="password" bindinput="onPasswordChange" value="{{password}}" />
+    </view>
   </view>
 
   <!-- 用户协议 -->

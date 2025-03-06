@@ -1,0 +1,36 @@
+<view class="top-bar">
+  <image src="/images/logo.png" class="logo"></image>
+  <text class="title">知名校友</text>
+</view>
+
+<!-- 筛选功能 -->
+<view class="filter-container">
+  <picker mode="selector" range="{{searchFields}}" bindchange="onFieldChange">
+    <view class="field-selector">{{selectedField || '选择查询字段'}}</view>
+  </picker>
+
+  <input class="search-input" placeholder="请输入内容" bindinput="onSearchInput" />
+</view>
+
+<!-- Excel 样式表格 -->
+<view class="table-container">
+  <view class="table-header">
+    <view class="table-cell">姓名</view>
+    <view class="table-cell">性别</view>
+    <view class="table-cell">毕业年份</view>
+    <view class="table-cell">学院</view>
+    <view class="table-cell">专业</view>
+    <view class="table-cell">工作单位</view>
+  </view>
+
+  <block wx:for="{{filteredAlumni}}" wx:key="id">
+    <view class="table-row">
+      <view class="table-cell">{{item.name}}</view>
+      <view class="table-cell">{{item.gender}}</view>
+      <view class="table-cell">{{item.graduate_year}}</view>
+      <view class="table-cell">{{item.college}}</view>
+      <view class="table-cell">{{item.major}}</view>
+      <view class="table-cell">{{item.company}}</view>
+    </view>
+  </block>
+</view>

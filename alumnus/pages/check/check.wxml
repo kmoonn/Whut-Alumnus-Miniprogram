@@ -1,0 +1,35 @@
+<view class="top-bar" style="height: 160rpx; display: flex; box-sizing: border-box">
+  <image src="/images/logo.png" class="logo"></image>
+    <text class="title">校友审核</text>
+  </view>
+
+  <!-- 右上角显示剩余待审核数量 -->
+  <view class="header">
+    <text>待审核校友数：</text>
+    <text class="badge">{{pendingCount}}</text>
+  </view>
+
+
+  <!-- 轮播组件 -->
+  <swiper class="swiper-container" circular indicator-dots>
+    <block wx:for="{{pendingAlumni}}" wx:key="id">
+      <swiper-item>
+        <view class="card">
+          <text class="name">{{item.name}}</text>
+          <text class="info">性别: {{item.gender}}</text>
+          <text class="info">毕业年份: {{item.graduate_year}}</text>
+          <text class="info">学院: {{item.college}}</text>
+          <text class="info">专业: {{item.major}}</text>
+          <text class="info">所在地: {{item.region}}</text>
+          <text class="info">工作单位: {{item.company}}</text>
+          <text class="info">职务: {{item.position}}</text>
+        </view>
+      </swiper-item>
+    </block>
+  </swiper>
+
+  <!-- 底部按钮 -->
+  <view class="button-group">
+    <button class="reject" bindtap="rejectAlumni">❌ 非真实校友</button>
+    <button class="approve" bindtap="approveAlumni">✅ 真实校友</button>
+  </view>

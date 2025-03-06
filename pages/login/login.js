@@ -1,5 +1,6 @@
 Page({
   data: {
+    id :'',
     username: '',
     password: '',
     isAgree: false
@@ -28,6 +29,7 @@ Page({
 
   // 登录按钮点击事件
   onLogin: function() {
+    wx.switchTab({ url: '/pages/index/index' }) //dev
     const { username, password, isAgree } = this.data;
 
     // 验证学工号和密码是否为空
@@ -52,45 +54,31 @@ Page({
     wx.cloud.callFunction({
       name: 'login',
       data: {
-        username: username,
-        password: password
+        username: this.data.username,
+        password: this.data.password
       },
       success: res => {
-        console.log('云函数调用成功', res);
         if (res.result.success) {
-          wx.showToast({
-            title: res.result.message,
-            icon: 'success'
-          });
-
-          const userId = '1';
-          wx.setStorageSync('userId', userId); // 将用户ID存储在本地
-          console.log(wx.getStorageSync('userId'))
-
-          // 登录成功后跳转到其他页面
-          wx.switchTab({
-            url: '/pages/index/index',
-            success: function() {
-              console.log("跳转成功");
-            },
-            fail: function(err) {
-              console.log("跳转失败",err);
-            }
-          });
+          wx.setStorageSync('userId', res.result.data.id);
+          wx.setStorageSync('username', res.result.data.username);
+          wx.setStorageSync('userRole', res.result.data.role);
+          
+          wx.showToast({ title: '登录成功', icon: 'success' });
+          wx.switchTab({ url: '/pages/index/index' })
+          // 根据角色跳转
+          // if (res.result.data.role === 'admin') {
+          //   wx.redirectTo({ url: '/pages/admin/index' });
+          // } else {
+          //   wx.redirectTo({ url: '/pages/home/index' });
+          // }
         } else {
-          wx.showToast({
-            title: res.result.message,
-            icon: 'none'
-          });
+          wx.showToast({ title: res.result.message, icon: 'none' });
         }
       },
       fail: err => {
-        console.log('云函数调用失败', err);
-        wx.showToast({
-          title: '登录失败，请稍后再试',
-          icon: 'none'
-        });
+        console.error('登录失败:', err);
+        wx.showToast({ title: '网络错误', icon: 'none' });
       }
-    });
+    });    
   }
 });

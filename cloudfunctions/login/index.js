@@ -1,49 +1,56 @@
 // 云函数入口文件
-const cloud = require('wx-server-sdk')
-cloud.init()
+const cloud = require('wx-server-sdk');
+const mysql = require('mysql2/promise');
+const bcrypt = require('bcryptjs');
+const config = require('config.js'); // 引入配置文件
 
-// 引入数据库
-const db = cloud.database()
+cloud.init();
 
-// 云函数入口函数
+let connection; // 连接池变量
+
+// 云函数入口
 exports.main = async (event, context) => {
-  const { username, password } = event
+  const { username, password } = event;
 
-  // 查询数据库中的用户
+  if (!username || !password) {
+    return { success: false, message: '学工号和密码不能为空' };
+  }
+
   try {
-    const res = await db.collection('users').where({
-      username: username
-    }).get()
-
-    if (res.data.length === 0) {
-      return {
-        success: false,
-        message: '学工号不存在'
-      }
+    // 确保 MySQL 连接只初始化一次
+    if (!connection) {
+      connection = await mysql.createConnection(config.MYSQL);
     }
 
-    const user = res.data[0]
+    // 查询数据库
+    const [rows] = await connection.execute(
+      'SELECT id, username, password, role FROM users WHERE username = ?',
+      [username]
+    );
 
-    // 检查密码是否匹配
-    if (user.password !== password) {
-      return {
-        success: false,
-        message: '密码错误'
-      }
+    if (rows.length === 0) {
+      return { success: false, message: '用户不存在' };
     }
 
-    // 登录成功
+    const user = rows[0];
+
+    // 校验密码
+    const isValidPassword = bcrypt.compareSync(password, user.password);
+    if (!isValidPassword) {
+      return { success: false, message: '密码错误' };
+    }
+
+    // 返回用户信息（不包括密码）
     return {
       success: true,
-      message: '登录成功',
-      userInfo: user
-    }
-
-  } catch (err) {
-    return {
-      success: false,
-      message: '数据库查询失败',
-      error: err
-    }
+      data: {
+        id: user.id,
+        username: user.username,
+        role: user.role
+      }
+    };
+  } catch (error) {
+    console.error('数据库查询错误:', error);
+    return { success: false, message: '服务器错误，请稍后重试' };
   }
-}
+};
