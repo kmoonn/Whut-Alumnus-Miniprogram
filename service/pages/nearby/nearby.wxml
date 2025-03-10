@@ -1,0 +1,34 @@
+<view class="top-bar" style="height: 160rpx; display: flex; box-sizing: border-box">
+  <image src="https://636c-cloud1-6gsqyvkd3f24bdd8-1311119192.tcb.qcloud.la/images/logo.png" class="logo"></image>
+  <text class="top-title">附近校友</text>
+</view>
+  <!-- 地图区域 -->
+  <map
+    id="map"
+    class="map"
+    longitude="{{longitude}}"
+    latitude="{{latitude}}"
+    scale="{{scale}}"
+    markers="{{markers}}"
+    show-location
+    bindmarkertap="handleMarkerTap"
+  ></map>
+
+  <!-- 校友列表 -->
+  <view class="alumni-list">
+    <view class="list-header">
+      <text class="title">附近校友</text>
+      <text class="count">({{alumniList.length}}人)</text>
+    </view>
+    
+    <scroll-view scroll-y class="list-content">
+      <view class="alumni-item" wx:for="{{alumniList}}" wx:key="id" bindtap="handleAlumniTap" data-id="{{item.id}}">
+        <image class="avatar" src="{{item.avatar || '/images/default-avatar.png'}}" mode="aspectFill"></image>
+        <view class="info">
+          <view class="name">{{item.name}}</view>
+          <view class="detail">{{item.college}} · {{item.major}} · {{item.graduate_year}}届</view>
+          <view class="distance">{{item.distance}}km</view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>

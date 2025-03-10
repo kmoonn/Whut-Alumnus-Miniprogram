@@ -1,42 +1,96 @@
 <view class="login-container">
   <!-- 背景图 -->
-  <image class="background-image" src="/images/login-bg.png" mode="aspectFill"></image>
+  <image class="background-image" src="https://636c-cloud1-6gsqyvkd3f24bdd8-1311119192.tcb.qcloud.la/images/login-bg.png" mode="aspectFill"></image>
 
   <!-- Logo容器 -->
   <view class="logo-container">
     <image class="logo" src="https://alumni.whut.edu.cn/xyh/d5695da9-0e35-45de-b232-d886065efaa3/static/home-new/school-logo-blue.png" mode="widthFix"></image>
   </view>
 
-  <!-- 登录选项 -->
-  <view class="login-options">
-    <!-- 学工号 -->
-    <view class="input-container">
-      <text class="login-btn">
-        <text class="icon">🙎‍♂️</text> 学工号
-      </text>
-      <input class="name" placeholder="请输入学工号" type="text" bindinput="onUsernameChange" value="{{username}}" />
+  <!-- 登录卡片 -->
+  <view class="login-card">
+    <!-- 切换标签 -->
+    <view class="tab-container">
+      <view class="tab {{activeTab === 'login' ? 'active' : ''}}" bindtap="switchTab" data-tab="login">登录</view>
+      <view class="tab {{activeTab === 'register' ? 'active' : ''}}" bindtap="switchTab" data-tab="register">注册</view>
     </view>
 
-    <!-- 密码 -->
-    <view class="input-container">
-      <text class="login-btn">
-        <text class="icon">🔑</text> 密码
-      </text>
-      <input class="password" placeholder="请输入密码" type="password" bindinput="onPasswordChange" value="{{password}}" />
+    <!-- 登录表单 -->
+    <view class="form-container {{activeTab === 'login' ? 'show' : 'hide'}}">
+      <!-- 学工号 -->
+      <view class="input-container">
+        <text class="input-label">
+          <text class="icon iconfont icon-user"></text> 学工号
+        </text>
+        <input class="input-field" placeholder="请输入学工号" type="text" bindinput="onUsernameChange" value="{{username}}" />
+      </view>
+
+      <!-- 密码 -->
+      <view class="input-container">
+        <text class="input-label">
+          <text class="icon iconfont icon-lock"></text> 密码
+        </text>
+        <input class="input-field" placeholder="请输入密码" password="true" bindinput="onPasswordChange" value="{{password}}" />
+      </view>
+
+      <!-- 用户协议 -->
+      <view class="agreement">
+        <checkbox-group bindchange="onAgreeChange">
+          <label>
+            <checkbox value="agree" /> 我已阅读并同意 <text class="link" bindtap="showAgreement">《服务协议》</text>
+          </label>
+        </checkbox-group>
+      </view>
+
+      <!-- 登录按钮 -->
+      <button class="submit-btn" bindtap="onLogin" hover-class="button-hover">登录</button>
     </view>
-  </view>
 
-  <!-- 用户协议 -->
-  <view class="agreement">
-    <checkbox-group bindchange="onAgreeChange">
-      <label>
-        <checkbox value="agree" /> 我已阅读并同意 <text class="link">《服务协议》</text>
-      </label>
-    </checkbox-group>
-  </view>
+    <!-- 注册表单 -->
+    <view class="form-container {{activeTab === 'register' ? 'show' : 'hide'}}">
+      <!-- 学工号 -->
+      <view class="input-container">
+        <text class="input-label">
+          <text class="icon iconfont icon-user"></text> 学工号
+        </text>
+        <input class="input-field" placeholder="请输入学工号" type="text" bindinput="onRegisterUsernameChange" value="{{registerUsername}}" />
+      </view>
 
-  <!-- 登录按钮 -->
-  <view class="login-submit">
-    <button class="submit-btn" bindtap="onLogin">登录</button>
+      <!-- 姓名 -->
+      <view class="input-container">
+        <text class="input-label">
+          <text class="icon iconfont icon-idcard"></text> 姓名
+        </text>
+        <input class="input-field" placeholder="请输入真实姓名" type="text" bindinput="onNameChange" value="{{name}}" />
+      </view>
+
+      <!-- 密码 -->
+      <view class="input-container">
+        <text class="input-label">
+          <text class="icon iconfont icon-lock"></text> 密码
+        </text>
+        <input class="input-field" placeholder="请输入密码" password="true" bindinput="onRegisterPasswordChange" value="{{registerPassword}}" />
+      </view>
+
+      <!-- 确认密码 -->
+      <view class="input-container">
+        <text class="input-label">
+          <text class="icon iconfont icon-lock"></text> 确认密码
+        </text>
+        <input class="input-field" placeholder="请再次输入密码" password="true" bindinput="onConfirmPasswordChange" value="{{confirmPassword}}" />
+      </view>
+
+      <!-- 用户协议 -->
+      <view class="agreement">
+        <checkbox-group bindchange="onRegisterAgreeChange">
+          <label>
+            <checkbox value="agree" /> 我已阅读并同意 <text class="link" bindtap="showAgreement">《服务协议》</text>
+          </label>
+        </checkbox-group>
+      </view>
+
+      <!-- 注册按钮 -->
+      <button class="submit-btn" bindtap="onRegister" hover-class="button-hover">注册</button>
+    </view>
   </view>
 </view>

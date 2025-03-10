@@ -2,6 +2,7 @@
   "pages": [ 
     "pages/login/login",
     "pages/index/index",
+    "pages/service/index",
     "pages/my/index"
   ],
   "subPackages": [
@@ -10,14 +11,22 @@
       "pages": [
         "pages/apply/apply",
         "pages/check/check",
-        "pages/famous/famous",
-        "pages/activity/activity"
+        "pages/famous/famous"
+      ]
+    },
+    {
+      "root": "service",
+      "pages": [
+        "pages/activity/activity",
+        "pages/nearby/nearby",
+        "pages/search/search",
+        "pages/visual/visual"
       ]
     }
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",
-    "navigationBarTitleText": "校友汇",
+    "navigationBarTitleText": "武理校友汇",
     "navigationBarTextStyle": "black",
     "backgroundTextStyle": "dark"
   },
@@ -27,18 +36,24 @@
     "borderStyle": "black",
     "backgroundColor": "#ffffff",
     "list": [
-    {
+      {
         "pagePath": "pages/index/index",
         "text": "首页",
-        "iconPath": "/assets/tabBar/index.png",
-        "selectedIconPath": "/assets/tabBar/index-select.png"
-    },      
-    {
-      "pagePath": "pages/my/index",
-      "text": "我的",
-      "iconPath": "/assets/tabBar/my.png",
-      "selectedIconPath": "/assets/tabBar/my-select.png"
-    }
+        "iconPath": "/images/index.png",
+        "selectedIconPath": "/images/index.png"
+      },
+      {
+        "pagePath": "pages/service/index",
+        "text": "服务",
+        "iconPath": "/images/service.png",
+        "selectedIconPath": "/images/service.png"
+      },
+      {
+        "pagePath": "pages/my/index",
+        "text": "我的",
+        "iconPath": "/images/my.png",
+        "selectedIconPath": "/images/my.png"
+      }
     ]
   },
   "style": "v2",

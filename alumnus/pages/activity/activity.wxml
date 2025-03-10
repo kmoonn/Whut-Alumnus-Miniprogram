@@ -1,4 +1,0 @@
-<view class="top-bar">
-    <image src="/images/logo.png" class="logo"></image>
-    <text class="title">校友活动</text>
-</view>

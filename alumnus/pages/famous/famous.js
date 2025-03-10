@@ -1,79 +1,65 @@
 Page({
   data: {
-    famousAlumni: [],       // 全部校友数据
-    filteredAlumni: [],     // 经过筛选的数据
-    searchQuery: '',        // 搜索框中的输入内容
-    selectedField: '',      // 选择的查询字段（姓名、性别等）
-    searchFields: ['姓名', '性别', '毕业年份', '学院', '专业', '所在地','工作单位'],  // 可供选择的查询字段
+    currentTab: 'politics', // 当前选中的标签
+    alumniList: [] // 校友列表
   },
 
   onLoad() {
-    this.getFamousAlumni();
+    this.fetchFamousAlumni('politics');
   },
 
-  // 获取知名校友数据
-  getFamousAlumni() {
+  // 切换标签
+  switchTab(e) {
+    const tab = e.currentTarget.dataset.tab;
+    this.setData({ currentTab: tab });
+    this.fetchFamousAlumni(tab);
+  },
+
+  // 获取知名校友列表
+  fetchFamousAlumni(category) {
+    wx.showLoading({ title: '加载中' });
     wx.cloud.callFunction({
-      name: 'getAlumnus',
+      name: 'famous',
+      data: {
+        action: 'getFamousAlumni',
+        category
+      },
       success: res => {
-        this.setData({
-          famousAlumni: res.result,
-          filteredAlumni: res.result // 初始显示全部数据
-        });
+        if (res.result.code === 200) {
+          this.setData({
+            alumniList: res.result.data
+          });
+        }
       },
       fail: err => {
-        console.error(err);
+        console.error('获取知名校友失败', err);
+        wx.showToast({
+          title: '获取数据失败',
+          icon: 'none'
+        });
+      },
+      complete: () => {
+        wx.hideLoading();
       }
     });
   },
 
-  // 用户选择查询字段
-  onFieldChange(e) {
-    const selectedField = this.data.searchFields[e.detail.value];
-    this.setData({
-      selectedField
-    });
-  },
-
-  // 搜索框输入实时更新
-  onSearchInput(e) {
-    const query = e.detail.value.trim();
-    this.setData({ searchQuery: query });
-    this.filterAlumni();
-  },
-
-  // 根据选择的字段和输入的内容进行过滤
-  filterAlumni() {
-    const { searchQuery, selectedField, famousAlumni } = this.data;
-
-    if (!selectedField || !searchQuery) {
-      this.setData({
-        filteredAlumni: famousAlumni
+  // 显示校友详情
+  showDetail(e) {
+    const id = e.currentTarget.dataset.id;
+    const alumni = this.data.alumniList.find(item => item.id === id);
+    if (alumni) {
+      wx.showModal({
+        title: alumni.name,
+        content: `性别：${alumni.gender}\n` +
+                `毕业年份：${alumni.graduate_year}届\n` +
+                `学院：${alumni.college}\n` +
+                `专业：${alumni.major}\n` +
+                `工作单位：${alumni.company}\n` +
+                `职务：${alumni.position}\n` +
+                `所在地：${alumni.region}\n`,
+        showCancel: false
       });
-      return;
     }
-
-    const filtered = famousAlumni.filter(alumni => {
-      switch (selectedField) {
-        case '姓名':
-          return alumni.name.includes(searchQuery);
-        case '性别':
-          return alumni.gender.includes(searchQuery);
-        case '毕业年份':
-          return alumni.graduate_year.includes(searchQuery);
-        case '学院':
-          return alumni.college.includes(searchQuery);
-        case '专业':
-          return alumni.major.includes(searchQuery);
-        case '工作单位':
-          return alumni.company.includes(searchQuery);
-        default:
-          return true;
-      }
-    });
-
-    this.setData({
-      filteredAlumni: filtered
-    });
   }
 });

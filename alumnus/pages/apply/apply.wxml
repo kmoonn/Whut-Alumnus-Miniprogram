@@ -1,6 +1,6 @@
 <!-- 顶部校友会导航栏 -->
 <view class="top-bar">
-  <image src="/images/logo.png" class="logo"></image>
+  <image src="https://636c-cloud1-6gsqyvkd3f24bdd8-1311119192.tcb.qcloud.la/images/logo.png" class="logo"></image>
     <text class="title">校友申报</text>
   </view>
   <view class="header">

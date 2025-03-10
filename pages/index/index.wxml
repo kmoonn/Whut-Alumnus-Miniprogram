@@ -1,6 +1,6 @@
 <!-- 顶部校友会导航栏 -->
 <view class="top-bar">
-  <image src="/images/logo.png" class="logo"></image>
+  <image src="https://636c-cloud1-6gsqyvkd3f24bdd8-1311119192.tcb.qcloud.la/images/logo.png" class="logo"></image>
   <text class="title">首页</text>
 </view>
 
@@ -11,22 +11,57 @@
   <swiper-item><image src="https://alumni.whut.edu.cn/upload/wxb/static/2022/11/11/e52b28b319a44a6e8a06198ad04a8cbc.jpg" class="slide-image"></image></swiper-item>
 </swiper>
 
-<!-- 菜单按钮 -->
-<view class="menu">
-  <view class="menu-item" bindtap="goToPage" data-url="/alumnus/pages/apply/apply">
-    <image src="/images/apply.png"></image>
-    <text>校友申报</text>
+  <!-- 校友动态 -->
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">校友动态</text>
+      <text class="more" bindtap="navigateTo" data-url="/pages/news/index">更多</text>
+    </view>
+    <view class="news-list">
+      <view class="news-item" wx:for="{{newsList}}" wx:key="id" bindtap="navigateTo" data-url="/pages/news/detail?id={{item.id}}">
+        <image class="news-image" src="{{item.imageUrl}}" mode="aspectFill"></image>
+        <view class="news-info">
+          <text class="news-title">{{item.title}}</text>
+          <text class="news-date">{{item.date}}</text>
+        </view>
+      </view>
+    </view>
   </view>
-  <view class="menu-item" bindtap="goToPage" data-url="/alumnus/pages/check/check">
-    <image src="/images/check.png"></image>
-    <text>校友审核</text>
+
+  <!-- 活动信息 -->
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">近期活动</text>
+      <text class="more" bindtap="navigateTo" data-url="/pages/activity/index">更多</text>
+    </view>
+    <view class="activity-list">
+      <view class="activity-item" wx:for="{{activities}}" wx:key="id" bindtap="navigateTo" data-url="/pages/activity/detail?id={{item.id}}">
+        <view class="activity-time">
+          <text class="day">{{item.day}}</text>
+          <text class="month">{{item.month}}</text>
+        </view>
+        <view class="activity-info">
+          <text class="activity-title">{{item.title}}</text>
+          <text class="activity-location">{{item.location}}</text>
+        </view>
+        <view class="activity-status {{item.status === '报名中' ? 'active' : ''}}">{{item.status}}</view>
+      </view>
+    </view>
   </view>
-  <view class="menu-item" bindtap="goToPage" data-url="/alumnus/pages/famous/famous">
-    <image src="/images/famous.png"></image>
-    <text>知名校友</text>
+  
+  <!-- 校友企业 -->
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">校友企业</text>
+      <text class="more" bindtap="navigateTo" data-url="/pages/company/index">更多</text>
+    </view>
+    <view class="company-list">
+      <view class="company-item" wx:for="{{companies}}" wx:key="id" bindtap="navigateTo" data-url="/pages/company/detail?id={{item.id}}">
+        <image class="company-logo" src="{{item.logo}}" mode="aspectFit"></image>
+        <view class="company-info">
+          <text class="company-name">{{item.name}}</text>
+          <text class="company-industry">{{item.industry}}</text>
+        </view>
+      </view>
+    </view>
   </view>
-  <view class="menu-item" bindtap="goToPage" data-url="/alumnus/pages/activity/activity">
-    <image src="/images/activity.png"></image>
-    <text>校友活动</text>
-  </view>
-</view>

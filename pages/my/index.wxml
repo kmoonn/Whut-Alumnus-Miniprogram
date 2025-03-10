@@ -1,36 +1,57 @@
+<!-- 顶部校友会导航栏 -->
 <view class="top-bar">
-  <image src="/images/logo.png" class="logo"></image>
-  <text class="title">我的</text>
+  <image src="https://636c-cloud1-6gsqyvkd3f24bdd8-1311119192.tcb.qcloud.la/images/logo.png" class="logo"></image>
+  <text class="top-title">我的</text>
 </view>
+  <!-- 用户信息卡片 -->
+  <view class="user-card">
+    <view class="user-info">
+      <image class="avatar" src="{{userInfo.avatarUrl || 'https://636c-cloud1-6gsqyvkd3f24bdd8-1311119192.tcb.qcloud.la/images/default-avatar.jpg'}}" mode="aspectFill"></image>
+      <view class="info">
+        <text class="nickname">{{userInfo.nickName || '未登录'}}</text>
+      </view>
+    </view>
+  </view>
 
-<view>
-  <i-cell-group i-class="my-group-margin">
-    <i-cell title="个人资料" is-link url="/pages/my/info/index">
-      <i-icon type="mine_fill" slot="icon" size="20" />
-    </i-cell>
-  </i-cell-group>
-</view>
+  <!-- 功能菜单 -->
+  <view class="menu-list">
+    <view class="menu-group">
+      <view class="menu-item" bindtap="navigateTo" data-url="/pages/my/profile">
+        <image class="icon" src="https://636c-cloud1-6gsqyvkd3f24bdd8-1311119192.tcb.qcloud.la/images/icon-profile.png" mode="aspectFit"></image>
+        <text class="title">个人资料</text>
+        <text class="arrow"></text>
+      </view>
+      <view class="menu-item" bindtap="navigateTo" data-url="/pages/my/message">
+        <image class="icon" src="https://636c-cloud1-6gsqyvkd3f24bdd8-1311119192.tcb.qcloud.la/images/icon-message.png" mode="aspectFit"></image>
+        <text class="title">消息通知</text>
+        <text class="badge" wx:if="{{unreadCount > 0}}">{{unreadCount}}</text>
+        <text class="arrow"></text>
+      </view>
+    </view>
 
-<view>
-  <i-cell-group i-class="my-group-margin">
-    <i-cell title="反馈" is-link url="/pages/dashboard/index">
-      <i-icon type="praise_fill" slot="icon" size="20" />
-    </i-cell>
-    <i-cell title="关于" is-link url="/pages/dashboard/index">
-      <i-icon type="prompt_fill" slot="icon" size="20" />
-    </i-cell>
-  </i-cell-group>
-</view>
+    <view class="menu-group">
+      <view class="menu-item" bindtap="navigateTo" data-url="/pages/my/activity">
+        <image class="icon" src="https://636c-cloud1-6gsqyvkd3f24bdd8-1311119192.tcb.qcloud.la/images/icon-activity.png" mode="aspectFit"></image>
+        <text class="title">我的活动</text>
+        <text class="arrow"></text>
+      </view>
+    </view>
 
-<view>
-  <i-cell-group i-class="my-group-margin">
-    <i-cell title="退出账号" bind:click="logOut">
-      <i-icon type="flashlight_fill" slot="icon" size="20" />
-    </i-cell>
-  </i-cell-group>
-</view>
-
-<view class="copyright">学海楼815实验室 提供技术支持</view>
-
-<i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin>
-<i-message id="message" />
+    <view class="menu-group">
+      <view class="menu-item" bindtap="navigateTo" data-url="/pages/my/settings">
+        <image class="icon" src="https://636c-cloud1-6gsqyvkd3f24bdd8-1311119192.tcb.qcloud.la/images/icon-settings.png" mode="aspectFit"></image>
+        <text class="title">设置</text>
+        <text class="arrow"></text>
+      </view>
+      <view class="menu-item" bindtap="contactService">
+        <image class="icon" src="https://636c-cloud1-6gsqyvkd3f24bdd8-1311119192.tcb.qcloud.la/images/icon-service.png" mode="aspectFit"></image>
+        <text class="title">联系我们</text>
+        <text class="arrow"></text>
+      </view>
+      <view class="menu-item" bindtap="navigateTo" data-url="/pages/my/about">
+        <image class="icon" src="https://636c-cloud1-6gsqyvkd3f24bdd8-1311119192.tcb.qcloud.la/images/icon-about.png" mode="aspectFit"></image>
+        <text class="title">关于我们</text>
+        <text class="arrow"></text>
+      </view>
+    </view>
+  </view>
