@@ -1,0 +1,12 @@
+<view class="container">
+  <view class="alumnus-info">
+    <text data-label="姓名">{{alumnusDetail.name}}</text>
+    <text data-label="性别">{{alumnusDetail.gender}}</text>
+    <text data-label="毕业年份">{{alumnusDetail.graduate_year}}</text>
+    <text data-label="学院">{{alumnusDetail.college}}</text>
+    <text data-label="专业">{{alumnusDetail.major}}</text>
+    <text data-label="工作单位">{{alumnusDetail.company}}</text>
+    <text data-label="职务">{{alumnusDetail.position}}</text>
+    <text data-label="所在地">{{alumnusDetail.region}}</text>
+  </view>
+</view>

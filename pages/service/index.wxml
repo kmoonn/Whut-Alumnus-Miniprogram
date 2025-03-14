@@ -40,7 +40,7 @@
       <text class="service-name">校友活动</text>
     </view>
 
-    <view class="service-item" bindtap="navigateTo" data-path="/alumnus/pages/visual/visual">
+    <view class="service-item" bindtap="navigateTo" data-path="/service/pages/company/company">
       <image class="service-icon" src="https://636c-cloud1-6gsqyvkd3f24bdd8-1311119192.tcb.qcloud.la/images/company.png" mode="aspectFit"></image>
       <text class="service-name">校友企业</text>
     </view>

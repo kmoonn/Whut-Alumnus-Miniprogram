@@ -1,0 +1,27 @@
+<view class="container">
+  <view class="alumnus-info">
+    <!-- 企业信息 -->
+    <view class="info-item">
+      <text class="label">企业名称：</text>
+      <text class="value">{{companyDetail.company_name}}</text>
+    </view>
+    <view class="info-item">
+      <text class="label">企业地址：</text>
+      <text class="value">{{companyDetail.company_region}}</text>
+    </view>
+    <view class="info-item">
+      <text class="label">企业简介：</text>
+      <text class="value">{{companyDetail.company_info}}</text>
+    </view>
+    
+    <!-- 校友信息 -->
+    <view class="info-item">
+      <text class="label">校友姓名：</text>
+      <text class="value">{{companyDetail.alumni_name}}</text>
+    </view>
+    <view class="info-item">
+      <text class="label">校友ID：</text>
+      <text class="value">{{companyDetail.alumni_id}}</text>
+    </view>
+  </view>
+</view>

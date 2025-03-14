@@ -90,6 +90,16 @@
   background: #f5f5f5;
 }
 
+/* 侧边栏触发按钮样式 */
+.sidebar-trigger {
+  position: fixed;
+  top: 15%;
+  left: 5%;
+  font-size: 30px;
+  cursor: pointer;
+  z-index: 1000; 
+}
+
 /* 侧边栏样式 */
 .sidebar {
   width: 160rpx;
@@ -106,6 +116,7 @@
   color: #666;
   position: relative;
   transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .sidebar-item.active {

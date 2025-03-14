@@ -11,7 +11,8 @@
       "pages": [
         "pages/apply/apply",
         "pages/check/check",
-        "pages/famous/famous"
+        "pages/famous/famous",
+        "pages/famous_detail/famous_detail"
       ]
     },
     {
@@ -20,7 +21,9 @@
         "pages/activity/activity",
         "pages/nearby/nearby",
         "pages/search/search",
-        "pages/visual/visual"
+        "pages/visual/visual",
+        "pages/company/company",
+        "pages/companyDetail/companyDetail"
       ]
     }
   ],
@@ -62,5 +65,8 @@
     "weui": true
   },
   "sitemapLocation": "sitemap.json",
-  "lazyCodeLoading": "requiredComponents"
+  "lazyCodeLoading": "requiredComponents",
+  "requiredPriateInfos": [
+    "getLocation"
+  ]
 }

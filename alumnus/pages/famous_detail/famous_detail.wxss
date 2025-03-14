@@ -1,0 +1,93 @@
+/* 容器样式 */
+.container {
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  /* 渐变背景 */
+  background: linear-gradient(135deg, #e9f5ff 0%, #cde5ff 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 装饰圆形 */
+.container::before,
+.container::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.container::before {
+  width: 200px;
+  height: 200px;
+  top: -50px;
+  left: -50px;
+}
+
+.container::after {
+  width: 300px;
+  height: 300px;
+  bottom: -100px;
+  right: -100px;
+}
+
+/* 校友信息块样式 */
+.alumnus-info {
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 25px;
+  width: 100%;
+  max-width: 600px;
+  z-index: 1;
+}
+
+/* 信息文本样式 */
+.alumnus-info text {
+  display: block;
+  font-size: 16px;
+  color: #333;
+  padding: 12px 0;
+  border-bottom: 1px solid #eaeaea;
+  position: relative;
+}
+
+.alumnus-info text:last-child {
+  border-bottom: none;
+}
+
+/* 信息标题样式 */
+.alumnus-info text::before {
+  content: attr(data-label);
+  font-weight: 600;
+  color: #007bff;
+  width: 120px;
+  display: inline-block;
+}
+
+/* 鼠标悬停效果 */
+.alumnus-info text:hover {
+  background-color: #f0f7ff;
+  transition: background-color 0.3s ease;
+}
+
+/* 暂无信息样式 */
+.alumnus-info text:empty::after {
+  content: '暂无信息';
+  color: #999;
+}
+
+/* 毕业年份特殊颜色 */
+.alumnus-info text[data-label="毕业年份"] {
+  color: #28a745;
+}
+
+/* 工作单位特殊颜色 */
+.alumnus-info text[data-label="工作单位"] {
+  color: #dc3545;
+}

@@ -1,33 +1,49 @@
 Page({
   data: {
-    currentTab: 'politics', // 当前选中的标签
+    showSidebar: false,
+    Sidebartrigger: true,
+    currentTab: '政治', // 当前选中的标签
     alumniList: [] // 校友列表
   },
 
+  //显示侧边栏 关闭侧边栏触发器
+  toggleSidebar: function() {
+    this.setData({
+      showSidebar: !this.data.showSidebar,
+      Sidebartrigger: !this.data.Sidebartrigger
+    });
+  },
+
   onLoad() {
-    this.fetchFamousAlumni('politics');
+    this.fetchFamousAlumni('政界');
   },
 
   // 切换标签
   switchTab(e) {
-    const tab = e.currentTarget.dataset.tab;
-    this.setData({ currentTab: tab });
-    this.fetchFamousAlumni(tab);
+    this.setData({ 
+      currentTab: e.currentTarget.dataset.tab,
+      showSidebar:!this.data.showSidebar,
+      Sidebartrigger:!this.data.Sidebartrigger
+    }, () => {
+      this.fetchFamousAlumni(this.data.currentTab);
+    });
   },
 
   // 获取知名校友列表
   fetchFamousAlumni(category) {
     wx.showLoading({ title: '加载中' });
     wx.cloud.callFunction({
-      name: 'famous',
+      name: 'getAlumnus',
       data: {
         action: 'getFamousAlumni',
         category
       },
       success: res => {
         if (res.result.code === 200) {
+          const alumniList = res.result.result;
+          console.log('获取到的校友列表数据:', alumniList);
           this.setData({
-            alumniList: res.result.data
+            alumniList: alumniList
           });
         }
       },
@@ -47,19 +63,12 @@ Page({
   // 显示校友详情
   showDetail(e) {
     const id = e.currentTarget.dataset.id;
-    const alumni = this.data.alumniList.find(item => item.id === id);
-    if (alumni) {
-      wx.showModal({
-        title: alumni.name,
-        content: `性别：${alumni.gender}\n` +
-                `毕业年份：${alumni.graduate_year}届\n` +
-                `学院：${alumni.college}\n` +
-                `专业：${alumni.major}\n` +
-                `工作单位：${alumni.company}\n` +
-                `职务：${alumni.position}\n` +
-                `所在地：${alumni.region}\n`,
-        showCancel: false
-      });
+    if (id) {
+        wx.navigateTo({
+            url: `/alumnus/pages/famous_detail/famous_detail?id=${id}`
+        });
+    } else {
+        console.error('未获取到有效的 id');
     }
-  }
-});
+}
+ });

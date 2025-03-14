@@ -1,13 +1,29 @@
+// 引入腾讯地图 SDK
+const QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js');
+let qqmapsdk;
+
 Page({
   data: {
     latitude: 0,
     longitude: 0,
     scale: 14,
     markers: [],
-    alumniList: []
+    alumniList: [],
+    // 新增腾讯地图配置
+    mapKey: 'LKOBZ-6VB3T-RDEXO-VEWKW-WIDI2-QKBMO', // 替换为你的腾讯地图 Key
+    mapCenter: {
+      latitude: 0,
+      longitude: 0
+    },
+    polyline: [],
+    controls: []
   },
 
   onLoad(options) {
+    // 初始化腾讯地图 SDK
+    qqmapsdk = new QQMapWX({
+      key: this.data.mapKey
+    });
     this.getLocation();
   },
 
@@ -55,8 +71,14 @@ Page({
       success: (res) => {
         this.setData({
           latitude: res.latitude,
-          longitude: res.longitude
+          longitude: res.longitude,
+          mapCenter: {
+            latitude: res.latitude,
+            longitude: res.longitude
+          }
         });
+        // 获取位置信息
+        this.getLocationInfo(res.latitude, res.longitude);
         this.fetchNearbyAlumni(res.latitude, res.longitude);
       },
       fail: () => {
@@ -68,7 +90,56 @@ Page({
     });
   },
 
-  // 获取附近校友
+  // 获取位置信息
+  getLocationInfo(latitude, longitude) {
+    qqmapsdk.reverseGeocoder({
+      location: {
+        latitude: latitude,
+        longitude: longitude
+      },
+      success: (res) => {
+        console.log('位置信息：', res.result);
+      },
+      fail: (err) => {
+        console.error('获取位置信息失败：', err);
+      }
+    });
+  },
+
+  // 更新标记点
+  updateMarkers(alumniList) {
+    const markers = alumniList.map(alumni => ({
+      id: alumni._id,
+      latitude: alumni.location.latitude,
+      longitude: alumni.location.longitude,
+      title: alumni.name,
+      iconPath: '/images/marker.png',
+      width: 30,
+      height: 30,
+      callout: {
+        content: alumni.name,
+        padding: 10,
+        borderRadius: 5,
+        display: 'BYCLICK'
+      }
+    }));
+
+    this.setData({ markers });
+  },
+
+  // 地图区域改变事件
+  regionchange(e) {
+    if (e.type === 'end' && e.causedBy === 'drag') {
+      // 获取新的地图中心点
+      this.mapCtx.getCenterLocation({
+        success: (res) => {
+          this.fetchNearbyAlumni(res.latitude, res.longitude);
+        }
+      });
+    }
+  },
+
+  // 修改 fetchNearbyAlumni 函数
   fetchNearbyAlumni(latitude, longitude) {
     wx.cloud.callFunction({
       name: 'nearby',
@@ -78,7 +149,7 @@ Page({
           latitude,
           longitude
         },
-        radius: 10 // 搜索半径，单位：公里
+        radius: 10
       },
       success: res => {
         if (res.result.code === 200) {
@@ -92,20 +163,8 @@ Page({
             ).toFixed(1)
           }));
           
-          const markers = alumniList.map(alumni => ({
-            id: alumni._id,
-            latitude: alumni.location.latitude,
-            longitude: alumni.location.longitude,
-            title: alumni.name,
-            iconPath: '/images/marker.png',
-            width: 30,
-            height: 30
-          }));
-
-          this.setData({
-            alumniList,
-            markers
-          });
+          this.setData({ alumniList });
+          this.updateMarkers(alumniList);
         }
       },
       fail: err => {

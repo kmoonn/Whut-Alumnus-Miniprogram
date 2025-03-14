@@ -12,6 +12,12 @@
     markers="{{markers}}"
     show-location
     bindmarkertap="handleMarkerTap"
+    bindregionchange="regionchange"
+    subkey="{{mapKey}}"
+    layer-style="1"
+    enable-3D="true"
+    enable-overlooking="true"
+    enable-rotate="true"
   ></map>
 
   <!-- 校友列表 -->

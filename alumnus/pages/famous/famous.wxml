@@ -4,26 +4,28 @@
 </view>
 
   <!-- 侧边栏 -->
-  <view class="sidebar">
+  <!-- 侧边栏触发器 -->
+  <view view wx:if="{{!showSidebar}}" class="sidebar-trigger" bindtap="toggleSidebar">☰</view> 
+  <view view wx:if="{{showSidebar}}" class="sidebar">
     <view 
       class="sidebar-item {{currentTab === 'politics' ? 'active' : ''}}" 
       bindtap="switchTab" 
-      data-tab="politics"
+      data-tab="政界"
     >政界</view>
     <view 
       class="sidebar-item {{currentTab === 'business' ? 'active' : ''}}" 
       bindtap="switchTab" 
-      data-tab="business"
+      data-tab="商界"
     >商界</view>
     <view 
       class="sidebar-item {{currentTab === 'academic' ? 'active' : ''}}" 
       bindtap="switchTab" 
-      data-tab="academic"
+      data-tab="学界"
     >学界</view>
   </view>
 
   <!-- 主内容区 -->
-  <view class="main-content">
+  <view view wx:if="{{!showSidebar}}" class="main-content">
     <scroll-view scroll-y class="alumni-list">
       <view class="alumni-item" 
         wx:for="{{alumniList}}" 

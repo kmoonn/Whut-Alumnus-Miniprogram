@@ -1,0 +1,33 @@
+/* 容器样式 */
+.container {
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+/* 信息区域样式 */
+.alumnus-info {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 单个信息项样式 */
+.info-item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+/* 标签和值的样式 */
+.label {
+  font-weight: bold;
+  margin-right: 10px;
+  color: #333;
+}
+
+.value {
+  flex: 1;
+  color: #666;
+}

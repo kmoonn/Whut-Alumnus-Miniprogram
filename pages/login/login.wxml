@@ -22,7 +22,7 @@
         <text class="input-label">
           <text class="icon iconfont icon-user"></text> 用户名
         </text>
-        <input class="input-field" placeholder="请输入学工号" type="text" bindinput="onUsernameChange" value="{{username}}" />
+        <input class="input-field" placeholder="请输入用户名" type="text" bindinput="onUsernameChange" value="{{username}}" />
       </view>
 
       <!-- 密码 -->
@@ -53,7 +53,7 @@
         <text class="input-label">
           <text class="icon iconfont icon-user"></text> 用户名
         </text>
-        <input class="input-field" placeholder="请输入学工号" type="text" bindinput="onRegisterUsernameChange" value="{{registerUsername}}" />
+        <input class="input-field" placeholder="请输入用户名" type="text" bindinput="onRegisterUsernameChange" value="{{registerUsername}}" />
       </view>
 
       <!-- 姓名 -->
