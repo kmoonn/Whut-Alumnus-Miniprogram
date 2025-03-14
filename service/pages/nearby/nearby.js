@@ -74,17 +74,28 @@ Page({
       name: 'nearby',
       data: {
         action: 'getNearbyAlumni',
-        latitude,
-        longitude,
+        location: {
+          latitude,
+          longitude
+        },
         radius: 10 // 搜索半径，单位：公里
       },
       success: res => {
         if (res.result.code === 200) {
-          const alumniList = res.result.data;
-          const markers = alumniList.map((alumni, index) => ({
-            id: alumni.id,
-            latitude: alumni.latitude,
-            longitude: alumni.longitude,
+          const alumniList = res.result.data.map(alumni => ({
+            ...alumni,
+            distance: this.calculateDistance(
+              latitude,
+              longitude,
+              alumni.location.latitude,
+              alumni.location.longitude
+            ).toFixed(1)
+          }));
+          
+          const markers = alumniList.map(alumni => ({
+            id: alumni._id,
+            latitude: alumni.location.latitude,
+            longitude: alumni.location.longitude,
             title: alumni.name,
             iconPath: '/images/marker.png',
             width: 30,
@@ -107,10 +118,28 @@ Page({
     });
   },
 
+  // 计算两点之间的距离（单位：公里）
+  calculateDistance(lat1, lon1, lat2, lon2) {
+    const R = 6371; // 地球半径（公里）
+    const dLat = this.deg2rad(lat2 - lat1);
+    const dLon = this.deg2rad(lon2 - lon1);
+    const a = 
+      Math.sin(dLat/2) * Math.sin(dLat/2) +
+      Math.cos(this.deg2rad(lat1)) * Math.cos(this.deg2rad(lat2)) * 
+      Math.sin(dLon/2) * Math.sin(dLon/2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    return R * c;
+  },
+
+  // 角度转弧度
+  deg2rad(deg) {
+    return deg * (Math.PI/180);
+  },
+
   // 点击地图标记
   handleMarkerTap(e) {
     const markerId = e.markerId;
-    const alumni = this.data.alumniList.find(item => item.id === markerId);
+    const alumni = this.data.alumniList.find(item => item._id === markerId);
     if (alumni) {
       this.showAlumniDetail(alumni);
     }
@@ -119,7 +148,7 @@ Page({
   // 点击校友列表项
   handleAlumniTap(e) {
     const id = e.currentTarget.dataset.id;
-    const alumni = this.data.alumniList.find(item => item.id === id);
+    const alumni = this.data.alumniList.find(item => item._id === id);
     if (alumni) {
       this.showAlumniDetail(alumni);
     }
@@ -129,7 +158,7 @@ Page({
   showAlumniDetail(alumni) {
     wx.showModal({
       title: alumni.name,
-      content: `${alumni.college} · ${alumni.major} · ${alumni.graduate_year}届\n距离：${alumni.distance}km`,
+      content: `${alumni.college} · ${alumni.major} · ${alumni.graduateYear}届\n${alumni.company}\n${alumni.position}\n距离：${alumni.distance}km`,
       showCancel: false
     });
   }

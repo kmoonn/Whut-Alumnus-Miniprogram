@@ -17,10 +17,10 @@
 
     <!-- 登录表单 -->
     <view class="form-container {{activeTab === 'login' ? 'show' : 'hide'}}">
-      <!-- 学工号 -->
+      <!-- 用户名 -->
       <view class="input-container">
         <text class="input-label">
-          <text class="icon iconfont icon-user"></text> 学工号
+          <text class="icon iconfont icon-user"></text> 用户名
         </text>
         <input class="input-field" placeholder="请输入学工号" type="text" bindinput="onUsernameChange" value="{{username}}" />
       </view>
@@ -48,10 +48,10 @@
 
     <!-- 注册表单 -->
     <view class="form-container {{activeTab === 'register' ? 'show' : 'hide'}}">
-      <!-- 学工号 -->
+      <!-- 用户名 -->
       <view class="input-container">
         <text class="input-label">
-          <text class="icon iconfont icon-user"></text> 学工号
+          <text class="icon iconfont icon-user"></text> 用户名
         </text>
         <input class="input-field" placeholder="请输入学工号" type="text" bindinput="onRegisterUsernameChange" value="{{registerUsername}}" />
       </view>

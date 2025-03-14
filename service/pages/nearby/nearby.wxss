@@ -91,3 +91,9 @@
   font-size: 24rpx;
   color: #999;
 }
+
+.company {
+  font-size: 24rpx;
+  color: #666;
+  margin-bottom: 8rpx;
+}

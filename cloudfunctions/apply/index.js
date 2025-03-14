@@ -16,7 +16,7 @@ exports.main = async (event, context) => {
 
   try {
     // 插入数据
-    const sql = `INSERT INTO alumnus (name, gender, graduate_year, college, major, region, company, position) 
+    const sql = `INSERT INTO alumnus_pending (name, gender, graduate_year, college, major, region, company, position) 
                  VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
     const values = [name, gender || null, graduateYear || null, college || null, major || null, region || null, company || null, position || null];
 

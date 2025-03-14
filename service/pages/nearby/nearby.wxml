@@ -22,11 +22,12 @@
     </view>
     
     <scroll-view scroll-y class="list-content">
-      <view class="alumni-item" wx:for="{{alumniList}}" wx:key="id" bindtap="handleAlumniTap" data-id="{{item.id}}">
+      <view class="alumni-item" wx:for="{{alumniList}}" wx:key="_id" bindtap="handleAlumniTap" data-id="{{item._id}}">
         <image class="avatar" src="{{item.avatar || '/images/default-avatar.png'}}" mode="aspectFill"></image>
         <view class="info">
           <view class="name">{{item.name}}</view>
-          <view class="detail">{{item.college}} · {{item.major}} · {{item.graduate_year}}届</view>
+          <view class="detail">{{item.college}} · {{item.major}} · {{item.graduateYear}}届</view>
+          <view class="company">{{item.company}} · {{item.position}}</view>
           <view class="distance">{{item.distance}}km</view>
         </view>
       </view>
