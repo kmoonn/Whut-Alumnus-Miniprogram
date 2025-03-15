@@ -8,7 +8,7 @@
       <icon type="search" size="16" color="#999"/>
       <input 
         class="search-input" 
-        placeholder="搜索校友姓名、学院、专业" 
+        placeholder="搜索校友姓名、工作单位、职务" 
         value="{{searchValue}}"
         bindinput="onSearchInput"
         bindconfirm="onSearch"
@@ -53,10 +53,9 @@
       bindtap="showDetail" 
       data-id="{{item.id}}"
     >
-      <image class="avatar" src="{{item.avatar || '/images/default-avatar.png'}}" mode="aspectFill"></image>
       <view class="info">
         <view class="name">{{item.name}}</view>
-        <view class="detail">{{item.college}} · {{item.major}} · {{item.graduate_year}}届</view>
+        
         <view class="company">{{item.company}}</view>
       </view>
       <view class="arrow">></view>

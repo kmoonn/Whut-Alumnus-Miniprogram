@@ -1,125 +1,114 @@
 import * as echarts from '../../ec-canvas/echarts';
+import geoJson from './mapData.js';
 
-let mapChart = null;
-let categoryChart = null;
+const app = getApp();
 
-// 地图初始化函数
 function initMapChart(canvas, width, height, dpr) {
-  mapChart = echarts.init(canvas, null, {
+  const chart = echarts.init(canvas, null, {
     width: width,
     height: height,
-    devicePixelRatio: dpr
+    devicePixelRatio: dpr // new
   });
-  canvas.setChart(mapChart);
-  return mapChart;
+  canvas.setChart(chart);
+
+  echarts.registerMap('china', geoJson);
+
+  const option = {
+    geo: {
+      map: 'china',
+      roam: true,  // 允许缩放和平移
+      label: {
+        show: true,
+        fontSize: 8,  // 调小字体以适应小程序
+        color: '#000'
+      }
+    },
+    series: [{
+      type: 'map',
+      mapType: 'china',
+      label: {
+        show: true,
+        fontSize: 8
+      },
+      itemStyle: {
+        normal: {
+          borderColor: '#389BB7',
+          areaColor: '#F3F3F3',  // 更改默认颜色使地图更清晰
+          borderWidth: 1
+        },
+        emphasis: {
+          areaColor: '#389BB7',
+          borderWidth: 0
+        }
+      },
+      animation: false,
+      data: [
+        { name: '北京', value: 100 },
+        { name: '上海', value: 80 },
+        { name: '广东', value: 90 }
+      ]
+    }]
+  };
+
+  chart.setOption(option);
+
+  return chart;
 }
 
-// 饼图初始化函数
 function initCategoryChart(canvas, width, height, dpr) {
-  categoryChart = echarts.init(canvas, null, {
+  const chart = echarts.init(canvas, null, {
     width: width,
     height: height,
-    devicePixelRatio: dpr
+    devicePixelRatio: dpr // new
   });
-  canvas.setChart(categoryChart);
-  return categoryChart;
+  canvas.setChart(chart);
+
+  var option = {
+    backgroundColor: "#ffffff",
+    series: [{
+      label: {
+        normal: {
+          fontSize: 14
+        }
+      },
+      type: 'pie',
+      center: ['50%', '50%'],
+      radius: ['20%', '40%'],
+      data: [{
+        value: 55,
+        name: '政界'
+      }, {
+        value: 20,
+        name: '商界'
+      }, {
+        value: 20,
+        name: '学界'
+      }]
+    }]
+  };
+
+  chart.setOption(option);
+  return chart;
 }
 
 Page({
+  onShareAppMessage: function (res) {
+    return {
+      title: 'ECharts 可以在微信小程序中使用啦！',
+      path: '/pages/index/index',
+      success: function () { },
+      fail: function () { }
+    }
+  },
   data: {
     mapEc: {
       onInit: initMapChart
     },
     categoryEc: {
       onInit: initCategoryChart
-    }
+    },
   },
 
-  onLoad: function() {
-    this.loadVisualData();
-  },
-
-  loadVisualData: function() {
-    wx.showLoading({
-      title: '加载中'
-    });
-
-    wx.cloud.callFunction({
-      name: 'getVisualData',
-    }).then(res => {
-      console.log('云函数返回:', res);
-      
-      if (res.result && res.result.success) {
-        this.setChartData(res.result.data);
-      } else {
-        console.error('云函数执行失败:', res.result);
-        wx.showToast({
-          title: res.result?.error || '数据加载失败',
-          icon: 'none',
-          duration: 3000
-        });
-      }
-    }).catch(err => {
-      console.error('请求错误:', err);
-      wx.showToast({
-        title: '网络请求失败',
-        icon: 'none',
-        duration: 3000
-      });
-    }).finally(() => {
-      wx.hideLoading();
-    });
-  },
-
-  setChartData: function(data) {
-    // 设置地图数据
-    const mapOption = {
-      visualMap: {
-        min: 0,
-        max: 100,
-        text: ['高', '低'],
-        calculable: true,
-        inRange: {
-          color: ['#50a3ba', '#eac736', '#d94e5d']
-        }
-      },
-      series: [{
-        type: 'map',
-        mapType: 'china',
-        label: {
-          show: true
-        },
-        data: data.locationData.map(item => ({
-          name: item.province,
-          value: item.count
-        }))
-      }]
-    };
-
-    // 设置饼图数据
-    const collegeOption = {
-      tooltip: {
-        trigger: 'item',
-        formatter: '{b}: {c} ({d}%)'
-      },
-      series: [{
-        type: 'pie',
-        radius: '60%',
-        data: data.fieldData.map(item => ({
-          name: item.field,
-          value: item.count
-        })),
-        emphasis: {
-          itemStyle: {
-            shadowBlur: 10,
-            shadowOffsetX: 0,
-            shadowColor: 'rgba(0, 0, 0, 0.5)'
-          }
-        }
-      }]
-    };
-
-    mapChart.setOption(mapOption);
-    collegeChart.setOption(collegeOption);
+  onReady() {
   }
 });
