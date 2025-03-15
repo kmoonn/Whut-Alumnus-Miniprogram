@@ -7,7 +7,7 @@
   <view class="service-grid">
     <view class="service-item" bindtap="navigateTo" data-path="/alumnus/pages/apply/apply">
       <image class="service-icon" src="https://636c-cloud1-6gsqyvkd3f24bdd8-1311119192.tcb.qcloud.la/images/apply.png" mode="aspectFit"></image>
-      <text class="service-name">校友申请</text>
+      <text class="service-name">校友申报</text>
     </view>
 
     <view class="service-item" bindtap="navigateTo" data-path="/alumnus/pages/check/check">
@@ -35,7 +35,7 @@
       <text class="service-name">可视化</text>
     </view>
 
-    <view class="service-item" bindtap="navigateTo" data-path="/alumnus/pages/activity/activity">
+    <view class="service-item" bindtap="navigateTo" data-path="/service/pages/activity/activity">
       <image class="service-icon" src="https://636c-cloud1-6gsqyvkd3f24bdd8-1311119192.tcb.qcloud.la/images/activity.png" mode="aspectFit"></image>
       <text class="service-name">校友活动</text>
     </view>

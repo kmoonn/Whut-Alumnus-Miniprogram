@@ -30,6 +30,8 @@
   justify-content: center;
 }
 
+
+
 .form {
   background-color: #fff;
   padding: 30rpx;
@@ -94,3 +96,32 @@
 .submit-btn:disabled {
   background-color: #ccc;
 }
+
+.checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20rpx;
+  margin-top: 10rpx;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  padding: 15rpx 30rpx;
+  background-color: #f5f5f5;
+  border-radius: 8rpx;
+  font-size: 28rpx;
+  color: #333;
+}
+
+checkbox .wx-checkbox-input {
+  width: 30rpx;
+  height: 30rpx;
+  border-radius: 4rpx;
+  margin-right: 10rpx;
+}
+
+
+
+
+

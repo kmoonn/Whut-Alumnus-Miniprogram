@@ -1,12 +1,9 @@
 import * as echarts from '../../ec-canvas/echarts';
-import { getVisualData } from '../../utils/api';
 
 let mapChart = null;
-let collegeChart = null;
-let majorChart = null;
-let yearChart = null;
-let industryChart = null;
+let categoryChart = null;
 
+// 地图初始化函数
 function initMapChart(canvas, width, height, dpr) {
   mapChart = echarts.init(canvas, null, {
     width: width,
@@ -14,323 +11,115 @@ function initMapChart(canvas, width, height, dpr) {
     devicePixelRatio: dpr
   });
   canvas.setChart(mapChart);
-
-  const option = {
-    title: {
-      text: '校友地理分布',
-      left: 'center'
-    },
-    tooltip: {
-      trigger: 'item'
-    },
-    visualMap: {
-      min: 0,
-      max: 100,
-      left: 'left',
-      top: 'bottom',
-      text: ['高', '低'],
-      calculable: true
-    },
-    series: [{
-      name: '校友分布',
-      type: 'map',
-      map: 'china',
-      roam: true,
-      emphasis: {
-        label: {
-          show: true
-        }
-      },
-      data: []
-    }]
-  };
-
-  mapChart.setOption(option);
   return mapChart;
 }
 
-function initCollegeChart(canvas, width, height, dpr) {
-  collegeChart = echarts.init(canvas, null, {
+// 饼图初始化函数
+function initCategoryChart(canvas, width, height, dpr) {
+  categoryChart = echarts.init(canvas, null, {
     width: width,
     height: height,
     devicePixelRatio: dpr
   });
-  canvas.setChart(collegeChart);
-
-  const option = {
-    title: {
-      text: '学院分布',
-      left: 'center'
-    },
-    tooltip: {
-      trigger: 'item',
-      formatter: '{a} <br/>{b}: {c} ({d}%)'
-    },
-    legend: {
-      orient: 'vertical',
-      left: 'left'
-    },
-    series: [{
-      name: '学院分布',
-      type: 'pie',
-      radius: '50%',
-      data: [],
-      emphasis: {
-        itemStyle: {
-          shadowBlur: 10,
-          shadowOffsetX: 0,
-          shadowColor: 'rgba(0, 0, 0, 0.5)'
-        }
-      }
-    }]
-  };
-
-  collegeChart.setOption(option);
-  return collegeChart;
-}
-
-function initMajorChart(canvas, width, height, dpr) {
-  majorChart = echarts.init(canvas, null, {
-    width: width,
-    height: height,
-    devicePixelRatio: dpr
-  });
-  canvas.setChart(majorChart);
-
-  const option = {
-    title: {
-      text: '专业分布TOP10',
-      left: 'center'
-    },
-    tooltip: {
-      trigger: 'axis',
-      axisPointer: {
-        type: 'shadow'
-      }
-    },
-    xAxis: {
-      type: 'category',
-      data: [],
-      axisLabel: {
-        interval: 0,
-        rotate: 30
-      }
-    },
-    yAxis: {
-      type: 'value'
-    },
-    series: [{
-      data: [],
-      type: 'bar'
-    }]
-  };
-
-  majorChart.setOption(option);
-  return majorChart;
-}
-
-function initYearChart(canvas, width, height, dpr) {
-  yearChart = echarts.init(canvas, null, {
-    width: width,
-    height: height,
-    devicePixelRatio: dpr
-  });
-  canvas.setChart(yearChart);
-
-  const option = {
-    title: {
-      text: '毕业年份分布',
-      left: 'center'
-    },
-    tooltip: {
-      trigger: 'axis'
-    },
-    xAxis: {
-      type: 'category',
-      data: []
-    },
-    yAxis: {
-      type: 'value'
-    },
-    series: [{
-      data: [],
-      type: 'line',
-      smooth: true
-    }]
-  };
-
-  yearChart.setOption(option);
-  return yearChart;
-}
-
-function initIndustryChart(canvas, width, height, dpr) {
-  industryChart = echarts.init(canvas, null, {
-    width: width,
-    height: height,
-    devicePixelRatio: dpr
-  });
-  canvas.setChart(industryChart);
-
-  const option = {
-    title: {
-      text: '行业分布',
-      left: 'center'
-    },
-    tooltip: {},
-    radar: {
-      indicator: []
-    },
-    series: [{
-      name: '行业分布',
-      type: 'radar',
-      data: [{
-        value: [],
-        name: '校友数量'
-      }]
-    }]
-  };
-
-  industryChart.setOption(option);
-  return industryChart;
+  canvas.setChart(categoryChart);
+  return categoryChart;
 }
 
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
     mapEc: {
       onInit: initMapChart
     },
-    collegeEc: {
-      onInit: initCollegeChart
-    },
-    majorEc: {
-      onInit: initMajorChart
-    },
-    yearEc: {
-      onInit: initYearChart
-    },
-    industryEc: {
-      onInit: initIndustryChart
+    categoryEc: {
+      onInit: initCategoryChart
     }
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad(options) {
-    this.fetchVisualData();
+  onLoad: function() {
+    this.loadVisualData();
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {
+  loadVisualData: function() {
+    wx.showLoading({
+      title: '加载中'
+    });
 
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {
-
-  },
-
-  async fetchVisualData() {
-    try {
-      const data = await getVisualData();
+    wx.cloud.callFunction({
+      name: 'getVisualData',
+    }).then(res => {
+      console.log('云函数返回:', res);
       
-      // 更新地图数据
-      mapChart.setOption({
-        series: [{
-          data: data.mapData
-        }]
-      });
-
-      // 更新学院分布数据
-      collegeChart.setOption({
-        series: [{
-          data: data.collegeData
-        }]
-      });
-
-      // 更新专业分布数据
-      majorChart.setOption({
-        xAxis: {
-          data: data.majorData.map(item => item.name)
-        },
-        series: [{
-          data: data.majorData.map(item => item.value)
-        }]
-      });
-
-      // 更新毕业年份分布数据
-      yearChart.setOption({
-        xAxis: {
-          data: data.yearData.map(item => item.name)
-        },
-        series: [{
-          data: data.yearData.map(item => item.value)
-        }]
-      });
-
-      // 更新行业分布数据
-      industryChart.setOption({
-        radar: {
-          indicator: data.industryData.map(item => ({
-            name: item.name,
-            max: Math.max(...data.industryData.map(d => d.value))
-          }))
-        },
-        series: [{
-          data: [{
-            value: data.industryData.map(item => item.value)
-          }]
-        }]
-      });
-    } catch (error) {
-      console.error('获取可视化数据失败：', error);
+      if (res.result && res.result.success) {
+        this.setChartData(res.result.data);
+      } else {
+        console.error('云函数执行失败:', res.result);
+        wx.showToast({
+          title: res.result?.error || '数据加载失败',
+          icon: 'none',
+          duration: 3000
+        });
+      }
+    }).catch(err => {
+      console.error('请求错误:', err);
       wx.showToast({
-        title: '获取数据失败',
-        icon: 'none'
+        title: '网络请求失败',
+        icon: 'none',
+        duration: 3000
       });
-    }
+    }).finally(() => {
+      wx.hideLoading();
+    });
+  },
+
+  setChartData: function(data) {
+    // 设置地图数据
+    const mapOption = {
+      visualMap: {
+        min: 0,
+        max: 100,
+        text: ['高', '低'],
+        calculable: true,
+        inRange: {
+          color: ['#50a3ba', '#eac736', '#d94e5d']
+        }
+      },
+      series: [{
+        type: 'map',
+        mapType: 'china',
+        label: {
+          show: true
+        },
+        data: data.locationData.map(item => ({
+          name: item.province,
+          value: item.count
+        }))
+      }]
+    };
+
+    // 设置饼图数据
+    const collegeOption = {
+      tooltip: {
+        trigger: 'item',
+        formatter: '{b}: {c} ({d}%)'
+      },
+      series: [{
+        type: 'pie',
+        radius: '60%',
+        data: data.fieldData.map(item => ({
+          name: item.field,
+          value: item.count
+        })),
+        emphasis: {
+          itemStyle: {
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: 'rgba(0, 0, 0, 0.5)'
+          }
+        }
+      }]
+    };
+
+    mapChart.setOption(mapOption);
+    collegeChart.setOption(collegeOption);
   }
-})
+});

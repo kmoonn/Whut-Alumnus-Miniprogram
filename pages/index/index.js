@@ -74,8 +74,8 @@ function getCompanies() {
   return new Promise((resolve) => {
     setTimeout(() => {
       const companies = [
-        { id: 1, name: '校友科技', industry: '', logo: 'https://example.com/company1.png' },
-        { id: 2, name: '校友金融', industry: '', logo: 'https://example.com/company2.png' }
+        { id: 1, name: '校友科技', industry: '', logo: 'https://636c-cloud1-6gsqyvkd3f24bdd8-1311119192.tcb.qcloud.la/images/default-avatar.jpg' },
+        { id: 2, name: '校友金融', industry: '', logo: 'https://636c-cloud1-6gsqyvkd3f24bdd8-1311119192.tcb.qcloud.la/images/default-avatar.jpg' }
       ];
       resolve(companies);
     }, 1000);

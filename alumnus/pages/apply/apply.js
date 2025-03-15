@@ -1,13 +1,12 @@
 Page({
   data: {
     name: '',
-    gender: '',
-    graduateYear: '',
-    college: '',
-    major: '',
+    category: [], // 改为数组存储多选的类别
     region: '',
     company: '',
     position: '',
+    graduation_year: '',
+    major: '',
     isAgreed: false
   },
 
@@ -19,26 +18,25 @@ Page({
     });
   },
 
-    // 处理性别变化
-  onGenderChange: function (e) {
-      // 获取用户选择的性别
-      const selectedGender = e.detail.value;
-  
-      // 更新数据
-      this.setData({
-        gender: selectedGender
-      });
-    },
+  // 处理类别多选变化
+  onCategoryChange(e) {
+    this.setData({
+      category: e.detail.value
+    });
+  },
 
   // 选择毕业年份
   onDateChange(e) {
     this.setData({
-      graduateYear: e.detail.value
+      graduation_year: e.detail.value
     });
   },
 
+  // 选择地区
   onRegionChange(e) {
-    this.setData({ region: e.detail.value.join(' ') }); // 将省市区拼接为字符串
+    this.setData({ 
+      region: e.detail.value.join(' ') 
+    });
   },
 
   // 用户同意协议
@@ -52,7 +50,15 @@ Page({
   submitForm() {
     if (!this.data.name) {
       wx.showToast({
-        title: '请至少填写姓名！',
+        title: '请填写姓名！',
+        icon: 'none'
+      });
+      return;
+    }
+
+    if (this.data.category.length === 0) {
+      wx.showToast({
+        title: '请选择类别！',
         icon: 'none'
       });
       return;
@@ -63,14 +69,13 @@ Page({
     wx.cloud.callFunction({
       name: 'apply',
       data: {
+        category: this.data.category,
         name: this.data.name,
-        gender: this.data.gender,
-        graduateYear: this.data.graduateYear,
-        college: this.data.college,
-        major: this.data.major,
         region: this.data.region,
         company: this.data.company,
-        position: this.data.position
+        position: this.data.position,
+        graduation_year: this.data.graduation_year,
+        major: this.data.major
       },
       success: (res) => {
         wx.hideLoading();

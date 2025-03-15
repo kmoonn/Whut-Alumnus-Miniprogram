@@ -1,22 +1,39 @@
 Page({
   data: {
     userInfo: null,
-    unreadCount: 0
+    showContactModal: false
+  },
+  
+  contactService() {
+    this.setData({
+      showContactModal: true
+    });
+  },
+  
+  hideModal() {
+    this.setData({
+      showContactModal: false
+    });
   },
 
   onLoad() {
     this.fetchUserInfo();
-    this.fetchUnreadCount();
   },
 
   onShow() {
-    this.fetchUnreadCount();
   },
 
   async fetchUserInfo() {
     try {
-      const { result } = await getUserInfo();
-      this.setData({ userInfo: result });
+      const userInfo = wx.getStorageSync('userInfo');
+      if (userInfo) {
+        this.setData({ userInfo });
+      } else {
+        wx.showToast({
+          title: '请先登录',
+          icon: 'none'
+        });
+      }
     } catch (error) {
       console.error('获取用户信息失败：', error);
       wx.showToast({
@@ -26,29 +43,9 @@ Page({
     }
   },
 
-  async fetchUnreadCount() {
-    try {
-      const { result } = await getUnreadCount();
-      this.setData({ unreadCount: result.count });
-    } catch (error) {
-      console.error('获取未读消息数失败：', error);
-    }
-  },
-
   navigateTo(e) {
     const { url } = e.currentTarget.dataset;
     wx.navigateTo({ url });
-  },
-
-  contactService() {
-    wx.makePhoneCall({
-      phoneNumber: '1234567890',
-      fail() {
-        wx.showToast({
-          title: '拨打电话失败',
-          icon: 'none'
-        });
-      }
-    });
   }
+
 }); 

@@ -1,7 +1,7 @@
 Page({
   data: {
-    alumniInfo: null,
-    searchInfo: null,
+    sourceInfo: null,
+    pendingInfo: null,
     pendingCount: 0
   },
 
@@ -15,50 +15,61 @@ Page({
       name: 'check',
       data: { 
         action: 'getPendingMatches',
-        reviewerId: wx.getStorageSync('userId')
+        reviewerId: wx.getStorageSync('userInfo').id
       },
       success: res => {
         if (res.result.code === 200) {
+          const { sourceAlumnus, pendingAlumnus, pendingCount } = res.result.data;
           this.setData({
-            alumniInfo: res.result.data.alumniInfo,
-            searchInfo: res.result.data.searchInfo,
-            pendingCount: res.result.data.count
+            sourceInfo: sourceAlumnus,  // 源校友库信息
+            pendingInfo: pendingAlumnus, // 待审核校友信息
+            pendingCount: pendingCount  // 待审核数量（已匹配source_id的记录数）
+          });
+        } else {
+          wx.showToast({
+            title: res.result.message || '获取数据失败',
+            icon: 'none'
           });
         }
       },
-      fail: err => console.error('获取待匹配数据失败', err)
+      fail: err => {
+        console.error('获取待匹配数据失败', err);
+        wx.showToast({
+          title: '获取数据失败',
+          icon: 'none'
+        });
+      }
     });
   },
 
   // 确认信息匹配
   approveMatch() {
-    this.submitMatch(1); // 1 表示信息匹配
+    this.submitMatch('approved'); // 表示信息匹配
   },
 
   // 确认信息不匹配
   rejectMatch() {
-    this.submitMatch(0); // 0 表示信息不匹配
+    this.submitMatch('rejected'); // 0 表示信息不匹配
   },
 
   // 提交匹配结果
   submitMatch(status) {
-    if (!this.data.alumniInfo || !this.data.searchInfo) {
+    if (!this.data.sourceInfo || !this.data.pendingInfo) {
       wx.showToast({ title: '没有待匹配数据', icon: 'none' });
       return;
     }
 
     wx.showModal({
       title: '确认提交',
-      content: status === 1 ? '确认这两条信息匹配吗？' : '确认这两条信息不匹配吗？',
+      content: status === 'approved' ? '确认这两条信息匹配吗？' : '确认这两条信息不匹配吗？',
       success: (res) => {
         if (res.confirm) {
           wx.cloud.callFunction({
             name: 'check',
             data: {
               action: 'submitMatch',
-              alumniId: this.data.alumniInfo.id,
-              searchId: this.data.searchInfo.id,
-              reviewerId: wx.getStorageSync('userId'),
+              pendingId: this.data.pendingInfo.id,
+              reviewerId: wx.getStorageSync('userInfo').id,
               status: status
             },
             success: res => {

@@ -7,31 +7,13 @@
   <view class="chart-container">
     <!-- 校友分布地图 -->
     <view class="chart-card">
-      <view class="chart-title">校友地理分布</view>
+      <view class="chart-title">全国校友地理分布</view>
       <ec-canvas id="mapChart" canvas-id="mapChart" ec="{{ mapEc }}"></ec-canvas>
     </view>
 
-    <!-- 学院分布饼图 -->
+    <!-- 行业分布饼图 -->
     <view class="chart-card">
-      <view class="chart-title">学院分布</view>
-      <ec-canvas id="collegeChart" canvas-id="collegeChart" ec="{{ collegeEc }}"></ec-canvas>
-    </view>
-
-    <!-- 专业分布柱状图 -->
-    <view class="chart-card">
-      <view class="chart-title">专业分布TOP10</view>
-      <ec-canvas id="majorChart" canvas-id="majorChart" ec="{{ majorEc }}"></ec-canvas>
-    </view>
-
-    <!-- 毕业年份分布折线图 -->
-    <view class="chart-card">
-      <view class="chart-title">毕业年份分布</view>
-      <ec-canvas id="yearChart" canvas-id="yearChart" ec="{{ yearEc }}"></ec-canvas>
-    </view>
-
-    <!-- 行业分布雷达图 -->
-    <view class="chart-card">
-      <view class="chart-title">行业分布</view>
-      <ec-canvas id="industryChart" canvas-id="industryChart" ec="{{ industryEc }}"></ec-canvas>
+      <view class="chart-title">政、商、学界分布</view>
+      <ec-canvas id="categoryChart" canvas-id="categoryChart" ec="{{ categoryEc }}"></ec-canvas>
     </view>
   </view>

@@ -3,7 +3,8 @@
     "pages/login/login",
     "pages/index/index",
     "pages/service/index",
-    "pages/my/index"
+    "pages/my/index",
+    "pages/my/profile"
   ],
   "subPackages": [
     {
@@ -65,8 +66,5 @@
     "weui": true
   },
   "sitemapLocation": "sitemap.json",
-  "lazyCodeLoading": "requiredComponents",
-  "requiredPriateInfos": [
-    "getLocation"
-  ]
+  "lazyCodeLoading": "requiredComponents"
 }

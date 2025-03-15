@@ -4,46 +4,31 @@
     <text class="title">校友申报</text>
   </view>
   <view class="header">
-    <text class="title" style="font-size: small;">信息填写</text>
+    <text class="title" style="font-size: medium;">信息填写</text>
   </view>
 
   <view class="form">
+    <view class="form-item">
+  <text class="label">类别<text class="required">*</text></text>
+  <checkbox-group class="checkbox-group" bindchange="onCategoryChange">
+    <label class="checkbox-label">
+      <checkbox value="政界" />政界
+    </label>
+    <label class="checkbox-label">
+      <checkbox value="商界" />商界
+    </label>
+    <label class="checkbox-label">
+      <checkbox value="学界" />学界
+    </label>
+  </checkbox-group>
+</view>
+
     <view class="form-item">
       <text class="label">姓名<text class="required">*</text></text>
       <input class="input" placeholder="请输入姓名" bindinput="onInputChange" data-field="name" />
     </view>
 
-    <view class="form-item">
-  <text class="label">性别</text>
-  <radio-group class="radio-group" bindchange="onGenderChange">
-    <label class="radio-label">
-      <radio value="男" checked="{{gender === '男'}}" /> 男
-    </label>
-    <label class="radio-label">
-      <radio value="女" checked="{{gender === '女'}}" /> 女
-    </label>
-  </radio-group>
-</view>
-
-
-    <view class="form-item">
-      <text class="label">毕业年份</text>
-      <picker mode="date" fields="year" bindchange="onDateChange">
-        <view class="picker">{{graduateYear || '请选择毕业年份'}}</view>
-      </picker>
-    </view>
-
-    <view class="form-item">
-      <text class="label">学院</text>
-      <input class="input" placeholder="请输入学院" bindinput="onInputChange" data-field="college" />
-    </view>
-
-    <view class="form-item">
-      <text class="label">专业</text>
-      <input class="input" placeholder="请输入专业" bindinput="onInputChange" data-field="major" />
-    </view>
-
-    <!-- 所在地 -->
+        <!-- 所在地 -->
   <view class="form-item">
     <text class="label">所在地</text>
     <picker mode="region" bindchange="onRegionChange">
@@ -51,7 +36,7 @@
     </picker>
   </view>
 
-    <view class="form-item">
+  <view class="form-item">
       <text class="label">工作单位</text>
       <input class="input" placeholder="请输入工作单位" bindinput="onInputChange" data-field="company" />
     </view>
@@ -60,6 +45,24 @@
       <text class="label">职务</text>
       <input class="input" placeholder="请输入职务" bindinput="onInputChange" data-field="position" />
     </view>
+
+
+    <view class="form-item">
+      <text class="label">毕业年份</text>
+      <picker mode="date" fields="year" bindchange="onDateChange">
+        <view class="picker">{{graduation_year || '请选择毕业年份'}}</view>
+      </picker>
+    </view>
+
+
+    <view class="form-item">
+      <text class="label">专业</text>
+      <input class="input" placeholder="请输入专业" bindinput="onInputChange" data-field="major" />
+    </view>
+
+
+
+
 
     <view class="agreement">
       <checkbox-group bindchange="onAgreeChange">

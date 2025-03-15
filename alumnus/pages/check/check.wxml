@@ -11,36 +11,35 @@
 
 <!-- 信息对比区域 -->
 <view class="comparison-container">
-  <!-- 校友库信息 -->
+  <!-- 校友库源信息 -->
   <view class="info-section">
-    <view class="section-title">校友库信息</view>
+    <view class="section-title">校友库源信息</view>
     <view class="card">
-      <text class="name">{{alumniInfo.name}}</text>
-      <text class="info">性别: {{alumniInfo.gender}}</text>
-      <text class="info">出生日期: {{alumniInfo.birthday}}</text>
-      <text class="info">毕业年份: {{alumniInfo.graduate_year}}</text>
-      <text class="info">学院: {{alumniInfo.college}}</text>
-      <text class="info">专业: {{alumniInfo.major}}</text>
-      <text class="info">所在地: {{alumniInfo.region}}</text>
-      <text class="info">工作单位: {{alumniInfo.company}}</text>
-      <text class="info">职务: {{alumniInfo.position}}</text>
+      <text class="name">{{sourceInfo.name}}</text>
+      <text class="info">性别: {{sourceInfo.gender}}</text>
+      <text class="info">出生日期: {{sourceInfo.birthday}}</text>
+      <text class="info">毕业年份: {{sourceInfo.graduation_year}}</text>
+      <text class="info">学院: {{sourceInfo.department}}</text>
+      <text class="info">专业: {{sourceInfo.major}}</text>
+      <text class="info">所在地: {{sourceInfo.region}}</text>
+      <text class="info">工作单位: {{sourceInfo.company}}</text>
+      <text class="info">职务: {{sourceInfo.position}}</text>
     </view>
   </view>
 
-  <!-- 网上搜索信息 -->
+  <!-- 待审核信息 -->
   <view class="info-section">
-    <view class="section-title">网上搜索信息</view>
+    <view class="section-title">疑似校友信息</view>
     <view class="card">
-      <text class="name">{{searchInfo.name}}</text>
-      <text class="info">性别: {{searchInfo.gender}}</text>
-      <text class="info">出生日期: {{searchInfo.birthday}}</text>
-      <text class="info">毕业年份: {{searchInfo.graduate_year}}</text>
-      <text class="info">学院: {{searchInfo.college}}</text>
-      <text class="info">专业: {{searchInfo.major}}</text>
-      <text class="info">所在地: {{searchInfo.region}}</text>
-      <text class="info">工作单位: {{searchInfo.company}}</text>
-      <text class="info">职务: {{searchInfo.position}}</text>
-      <text class="info">信息来源: {{searchInfo.source}}</text>
+      <text class="name">{{pendingInfo.name}}</text>
+      <text class="info">性别: {{pendingInfo.gender}}</text>
+      <text class="info">出生日期: {{pendingInfo.birthday}}</text>
+      <text class="info">毕业年份: {{pendingInfo.graduation_year}}</text>
+      <text class="info">专业: {{pendingInfo.major}}</text>
+      <text class="info">所在地: {{pendingInfo.region}}</text>
+      <text class="info">工作单位: {{pendingInfo.company}}</text>
+      <text class="info">职务: {{pendingInfo.position}}</text>
+      <text class="info">信息来源: {{pendingInfo.source}}</text>
     </view>
   </view>
 </view>

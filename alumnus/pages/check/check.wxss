@@ -83,7 +83,7 @@
 
 .info {
   font-size: 32rpx;
-  color: #666;
+  color: rgb(34, 96, 211);
   margin: 10rpx 0;
   word-break: break-word;
 }
