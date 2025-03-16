@@ -19,7 +19,7 @@
       "root": "service",
       "pages": [
         "pages/activity/activity",
-        "pages/activity/activityDetail",
+        "pages/activityDetail/activityDetail",
         "pages/nearby/nearby",
         "pages/search/search",
         "pages/visual/visual",

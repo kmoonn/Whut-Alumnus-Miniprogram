@@ -2,7 +2,6 @@ Page({
   data: {
     activityList: [] 
   },
-
   onLoad() {
     this.fetchActivity();
   },
@@ -15,7 +14,6 @@ Page({
     });
   },
 
-
   // 获取活动列表
   fetchActivity() {
     wx.showLoading({ title: '加载中' });
@@ -27,7 +25,18 @@ Page({
       success: res => {
         if (res.result.code === 200) {
           const activityList = res.result.result;
-          console.log('获取到的校友列表数据:', activityList);
+          
+          activityList.forEach(activity => {
+            if (activity.date) {
+              const date = new Date(activity.date);
+              activity.date = date.toLocaleDateString('zh-CN', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit'
+              });
+            }
+          });
+
           this.setData({
             activityList: activityList
           });
