@@ -4,7 +4,7 @@ Page({
     searchHistory: [],
     alumniList: [],
     page: 1,
-    pageSize: 20,
+    pageSize: 10,
     hasMore: true,
     loading: false
   },
@@ -36,11 +36,11 @@ Page({
   },
 
   // 输入搜索内容
-  onInput(e) {
+  onSearchInput(e) {
     this.setData({
       searchValue: e.detail.value
     })
-  },
+  },  
 
   // 清空搜索
   clearSearch() {
@@ -53,7 +53,7 @@ Page({
   },
 
   // 搜索
-  search() {
+  onSearch() {
     const { searchValue } = this.data
     if (!searchValue.trim()) return
 
@@ -81,7 +81,7 @@ Page({
   onHistoryTap(e) {
     const { keyword } = e.currentTarget.dataset
     this.setData({ searchValue: keyword }, () => {
-      this.search()
+      this.onSearch()
     })
   },
 
@@ -133,11 +133,15 @@ Page({
       this.setData({ loading: false })
     }
   },
-
+  // 显示校友详情
   showDetail(e) {
-    const { id } = e.currentTarget.dataset
-    wx.navigateTo({
-      url: `/pages/alumni/detail?id=${id}`
-    })
-  }
+    const id = e.currentTarget.dataset.id;
+    if (id) {
+        wx.navigateTo({
+            url: `/alumnus/pages/famous_detail/famous_detail?id=${id}`
+        });
+    } else {
+        console.error('未获取到有效的 id');
+    }
+}
 })

@@ -18,145 +18,47 @@
   font-weight: bold;
   margin-top: 10px;
 }
-
-/* 🔍 筛选容器 */
-.filter-container {
-  display: flex;
-  align-items: center;
-  padding: 20rpx;
-}
-
-.field-selector {
-  height: 50rpx;
-  padding: 0 20rpx;
-  font-size: 32rpx;
-  border: 2px solid #ccc;
-  border-radius: 35rpx;
-  margin-right: 10rpx;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100px;
-}
-
-.search-input {
-  flex: 1;
-  height: 50rpx;
-  padding: 0 20rpx;
-  border: 2px solid #ccc;
-  border-radius: 35rpx;
-  font-size: 32rpx;
-  outline: none;
-}
-
-/* 📋 表格容器 */
-.table-container {
-  padding: 20rpx;
-}
-
-.table-header, .table-row {
-  display: flex;
-  justify-content: space-between;
-  margin: 10rpx 0;
-}
-
-.table-cell {
-  flex: 1;
-  font-size: 20rpx;
-  font-weight: bold;
-  padding: 10rpx;
-  text-align: center;
-  background-color: #f9f9f9;
-  border: 1px solid #ccc;
-  border-radius: 8rpx;
-}
-
-.table-row {
-  background-color: #fff;
-}
-
-.table-row .table-cell {
-  font-weight: normal;
-  background-color: transparent;
-}
-
-.table-cell:first-child {
-  font-weight: bold;
-}
-
-.container {
-  height: 100vh;
-  display: flex;
-  background: #f5f5f5;
-}
-
-/* 侧边栏触发按钮样式 */
-.sidebar-trigger {
-  position: fixed;
-  top: 15%;
-  left: 5%;
-  font-size: 30px;
-  cursor: pointer;
-  z-index: 1000; 
-}
-
-/* 侧边栏样式 */
+/* 侧边栏 */
 .sidebar {
   width: 160rpx;
   background: #ffffff;
   display: flex;
   flex-direction: column;
   border-right: 1rpx solid #f0f0f0;
+  padding-top: 50rpx;
 }
 
 .sidebar-item {
-  padding: 40rpx 20rpx;
+  padding: 30rpx;
+  font-size: 30rpx;
   text-align: center;
-  font-size: 28rpx;
-  color: #666;
-  position: relative;
-  transition: all 0.3s ease;
-  cursor: pointer;
+  border-bottom: 2rpx solid #ddd;
 }
 
 .sidebar-item.active {
-  color: #007bff;
-  font-weight: 500;
-  background: #f8f9ff;
+  background-color: #007AFF;
+  color: white;
+  font-weight: bold;
 }
 
-.sidebar-item.active::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 6rpx;
-  height: 40rpx;
-  background: #007bff;
-  border-radius: 0 3rpx 3rpx 0;
-}
-
-/* 主内容区样式 */
-.main-content {
-  flex: 1;
-  overflow: hidden;
-}
-
-/* 校友列表样式 */
+/* 校友列表 */
 .alumni-list {
-  height: 100%;
   padding: 20rpx;
 }
 
 .alumni-item {
   display: flex;
   align-items: center;
-  background: #ffffff;
-  padding: 30rpx;
+  padding: 20rpx;
+  background: #fff;
+  border-radius: 20rpx;
+  box-shadow: 0 5rpx 15rpx rgba(0, 0, 0, 0.1);
   margin-bottom: 20rpx;
-  border-radius: 12rpx;
-  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.alumni-item:hover {
+  transform: scale(1.02);
 }
 
 .avatar {
@@ -168,28 +70,36 @@
 
 .info {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .name {
-  font-size: 32rpx;
-  color: #333;
-  font-weight: 500;
-  margin-bottom: 8rpx;
+  font-size: 34rpx;
+  font-weight: bold;
 }
 
-.in-title {
+.details {
+  display: flex;
+  align-items: center;
   font-size: 28rpx;
-  color: #007bff;
-  margin-bottom: 8rpx;
-}
-
-.company {
-  font-size: 26rpx;
   color: #666;
 }
 
+.position {
+  color: #333;
+}
+
+.divider {
+  margin: 0 10rpx;
+}
+
+.company {
+  color: #007AFF;
+}
+
 .arrow {
+  font-size: 36rpx;
   color: #999;
-  font-size: 32rpx;
-  margin-left: 20rpx;
 }

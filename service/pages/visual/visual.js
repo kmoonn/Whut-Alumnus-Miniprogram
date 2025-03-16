@@ -1,57 +1,73 @@
 import * as echarts from '../../ec-canvas/echarts';
-import geoJson from './mapData.js';
 
 const app = getApp();
 
+let chart = null;
+
 function initMapChart(canvas, width, height, dpr) {
-  const chart = echarts.init(canvas, null, {
+  chart = echarts.init(canvas, null, {
     width: width,
     height: height,
     devicePixelRatio: dpr // new
   });
   canvas.setChart(chart);
 
-  echarts.registerMap('china', geoJson);
-
-  const option = {
-    geo: {
-      map: 'china',
-      roam: true,  // 允许缩放和平移
-      label: {
-        show: true,
-        fontSize: 8,  // 调小字体以适应小程序
-        color: '#000'
+  var option = {
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: {
+        type: 'shadow'
       }
     },
-    series: [{
-      type: 'map',
-      mapType: 'china',
-      label: {
-        show: true,
-        fontSize: 8
-      },
-      itemStyle: {
-        normal: {
-          borderColor: '#389BB7',
-          areaColor: '#F3F3F3',  // 更改默认颜色使地图更清晰
-          borderWidth: 1
-        },
+    legend: {},
+    grid: {
+      left: '3%',
+      right: '4%',
+      bottom: '3%',
+      containLabel: true
+    },
+    xAxis: [
+      {
+        type: 'category',
+        data: ['湖北省', '湖南省', '浙江省', '广东省','四川省']
+      }
+    ],
+    yAxis: [
+      {
+        type: 'value'
+      }
+    ],
+    series: [
+      {
+        name: '政界',
+        type: 'bar',
+        stack: 'Ad',
         emphasis: {
-          areaColor: '#389BB7',
-          borderWidth: 0
-        }
+          focus: 'series'
+        },
+        data: [120, 132, 101, 134, 90, 230, 210]
       },
-      animation: false,
-      data: [
-        { name: '北京', value: 100 },
-        { name: '上海', value: 80 },
-        { name: '广东', value: 90 }
-      ]
-    }]
+      {
+        name: '商界',
+        type: 'bar',
+        stack: 'Ad',
+        emphasis: {
+          focus: 'series'
+        },
+        data: [220, 182, 191, 234, 290, 330, 310]
+      },
+      {
+        name: '学界',
+        type: 'bar',
+        stack: 'Ad',
+        emphasis: {
+          focus: 'series'
+        },
+        data: [150, 232, 201, 154, 190, 330, 410]
+      }
+    ]
   };
-
   chart.setOption(option);
-
   return chart;
 }
 

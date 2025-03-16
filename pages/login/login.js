@@ -207,9 +207,9 @@ Page({
     wx.cloud.callFunction({
       name: 'register',
       data: {
+        nickname: nickname,
         username: registerUsername,
-        password: registerPassword,
-        nickname: nickname
+        password: registerPassword
       }
     })
     .then(res => {

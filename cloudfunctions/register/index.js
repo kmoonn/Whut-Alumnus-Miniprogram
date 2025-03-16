@@ -25,14 +25,14 @@ exports.main = async (event, context) => {
         );
 
         if (rows.length > 0) {
-            return { success: false, message: '该学工号已被注册' };
+            return { success: false, message: '该用户名已被注册' };
         }
 
         const hashPassword = bcrypt.hashSync(password, 10);
 
         const [result] = await connection.execute(
-            'INSERT INTO users (username, password, nickname, role) VALUES (?, ?, ?, ?)',
-            [username, hashPassword, nickname, 'public']
+            'INSERT INTO users (nickname, username, password) VALUES (?, ?, ?)',
+            [nickname, username, hashPassword]
         );
 
         await connection.end();

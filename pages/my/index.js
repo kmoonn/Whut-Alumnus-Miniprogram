@@ -46,6 +46,23 @@ Page({
   navigateTo(e) {
     const { url } = e.currentTarget.dataset;
     wx.navigateTo({ url });
+  },
+
+  // 退出登录
+  logout() {
+    wx.showModal({
+      title: '确认退出',
+      content: '确定要退出登录吗？',
+      success: (res) => {
+        if (res.confirm) {
+          // 执行退出登录逻辑
+          wx.clearStorageSync();  // 清除缓存
+          wx.redirectTo({
+            url: '/pages/login/login'  // 跳转到登录页面
+          });
+        }
+      }
+    });
   }
 
 }); 

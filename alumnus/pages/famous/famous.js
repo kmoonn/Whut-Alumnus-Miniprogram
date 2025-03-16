@@ -2,7 +2,7 @@ Page({
   data: {
     showSidebar: false,
     Sidebartrigger: true,
-    currentTab: '政治', // 当前选中的标签
+    currentTab: '政界', // 当前选中的标签
     alumniList: [] // 校友列表
   },
 
@@ -41,7 +41,6 @@ Page({
       success: res => {
         if (res.result.code === 200) {
           const alumniList = res.result.result;
-          console.log('获取到的校友列表数据:', alumniList);
           this.setData({
             alumniList: alumniList
           });

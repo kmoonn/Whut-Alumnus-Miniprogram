@@ -48,7 +48,7 @@
     bindscrolltolower="loadMore"
   >
     <view class="alumni-item" 
-      wx:for="{{searchResults}}" 
+      wx:for="{{alumniList}}" 
       wx:key="id" 
       bindtap="showDetail" 
       data-id="{{item.id}}"
@@ -57,13 +57,15 @@
         <view class="name">{{item.name}}</view>
         
         <view class="company">{{item.company}}</view>
+
+        <view class="company">{{item.position}}</view>
       </view>
       <view class="arrow">></view>
     </view>
 
     <!-- 加载更多 -->
     <view class="loading" wx:if="{{loading}}">加载中...</view>
-    <view class="no-more" wx:if="{{!hasMore && searchResults.length > 0}}">没有更多了</view>
+    <view class="no-more" wx:if="{{!hasMore && searchResults.length > 0}}">没有更多结果</view>
   </scroll-view>
 
   <!-- 无搜索结果 -->

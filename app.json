@@ -3,8 +3,7 @@
     "pages/login/login",
     "pages/index/index",
     "pages/service/index",
-    "pages/my/index",
-    "pages/my/profile"
+    "pages/my/index"
   ],
   "subPackages": [
     {

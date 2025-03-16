@@ -6,13 +6,13 @@
 <view class="chart-container">
     <!-- 校友分布地图 -->
     <view class="chart-card">
-      <view class="chart-title">全国校友地理分布</view>
+      <view class="chart-title">全国各省校友分布排行Top5</view>
       <ec-canvas id="mychart-dom-area" canvas-id="mychart-area" ec="{{ mapEc }}"></ec-canvas>
     </view>
 
     <!-- 行业分布饼图 -->
     <view class="chart-card">
-      <view class="chart-title">政、商、学界分布</view>
+      <view class="chart-title">政、商、学各界校友分布</view>
         <ec-canvas id="categoryChart" canvas-id="categoryChart" ec="{{ categoryEc }}"></ec-canvas>
     </view>
 </view>

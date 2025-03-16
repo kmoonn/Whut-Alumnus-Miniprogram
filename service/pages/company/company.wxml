@@ -3,7 +3,6 @@
   <text class="title">校友企业</text>
 </view>
 
-<!-- 主内容区 -->
 <view class="main-content">
   <scroll-view scroll-y class="company-list">
     <view class="company-item" 
@@ -14,8 +13,11 @@
     >
       <view class="info">
         <view class="company">{{item.company_name}}</view>
-        <view class="in-title">{{item.alumni_name}}</view>
-        <view class="name">{{item.company_region}}</view>
+        <view class="details">
+          <text class="alumni-name">👤 {{item.alumni_name}}</text>
+          <text class="divider"> | </text>
+          <text class="company-region">📍 {{item.company_region}}</text>
+        </view>
       </view>
       <view class="arrow">></view>
     </view>

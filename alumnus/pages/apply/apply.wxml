@@ -67,7 +67,7 @@
     <view class="agreement">
       <checkbox-group bindchange="onAgreeChange">
         <label>
-          <checkbox value="agree" checked="{{isAgreed}}" /> 我已阅读并同意 <text class="link">《校友信息服务协议》</text>
+          <checkbox value="agree" checked="{{isAgreed}}" /> 我已阅读并同意 <text class="link" bindtap="showAgreement">《校友信息服务协议》</text>
         </label>
       </checkbox-group>
     </view>

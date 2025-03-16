@@ -21,128 +21,75 @@
 
 /* 主内容区 */
 .main-content {
-  width: 100%;
-  height: calc(100vh - 160rpx);
+  padding: 20rpx;
   background-color: #f8f9fa;
-  padding: 40rpx 24rpx;
-  box-sizing: border-box;
 }
 
-/* 企业列表容器 */
+/* 公司列表滚动容器 */
 .company-list {
-  height: 100%;
-  background-color: #fff;
-  border-radius: 30rpx;
-  box-shadow: 0 16rpx 48rpx rgba(102, 178, 255, 0.15);
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
 }
 
-/* 企业条目样式 */
+/* 单个公司卡片 */
 .company-item {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  padding: 32rpx 40rpx;
-  border-bottom: 2rpx solid #f0f4f8;
-  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  position: relative;
+  padding: 30rpx;
+  background: white;
+  border-radius: 20rpx;
+  box-shadow: 0 5rpx 15rpx rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 }
 
-.company-item:last-child {
-  border-bottom: none;
+/* 悬停或点击时放大效果 */
+.company-item:hover {
+  transform: scale(1.02);
 }
 
-/* 条目信息部分 */
+.company-item:active {
+  transform: scale(0.98);
+}
+
+/* 主要信息区域 */
 .info {
+  flex: 1;
   display: flex;
-  align-items: flex-start;
-  gap: 32rpx;
+  flex-direction: column;
+  gap: 10rpx;
 }
 
 /* 公司名称 */
 .company {
-  font-size: 40rpx;
-  font-weight: 700;
-  color: #007bff;
-  text-shadow: none;
-  margin-bottom: 16rpx;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;  /* 最多显示2行 */
-  overflow: hidden;
-  line-height: 1.5;
-  max-width: 30%;  /* 限制宽度 */
-}
-
-/* 校友姓名 */
-.name {
   font-size: 36rpx;
-  color: #333;
-  opacity: 0.9;
-  letter-spacing: 0.8rpx;
+  font-weight: bold;
+  color: rgb(53, 66, 184);
 }
 
-/* 公司信息 */
-.in-title {
-  font-size: 30rpx;
-  color: #6c757d;
-  opacity: 0.8;
-  margin-top: 8rpx;
+/* 详细信息（校友 & 地区） */
+.details {
+  display: flex;
+  align-items: center;
+  font-size: 28rpx;
+  color: #666;
+}
+
+.alumni-name {
+  color: #000000;
+}
+
+.divider {
+  margin: 0 10rpx;
+}
+
+.company-region {
+  color: #333;
 }
 
 /* 箭头图标 */
 .arrow {
-  font-size: 44rpx;
-  color: #007bff;
-  opacity: 0;
-  transform: translateX(24rpx);
-  transition: all 0.3s;
-}
-
-/* 悬停效果 */
-.company-item:hover {
-  transform: translateX(16rpx);
-  box-shadow: 0 16rpx 32rpx rgba(0, 123, 255, 0.1);
-  background: linear-gradient(90deg, #e9f5ff 0%, #fff 100%);
-}
-
-.company-item:hover.arrow {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-/* 点击按下状态 */
-.company-item:active {
-  transform: translateX(12rpx) scale(0.98);
-  background: linear-gradient(90deg, #d9efff 0%, #fff 100%);
-  box-shadow: 0 8rpx 16rpx rgba(0, 123, 255, 0.15);
-}
-
-/* 分割线装饰 */
-.company-item::before {
-  content: '';
-  position: absolute;
-  left: 10rpx;
-  top: 50%;
-  width: 6rpx;
-  height: 80rpx;
-  background: #718499;  /* 改为单色 */
-  border-radius: 3rpx;
-  transform: translateY(-50%);
-  opacity: 0.8;
-  transition: background 0.3s;
-}
-
-/* 加载状态占位符 */
-.loading-placeholder {
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.loading-placeholder text {
   font-size: 36rpx;
-  color: #999;
-  opacity: 0.7;
-  text-shadow: 2rpx 2rpx 8rpx rgba(0, 0, 0, 0.1);
+  color: rgba(8, 8, 8, 0.959);
 }
