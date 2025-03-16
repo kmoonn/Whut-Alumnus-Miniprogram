@@ -1,66 +1,48 @@
-// pages/activity/activity.js
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-
+    activityList: [] 
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad(options) {
-
+  onLoad() {
+    this.fetchActivity();
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {
-
+  navigateToWeb(e) {
+    const url = e.currentTarget.dataset.url;
+    console.log('Decoded URL:', url);
+    wx.navigateTo({
+      url: `/service/pages/activityDetail/activityDetail?url=${encodeURIComponent(url)}`
+    });
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {
 
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {
-
+  // 获取活动列表
+  fetchActivity() {
+    wx.showLoading({ title: '加载中' });
+    wx.cloud.callFunction({
+      name: 'getActivity',
+      data: {
+        action: 'getActivity',
+      },
+      success: res => {
+        if (res.result.code === 200) {
+          const activityList = res.result.result;
+          console.log('获取到的校友列表数据:', activityList);
+          this.setData({
+            activityList: activityList
+          });
+        }
+      },
+      fail: err => {
+        console.error('获取活动详情失败', err);
+        wx.showToast({
+          title: '获取数据失败',
+          icon: 'none'
+        });
+      },
+      complete: () => {
+        wx.hideLoading();
+      }
+    });
   }
-})
+});
