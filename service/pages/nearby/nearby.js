@@ -9,8 +9,7 @@ Page({
     scale: 14,
     markers: [],
     alumniList: [],
-    // 新增腾讯地图配置
-    mapKey: 'LKOBZ-6VB3T-RDEXO-VEWKW-WIDI2-QKBMO', // 替换为你的腾讯地图 Key
+    mapKey: 'LKOBZ-6VB3T-RDEXO-VEWKW-WIDI2-QKBMO', 
     mapCenter: {
       latitude: 0,
       longitude: 0
@@ -27,8 +26,22 @@ Page({
     this.getLocation();
   },
   
-  // 获取当前位置
+  // 获取当前位置 
   getLocation() {
+    wx.authorize({
+      scope: 'scope.userLocation',
+      success() {
+        // 用户授权成功后再调用获取位置函数
+        this.getLocation();
+      },
+      fail() {
+        wx.showToast({
+          title: '定位授权失败',
+          icon: 'none'
+        });
+      }
+    });
+
     wx.getLocation({
       type: 'gcj02',
       success: (res) => {
@@ -44,7 +57,8 @@ Page({
         this.getLocationInfo(res.latitude, res.longitude);
         this.fetchNearbyAlumni(res.latitude, res.longitude);
       },
-      fail: () => {
+      fail: (err) => {
+        console.log('获取位置失败', err);
         wx.showToast({
           title: '获取位置失败',
           icon: 'none'
@@ -105,9 +119,9 @@ Page({
   // 修改 fetchNearbyAlumni 函数
   fetchNearbyAlumni(latitude, longitude) {
     wx.cloud.callFunction({
-      name: 'nearby',
+      name: 'getNearby',
       data: {
-        action: 'getNearbyAlumni',
+        action: 'getNearbyAlumnus',
         location: {
           latitude,
           longitude

@@ -32,7 +32,6 @@
         <image class="avatar" src="{{item.avatar || '/images/default-avatar.png'}}" mode="aspectFill"></image>
         <view class="info">
           <view class="name">{{item.name}}</view>
-          <view class="detail">{{item.college}} · {{item.major}} · {{item.graduateYear}}届</view>
           <view class="company">{{item.company}} · {{item.position}}</view>
           <view class="distance">{{item.distance}}km</view>
         </view>
