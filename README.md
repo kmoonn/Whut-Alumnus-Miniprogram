@@ -11,22 +11,65 @@
 - 提供便捷的信息填写界面
 
 ### 2. 审核疑似校友
-- 管理员可以查看待审核的校友申请
+- 可以查看待审核的校友信息
 - 提供详细的审核记录
 
 ### 3. 知名校友查看
 - 展示学校杰出校友信息
-- 按照行业、年份等多维度筛选
-- 提供校友成就展示平台
+- 按照政商学等多维度筛选
 
 ## 技术栈
-
 - 微信小程序原生开发框架
-- 云开发数据库
+- 腾讯云开发
+- MySQL
+- 腾讯地图 API
 
 ## 项目结构
 
+WHUT-ALMNUS-MINIPROGRAM
+├─alumnus 校友模块
+│  └─pages
+│      ├─apply
+│      ├─check
+│      ├─famous
+│      └─famous_detail
+├─cloudfunctions 云函数
+│  ├─apply
+│  ├─check
+│  ├─getActivity
+│  ├─getActivityDetail
+│  ├─getAlumnus
+│  ├─getAlumnusDetail
+│  ├─getCompany
+│  ├─getCompanyDetail
+│  ├─getNews
+│  ├─getVisualData
+│  ├─login
+│  ├─register
+│  └─search
+├─components 组件
+│  ├─iView
+│  └─navigation-bar
+├─images 静态资源
+├─pages 全局模块
+│  ├─index
+│  ├─login
+│  ├─my
+│  ├─service
+│  └─utils
+├─service 服务模块
+│  ├─ec-canvas
+│  ├─pages
+│  │  ├─activity
+│  │  ├─activityDetail
+│  │  ├─company
+│  │  ├─companyDetail
+│  │  ├─nearby
+│  │  ├─search
+│  │  └─visual
+│  └─utils
+└─sql 数据库文件
 
 ## 版权说明
 
-© 2024 武汉理工大学。保留所有权利。
+© 2025 武汉理工大学。保留所有权利。
