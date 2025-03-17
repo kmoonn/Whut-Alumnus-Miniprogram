@@ -4,7 +4,7 @@
 </view>
 
 <!-- 侧边栏 -->
-<view wx:if="{{!showSidebar}}" class="sidebar-trigger" bindtap="toggleSidebar"> ☰ </view> 
+<view class="trigger" wx:if="{{!showSidebar}}" bindtap="toggleSidebar"> ☰ </view> 
 <view wx:if="{{showSidebar}}" class="sidebar">
   <view 
     class="sidebar-item {{currentTab === 'politics' ? 'active' : ''}}" 

@@ -61,17 +61,6 @@ Page({
 
   // 显示校友详情
   showDetail(e) {
-    const userInfo = wx.getStorageSync('userInfo'); 
-    const userRole = userInfo ? userInfo.role : null; 
-
-    if (userRole !== 'admin' && userRole !== 'reviewer') {
-      wx.showToast({
-        title: '无访问权限',
-        icon: 'none'
-      });
-      return;
-    }
-    
     const id = e.currentTarget.dataset.id;
     if (id) {
         wx.navigateTo({
