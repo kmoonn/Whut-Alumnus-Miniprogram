@@ -26,7 +26,10 @@
   border-radius: 10rpx;
   padding: 30rpx;
   box-sizing: border-box;
-  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
+}
+
+.category {
+  margin-top: 20%;
 }
 
 .alumnus-info text {

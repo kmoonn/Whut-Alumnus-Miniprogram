@@ -5,7 +5,7 @@
 
 
 <view class="alumnus-info">
-  <text data-label="类别">{{alumnusDetail.category}}</text>
+  <text class="category" data-label="类别">{{alumnusDetail.category}}</text>
   <text data-label="姓名">{{alumnusDetail.name}}</text>
   <text data-label="所在地">{{alumnusDetail.region}}</text>
   <text data-label="工作单位">{{alumnusDetail.company}}</text>

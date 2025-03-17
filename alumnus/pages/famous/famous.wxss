@@ -27,7 +27,9 @@
   border-right: 1rpx solid #f0f0f0;
   padding-top: 50rpx;
 }
-
+.sidebar-trigger{
+  font-size: 50rpx;
+}
 .sidebar-item {
   padding: 30rpx;
   font-size: 30rpx;

@@ -1,4 +1,3 @@
-// activityDetail 页面
 Page({
   data: {
     webUrl: ''

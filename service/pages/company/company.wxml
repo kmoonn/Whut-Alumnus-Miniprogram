@@ -8,8 +8,8 @@
     <view class="company-item" 
       wx:for="{{companyList}}" 
       wx:key="id" 
-      bindtap="showDetail" 
-      data-id="{{item.id}}"
+      bindtap="navigateToWeb" 
+      data-url="{{item.company_info}}"
     >
       <view class="info">
         <view class="company">{{item.company_name}}</view>

@@ -36,23 +36,14 @@ Page({
     });
   },
 
-  showDetail(e) {
-    const id = e.currentTarget.dataset.id;
-    console.log('id:', id); // 检查是否正确获取到 id
-    if (!id) {
-      console.error('id 为空或无效');
-      return;
-    }
+  navigateToWeb(e) {
+    const url = e.currentTarget.dataset.url;
+    console.log('Decoded URL:', url);
     wx.navigateTo({
-      url: `/service/pages/companyDetail/companyDetail?id=${id}`,
-      success: function (res) {
-        console.log('跳转成功:', res);
-      },
-      fail: function (err) {
-        console.error('页面跳转失败:', err);
-      }
+      url: `/service/pages/companyDetail/companyDetail?url=${encodeURIComponent(url)}`
     });
   }
+  
 });
 
 
