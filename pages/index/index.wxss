@@ -90,6 +90,7 @@
   width: 200rpx;
   height: 120rpx;
   border-radius: 8rpx;
+  object-fit: cover;
 }
 
 .news-info {
@@ -151,31 +152,23 @@
   flex: 1;
 }
 
+.text-wrapper {
+  flex: 1; /* 文字区域占据剩余空间 */
+  max-width: calc(100% - 170rpx); /* 为图片预留空间（图片宽度+间距） */
+}
+
 .activity-title {
   font-size: 28rpx;
   color: #333;
-  margin-bottom: 8rpx;
+  line-height: 1.5;
+  text-overflow: ellipsis;
+  display: -webkit-box;  
+  -webkit-line-clamp: 2;
 }
 
-.activity-location {
-  font-size: 24rpx;
-  color: #999;
-}
+/* 
 
-.activity-status {
-  font-size: 24rpx;
-  color: #999;
-  padding: 4rpx 16rpx;
-  border-radius: 20rpx;
-  background: #f5f5f5;
-}
 
-.activity-status.active {
-  color: #1aad19;
-  background: rgba(26, 173, 25, 0.1);
-}
-
-/* 校友风采 */
 .story-list {
   display: flex;
   flex-direction: column;
@@ -214,7 +207,7 @@
   color: rgba(255, 255, 255, 0.8);
 }
 
-/* 校友企业 */
+
 .company-list {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -249,4 +242,4 @@
 .company-industry {
   font-size: 24rpx;
   color: #999;
-} 
+}  */

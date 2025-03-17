@@ -5,8 +5,9 @@ Page({
   navigateTo(e) {
     const userInfo = wx.getStorageSync('userInfo'); 
     const userRole = userInfo ? userInfo.role : null; 
+    const path = e.currentTarget.dataset.path;
 
-    if (userRole !== 'admin' && userRole !== 'reviewer') {
+    if (userRole !== 'admin' && userRole !== 'reviewer' && path == "/alumnus/pages/check/check") {
       wx.showToast({
         title: '无访问权限',
         icon: 'none'
@@ -14,7 +15,7 @@ Page({
       return;
     }
 
-    const path = e.currentTarget.dataset.path;
+    
     wx.navigateTo({
       url: path
     });

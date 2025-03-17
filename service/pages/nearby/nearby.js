@@ -12,7 +12,7 @@ const getLocationByWorkplace = async (workplace) => {
   const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
   try {
-    await delay(3000); // 等待1秒
+    await delay(10000); // 等待1秒
     return new Promise((resolve, reject) => {
       wx.request({
         url: `https://apis.map.qq.com/ws/geocoder/v1?key=B4MBZ-4AAKG-YVYQY-QOKDS-TXVHV-Y5FPA&address=${encodeURIComponent(workplace)}`,

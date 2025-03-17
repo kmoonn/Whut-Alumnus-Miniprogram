@@ -11,15 +11,14 @@
   <swiper-item><image src="https://alumni.whut.edu.cn/upload/wxb/static/2022/11/11/e52b28b319a44a6e8a06198ad04a8cbc.jpg" class="slide-image"></image></swiper-item>
 </swiper>
 
-  <!-- 校友动态 -->
+  <!-- 最新动态 -->
   <view class="section">
     <view class="section-header">
-      <text class="section-title">校友动态</text>
-      <text class="more" bindtap="navigateTo" data-url="/pages/news/index">更多</text>
+      <text class="section-title">最新动态</text>
     </view>
     <view class="news-list">
       <view class="news-item" wx:for="{{newsList}}" wx:key="id" bindtap="navigateTo" data-url="/pages/news/detail?id={{item.id}}">
-        <image class="news-image" src="{{item.imageUrl}}" mode="aspectFill"></image>
+        <image class="news-image" src="{{item.image}}" mode="aspectFill"></image>
         <view class="news-info">
           <text class="news-title">{{item.title}}</text>
           <text class="news-date">{{item.date}}</text>
@@ -32,25 +31,30 @@
   <view class="section">
     <view class="section-header">
       <text class="section-title">近期活动</text>
-      <text class="more" bindtap="navigateTo" data-url="/pages/activity/index">更多</text>
     </view>
     <view class="activity-list">
       <view class="activity-item" wx:for="{{activities}}" wx:key="id" bindtap="navigateTo" data-url="/pages/activity/detail?id={{item.id}}">
+       
+        
+
         <view class="activity-time">
           <text class="day">{{item.day}}</text>
-          <text class="month">{{item.month}}</text>
+          <text class="month">{{item.month}}月</text>
         </view>
-        <view class="activity-info">
-          <text class="activity-title">{{item.title}}</text>
-          <text class="activity-location">{{item.location}}</text>
+
+        <view class="news-item">
+          <image class="news-image" src="{{item.image}}" mode="aspectFill"></image>
+          <view class="text-wrapper">
+            <text class="activity-title">{{item.title}}</text>
+          </view>
         </view>
-        <view class="activity-status {{item.status === '报名中' ? 'active' : ''}}">{{item.status}}</view>
+        <!-- <view class="activity-status {{item.status === '报名中' ? 'active' : ''}}">{{item.status}}</view> -->
       </view>
     </view>
   </view>
   
   <!-- 校友企业 -->
-  <view class="section">
+  <!-- <view class="section">
     <view class="section-header">
       <text class="section-title">校友企业</text>
       <text class="more" bindtap="navigateTo" data-url="/pages/company/index">更多</text>
@@ -64,4 +68,4 @@
         </view>
       </view>
     </view>
-  </view>
+  </view> -->
