@@ -18,7 +18,7 @@
           <view class="date" style="color: #666; font-size: 24rpx;">{{item.date}}</view>
           
           <view class="describe" bindtap="navigateToWeb" data-url="{{item.describe}}" style="color: #007aff; text-decoration: underline;">
-             详情
+             获取活动详情
           </view>
         </view>
       </view>
