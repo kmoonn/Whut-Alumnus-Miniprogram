@@ -237,3 +237,27 @@
   border-radius: 40rpx;
   font-size: 40rpx;
 }
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #ffffff;
+  text-align: center;
+  padding: 20rpx 0;
+  font-size: 24rpx;
+  color: #666;
+}
+
+.copyright {
+  display: block;
+  font-weight: bold;
+}
+
+.support {
+  display: block;
+  font-size: 22rpx;
+  margin-top: 5rpx;
+}
+

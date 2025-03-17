@@ -89,3 +89,9 @@
       </view>
     </view>
   </view>
+
+  <!-- 版权声明 -->
+<view class="footer">
+  <text class="copyright">© 2025 武汉理工大学校友会</text>
+  <text class="support">技术支持：学海楼815实验室</text>
+</view>
