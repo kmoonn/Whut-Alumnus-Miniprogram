@@ -18,6 +18,12 @@
 - 展示学校杰出校友信息
 - 按照政商学等多维度筛选
 
+### 4. 校友信息查找
+- 获取当前位置，查找指定范围内校友信息
+- 搜索关键字模糊查询校友信息
+
+### 5. 校友活动、校友企业
+
 ## 技术栈
 - 微信小程序原生开发框架
 - 腾讯云开发
@@ -26,49 +32,53 @@
 
 ## 项目结构
 
+```text
 WHUT-ALMNUS-MINIPROGRAM
-├─alumnus 校友模块
-│  └─pages
-│      ├─apply
-│      ├─check
-│      ├─famous
-│      └─famous_detail
-├─cloudfunctions 云函数
-│  ├─apply
-│  ├─check
-│  ├─getActivity
-│  ├─getActivityDetail
-│  ├─getAlumnus
-│  ├─getAlumnusDetail
-│  ├─getCompany
-│  ├─getCompanyDetail
-│  ├─getNews
-│  ├─getVisualData
-│  ├─login
-│  ├─register
-│  └─search
-├─components 组件
-│  ├─iView
-│  └─navigation-bar
-├─images 静态资源
-├─pages 全局模块
-│  ├─index
-│  ├─login
-│  ├─my
-│  ├─service
-│  └─utils
-├─service 服务模块
-│  ├─ec-canvas
-│  ├─pages
-│  │  ├─activity
-│  │  ├─activityDetail
-│  │  ├─company
-│  │  ├─companyDetail
-│  │  ├─nearby
-│  │  ├─search
-│  │  └─visual
-│  └─utils
-└─sql 数据库文件
+├─ alumnus 校友模块
+│  └─ pages
+│     ├─ apply
+│     ├─ check
+│     ├─ famous
+│     └─ famous_detail
+├─ cloudfunctions 云函数
+│  ├─ apply
+│  ├─ check
+│  ├─ getActivity
+│  ├─ getActivityDetail
+│  ├─ getAlumnus
+│  ├─ getAlumnusDetail
+│  ├─ getCompany
+│  ├─ getCompanyDetail
+│  ├─ getNews
+│  ├─ getVisualData
+│  ├─ login
+│  ├─ register
+│  └─ search
+├─ components 组件
+│  ├─ iView
+│  └─ navigation-bar
+├─ images 静态资源
+├─ pages 全局模块
+│  ├─ index
+│  ├─ login
+│  ├─ my
+│  ├─ service
+│  └─ utils
+├─ service 服务模块
+│  ├─ ec-canvas
+│  ├─ pages
+│  │  ├─ activity
+│  │  ├─ activityDetail
+│  │  ├─ company
+│  │  ├─ companyDetail
+│  │  ├─ nearby
+│  │  ├─ search
+│  │  └─ visual
+│  └─ utils
+└─ sql 数据库文件
+```
+
+
 
 ## 版权说明
 
