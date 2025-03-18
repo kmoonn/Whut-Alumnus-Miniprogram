@@ -20,6 +20,21 @@ Page({
       success: res => {
         if (res.result.code === 200) {
           const { sourceAlumnus, pendingAlumnus, pendingCount } = res.result.data;
+
+          const birthday = new Date(pendingAlumnus.birthday);
+          pendingAlumnus.birthday = birthday.toLocaleDateString('zh-CN', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit'
+          });
+
+          const s_birthday = new Date(sourceAlumnus.birthday);
+          sourceAlumnus.birthday = s_birthday.toLocaleDateString('zh-CN', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit'
+          });
+          
           this.setData({
             sourceInfo: sourceAlumnus,  // 源校友库信息
             pendingInfo: pendingAlumnus, // 待审核校友信息

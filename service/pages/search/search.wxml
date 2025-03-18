@@ -65,11 +65,10 @@
 
     <!-- 加载更多 -->
     <view class="loading" wx:if="{{loading}}">加载中...</view>
-    <view class="no-more" wx:if="{{!hasMore && searchResults.length > 0}}">没有更多结果</view>
+    <view class="no-more" wx:if="{{!hasMore && alumniList.length > 0}}">没有更多结果</view>
+    
+    <!-- 无搜索结果 -->
+    <view class="no-result" wx:if="{{alumniList.length === 0 && !loading}}">
+      <text>未找到相关校友</text>
+    </view>
   </scroll-view>
-
-  <!-- 无搜索结果 -->
-  <view class="no-result" wx:if="{{searchValue && searchResults.length === 0}}">
-    <image src="https://636c-cloud1-6gsqyvkd3f24bdd8-1311119192.tcb.qcloud.la/images/no-result.png" mode="aspectFit"></image>
-    <text>未找到相关校友</text>
-  </view>

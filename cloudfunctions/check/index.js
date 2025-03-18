@@ -11,45 +11,61 @@ exports.main = async (event, context) => {
     try {
       connection = await mysql.createConnection(config.MYSQL);
       
-      // 获取待审核总数（必须有source_id的记录）
-      const [countRows] = await connection.execute(`
+      // 获取待审核总数（必须有 source_id 的记录，并且当前用户未审核过）
+      const [countRows] = await connection.execute(
+        `
         SELECT COUNT(*) as total 
-        FROM pending_alumnus 
-        WHERE source_id IS NOT NULL 
-        AND status = 'pending'
-      `);
-      
-      // 获取一条待审核记录及其对应的源校友信息
-      const [rows] = await connection.execute(`
-      SELECT
-      p.id AS pending_id,
-      p.NAME AS pending_name,
-      p.gender AS pending_gender,
-      p.birthday AS pending_birthday,
-      p.graduation_year AS pending_graduation_year,
-      p.major AS pending_major,
-      p.region AS pending_region,
-      p.company AS pending_company,
-      p.position AS pending_position,
-      p.source,
-      s.id AS source_id,
-      s.NAME AS source_name,
-      s.gender AS source_gender,
-      s.birthday AS source_birthday,
-      s.graduation_year AS source_graduation_year,
-      s.department AS source_department,
-      s.major AS source_major,
-      s.region AS source_region,
-      s.company AS source_company,
-      s.position AS source_position 
-    FROM
-      pending_alumnus p
-      INNER JOIN source_alumnus s ON p.source_id = s.id 
-    WHERE
-      p.source_id IS NOT NULL 
-      AND p.STATUS = "pending" 
-      LIMIT 1
-      `);
+        FROM pending_alumnus p
+        WHERE p.source_id IS NOT NULL 
+          AND p.status = 'pending'
+          AND NOT EXISTS (
+            SELECT 1 FROM review_note r 
+            WHERE r.pending_id = p.id 
+            AND r.reviewer_id = ?
+          )
+        `,
+        [event.reviewerId] // 传入当前用户 ID
+      );
+
+      // 获取一条待审核记录及其对应的源校友信息（当前用户未审核过）
+      const [rows] = await connection.execute(
+        `
+        SELECT
+          p.id AS pending_id,
+          p.name AS pending_name,
+          p.gender AS pending_gender,
+          p.birthday AS pending_birthday,
+          p.graduation_year AS pending_graduation_year,
+          p.major AS pending_major,
+          p.region AS pending_region,
+          p.company AS pending_company,
+          p.position AS pending_position,
+          p.source,
+          s.id AS source_id,
+          s.name AS source_name,
+          s.gender AS source_gender,
+          s.birthday AS source_birthday,
+          s.graduation_year AS source_graduation_year,
+          s.department AS source_department,
+          s.major AS source_major,
+          s.region AS source_region,
+          s.company AS source_company,
+          s.position AS source_position 
+        FROM
+          pending_alumnus p
+          INNER JOIN source_alumnus s ON p.source_id = s.id 
+        WHERE
+          p.source_id IS NOT NULL 
+          AND p.status = 'pending' 
+          AND NOT EXISTS (
+            SELECT 1 FROM review_note r 
+            WHERE r.pending_id = p.id 
+            AND r.reviewer_id = ?
+          )
+        LIMIT 1
+        `,
+        [event.reviewerId] // 传入当前用户 ID
+      );
 
       if (rows.length === 0) {
         return {
@@ -58,14 +74,14 @@ exports.main = async (event, context) => {
           data: {
             sourceAlumnus: null,
             pendingAlumnus: null,
-            pendingCount: 0
+            pendingCount: countRows[0].total
           }
         };
       }
 
       // 分离源校友和待审核校友的数据
       const pendingAlumnus = {
-        id:rows[0].pending_id,
+        id: rows[0].pending_id,
         name: rows[0].pending_name,
         gender: rows[0].pending_gender,
         birthday: rows[0].pending_birthday,
@@ -78,7 +94,7 @@ exports.main = async (event, context) => {
       };
 
       const sourceAlumnus = {
-        id:rows[0].source_id,
+        id: rows[0].source_id,
         name: rows[0].source_name,
         gender: rows[0].source_gender,
         birthday: rows[0].source_birthday,
@@ -114,7 +130,7 @@ exports.main = async (event, context) => {
     }
   }
 
-  else if(event.action === 'submitMatch') {
+  else if (event.action === 'submitMatch') {
     connection = await mysql.createConnection(config.MYSQL);
 
     // 参数校验
@@ -128,11 +144,14 @@ exports.main = async (event, context) => {
 
     try {
       // 添加审核记录
-      const [updateResult] = await connection.execute(`
+      const [updateResult] = await connection.execute(
+        `
         INSERT INTO review_note(
           pending_id, reviewer_id, status
-        ) VALUES (?,?,?)
-      `, [event.pendingId,event.reviewerId,event.status]);
+        ) VALUES (?, ?, ?)
+        `,
+        [event.pendingId, event.reviewerId, event.status]
+      );
 
       if (updateResult.affectedRows === 0) {
         throw new Error('未找到待审核记录');
@@ -144,8 +163,16 @@ exports.main = async (event, context) => {
       };
 
     } catch (err) {
-    
-      throw err;
+      console.error('审核提交错误：', err);
+      return {
+        code: 500,
+        message: '服务器错误',
+        data: null
+      };
+    } finally {
+      if (connection) {
+        await connection.end();
+      }
     }
   }
 };

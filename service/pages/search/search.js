@@ -14,6 +14,7 @@ Page({
     const history = wx.getStorageSync('searchHistory') || []
     this.setData({ searchHistory: history })
   },
+  
   onPullDownRefresh() {
     this.setData({
       alumniList: [],
@@ -32,7 +33,10 @@ Page({
   },
 
   onShareAppMessage() {
-
+    return {
+      title: '校友查找',
+      path: '/service/pages/search/search'
+    }
   },
 
   // 输入搜索内容
@@ -133,15 +137,27 @@ Page({
       this.setData({ loading: false })
     }
   },
+  
+  // 加载更多数据
+  loadMore() {
+    if (this.data.hasMore && !this.data.loading) {
+      this.fetchSearchResults()
+    }
+  },
+  
   // 显示校友详情
   showDetail(e) {
     const id = e.currentTarget.dataset.id;
     if (id) {
-        wx.navigateTo({
-            url: `/alumnus/pages/famous_detail/famous_detail?id=${id}`
-        });
+      wx.navigateTo({
+        url: `/alumnus/pages/famous_detail/famous_detail?id=${id}`
+      });
     } else {
-        console.error('未获取到有效的 id');
+      console.error('未获取到有效的 id');
+      wx.showToast({
+        title: '无法获取校友详情',
+        icon: 'none'
+      });
     }
-}
+  }
 })

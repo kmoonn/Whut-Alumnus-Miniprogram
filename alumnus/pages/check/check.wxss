@@ -19,97 +19,161 @@
   margin-top: 10px;
 }
 
-/* 审核数量 */
+
 .header {
   display: flex;
   justify-content: center;
-  align-items: center;
-  font-size: 32rpx;
-  padding: 20rpx;
+  padding: 20rpx 0;
+  margin-bottom: 20rpx;
 }
 
-.badge {
-  background: red;
-  color: white;
-  font-weight: bold;
-  padding: 6rpx 12rpx;
-  border-radius: 10rpx;
-  margin-left: 10rpx;
+.count {
+  font-size: 28rpx;
+  color: #666;
+  background-color: #e6f7ff;
+  padding: 10rpx 30rpx;
+  border-radius: 30rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
 }
 
 /* 信息对比容器 */
 .comparison-container {
+  padding: 10rpx;
+}
+
+/* 信息对比区域 */
+.info-comparison {
   display: flex;
-  flex-direction: column;
-  padding: 20rpx;
+  flex-direction: row;
   gap: 20rpx;
+  margin-bottom: 20rpx;
 }
 
 /* 信息区域 */
 .info-section {
-  width: 100%;
+  width: 50%;
 }
 
 .section-title {
-  font-size: 36rpx;
+  font-size: 32rpx;
   font-weight: bold;
+  margin-bottom: 15rpx;
   color: #333;
-  margin-bottom: 20rpx;
-  padding-left: 20rpx;
-  border-left: 8rpx solid #007bff;
+  text-align: center;
+  background-color: #f0f8ff;
+  padding: 10rpx 0;
+  border-radius: 10rpx;
 }
 
-/* 校友卡片 */
 .card {
-  background: #fff;
-  padding: 40rpx;
-  margin: 20rpx;
-  border-radius: 20rpx;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: left;
+  background-color: #fff;
+  border-radius: 16rpx;
+  padding: 25rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  justify-content: center;
-}
-
-/* 校友信息 */
-.name {
-  font-size: 40rpx;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 20rpx;
-  text-align: center;
+  height: 100%;
 }
 
 .info {
-  font-size: 32rpx;
-  color: rgb(34, 96, 211);
-  margin: 10rpx 0;
-  word-break: break-word;
+  margin-bottom: 20rpx;
+  font-size: 28rpx;
+  color: #333;
+  line-height: 1.5;
+  word-break: break-all;
 }
 
-/* 按钮组 */
-.button-group {
+/* 来源信息 */
+.source-info {
+  background-color: #fff;
+  border-radius: 16rpx;
+  padding: 20rpx;
+  margin-top: 10rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
+}
+
+/* 差异高亮 */
+.diff {
+  color: #ff4500;
+  font-weight: bold;
+  background-color: rgba(255, 69, 0, 0.1);
+  padding: 4rpx 8rpx;
+  border-radius: 6rpx;
+}
+
+.action-area {
+  margin-top: 30rpx;
+  padding: 20rpx;
+  background-color: #fff;
+  border-radius: 16rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
+}
+
+.action-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-bottom: 25rpx;
+  text-align: center;
+  color: #333;
+}
+
+.action-buttons {
   display: flex;
   justify-content: space-around;
-  margin-top: 40rpx;
-  padding: 20rpx;
 }
 
-button {
-  font-size: 36rpx;
-  padding: 20rpx 40rpx;
-  border-radius: 50rpx;
-  font-weight: bold;
+.approve-btn, .reject-btn {
   width: 45%;
+  padding: 20rpx 0;
+  border-radius: 50rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.15);
 }
 
-.approve {
-  background: #4caf50;
-  color: white;
+.approve-btn {
+  background-color: #52c41a;
+  color: #fff;
 }
 
-.reject {
-  background: #f44336;
+.reject-btn {
+  background-color: #f5222d;
+  color: #fff;
+}
+
+/* 空状态样式 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 100rpx 0;
+  background-color: #fff;
+  border-radius: 16rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
+  margin: 30rpx 0;
+}
+
+.empty-image {
+  width: 200rpx;
+  height: 200rpx;
+  margin-bottom: 30rpx;
+}
+
+.empty-text {
+  font-size: 32rpx;
+  color: #999;
+  margin-bottom: 40rpx;
+}
+
+.refresh-btn {
+  background: #007bff;
   color: white;
+  font-size: 32rpx;
+  padding: 20rpx 60rpx;
+  border-radius: 50rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.15);
 }

@@ -3,49 +3,62 @@
   <text class="title">校友审核</text>
 </view>
 
-<!-- 右上角显示剩余待审核数量 -->
-<view class="header">
-  <text>待审核数：</text>
-  <text class="badge">{{pendingCount}}</text>
-</view>
+  <view class="header">
+    <view class="count">待审核: {{pendingCount}}</view>
+  </view>
 
-<!-- 信息对比区域 -->
-<view class="comparison-container">
-  <!-- 校友库源信息 -->
-  <view class="info-section">
-    <view class="section-title">校友库源信息</view>
-    <view class="card">
-      <text class="name">{{sourceInfo.name}}</text>
-      <text class="info">性别: {{sourceInfo.gender}}</text>
-      <text class="info">出生日期: {{sourceInfo.birthday}}</text>
-      <text class="info">毕业年份: {{sourceInfo.graduation_year}}</text>
-      <text class="info">学院: {{sourceInfo.department}}</text>
-      <text class="info">专业: {{sourceInfo.major}}</text>
-      <text class="info">所在地: {{sourceInfo.region}}</text>
-      <text class="info">工作单位: {{sourceInfo.company}}</text>
-      <text class="info">职务: {{sourceInfo.position}}</text>
+  <!-- 空状态显示 -->
+  <view class="empty-state" wx:if="{{noMoreData}}">
+    <image src="https://636c-cloud1-6gsqyvkd3f24bdd8-1311119192.tcb.qcloud.la/images/empty.png" mode="aspectFit" class="empty-image"></image>
+    <text class="empty-text">暂无待审核数据</text>
+    <button class="refresh-btn" bindtap="fetchPendingMatches">刷新</button>
+  </view>
+
+  <!-- 信息对比区域 -->
+  <view class="comparison-container" wx:if="{{!noMoreData}}">
+    <!-- 校友库源信息和待审核信息并排显示 -->
+    <view class="info-comparison">
+      <!-- 校友库源信息 -->
+      <view class="info-section">
+        <view class="section-title">校友库源信息</view>
+        <view class="card">
+          <text class="info">姓名: {{sourceInfo.name}}</text>
+          <text class="info {{diffFields.includes('gender') ? 'diff' : ''}}">性别: {{sourceInfo.gender}}</text>
+          <text class="info {{diffFields.includes('birthday') ? 'diff' : ''}}">生日: {{sourceInfo.birthday}}</text>
+          <text class="info {{diffFields.includes('graduation_year') ? 'diff' : ''}}">毕业年份: {{sourceInfo.graduation_year}}</text>
+          <text class="info {{diffFields.includes('major') ? 'diff' : ''}}">专业: {{sourceInfo.major}}</text>
+          <text class="info {{diffFields.includes('region') ? 'diff' : ''}}">地区: {{sourceInfo.region}}</text>
+          <text class="info {{diffFields.includes('company') ? 'diff' : ''}}">公司: {{sourceInfo.company}}</text>
+          <text class="info {{diffFields.includes('position') ? 'diff' : ''}}">职位: {{sourceInfo.position}}</text>
+        </view>
+      </view>
+
+      <!-- 待审核信息 -->
+      <view class="info-section">
+        <view class="section-title">疑似校友信息</view>
+        <view class="card">
+          <text class="info">姓名: {{pendingInfo.name}}</text>
+          <text class="info {{diffFields.includes('gender') ? 'diff' : ''}}">性别: {{pendingInfo.gender}}</text>
+          <text class="info {{diffFields.includes('birthday') ? 'diff' : ''}}">生日: {{pendingInfo.birthday}}</text>
+          <text class="info {{diffFields.includes('graduation_year') ? 'diff' : ''}}">毕业年份: {{pendingInfo.graduation_year}}</text>
+          <text class="info {{diffFields.includes('major') ? 'diff' : ''}}">专业: {{pendingInfo.major}}</text>
+          <text class="info {{diffFields.includes('region') ? 'diff' : ''}}">地区: {{pendingInfo.region}}</text>
+          <text class="info {{diffFields.includes('company') ? 'diff' : ''}}">公司: {{pendingInfo.company}}</text>
+          <text class="info {{diffFields.includes('position') ? 'diff' : ''}}">职位: {{pendingInfo.position}}</text>
+        </view>
+      </view>
+    </view>
+    
+    <view class="source-info">
+      <text class="info {{diffFields.includes('source') ? 'diff' : ''}}">来源: {{pendingInfo.source}}</text>
     </view>
   </view>
 
-  <!-- 待审核信息 -->
-  <view class="info-section">
-    <view class="section-title">疑似校友信息</view>
-    <view class="card">
-      <text class="name">{{pendingInfo.name}}</text>
-      <text class="info">性别: {{pendingInfo.gender}}</text>
-      <text class="info">出生日期: {{pendingInfo.birthday}}</text>
-      <text class="info">毕业年份: {{pendingInfo.graduation_year}}</text>
-      <text class="info">专业: {{pendingInfo.major}}</text>
-      <text class="info">所在地: {{pendingInfo.region}}</text>
-      <text class="info">工作单位: {{pendingInfo.company}}</text>
-      <text class="info">职务: {{pendingInfo.position}}</text>
-      <text class="info">信息来源: {{pendingInfo.source}}</text>
+  <!-- 审核操作区域 -->
+  <view class="action-area" wx:if="{{!noMoreData}}">
+    <view class="action-title">审核结果</view>
+    <view class="action-buttons">
+      <button class="reject-btn" bindtap="handleReject">不匹配</button>
+      <button class="approve-btn" bindtap="handleApprove">匹配</button>
     </view>
   </view>
-</view>
-
-<!-- 底部按钮 -->
-<view class="button-group">
-  <button class="reject" bindtap="rejectMatch">❌ 信息不匹配</button>
-  <button class="approve" bindtap="approveMatch">✅ 信息匹配</button>
-</view>
