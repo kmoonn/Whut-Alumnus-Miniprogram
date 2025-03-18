@@ -18,36 +18,25 @@
   font-weight: bold;
   margin-top: 10px;
 }
-
-
-.alumnus-info {
-  width: 100%;
-  background-color: #fff;
-  border-radius: 10rpx;
-  padding: 30rpx;
-  box-sizing: border-box;
-}
-
 .category {
-  margin-top: 20%;
+  margin-top: 10%;
 }
 
 .alumnus-info text {
-  display: block;
-  margin-bottom: 20rpx;
-  font-size: 32rpx;
-  padding-left: 32px;
-  padding-right: 32px;
-  color: #333;
+  display: flex; 
+  margin-bottom: 10px;
+  padding-right: 5%;
+  padding-left: 10%;
+  max-width: 90%; /* 确保内容不超过右侧区域 */
 }
 
 .alumnus-info text[data-label]::before {
   content: attr(data-label);
-  display: inline-block;
-  width: 160rpx;
-  color: #666;
+  width: 30%;
+  color: #007AFF;
   font-size: 28rpx;
-  margin-right: 24rpx;
   margin-bottom: 16rpx;
   text-align: left;
+  flex-shrink: 0; /* 防止标签被压缩 */
 }
+

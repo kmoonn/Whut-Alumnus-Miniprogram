@@ -17,8 +17,10 @@ Page({
       data: {
         id: id
       },
+      
       success: res => {
         if (res.result.code === 200) {
+          console.log(res.result.result);
           this.setData({
             alumnusDetail: res.result.result
           });

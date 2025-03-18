@@ -28,7 +28,11 @@
   padding-top: 50rpx;
 }
 .trigger{
-  font-size: 50rpx;
+  font-size: 60rpx;
+  position: fixed;
+  top: 20rpx;  
+  left: 20rpx;   
+  z-index: 999;   
 }
 .sidebar-item {
   padding: 30rpx;
@@ -69,7 +73,6 @@
   border-radius: 50%;
   margin-right: 20rpx;
 }
-
 .info {
   flex: 1;
   display: flex;
@@ -91,6 +94,10 @@
 
 .position {
   color: #333;
+  width: 80px; 
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis; 
 }
 
 .divider {
@@ -99,6 +106,14 @@
 
 .company {
   color: #007AFF;
+  width: 180px; 
+  max-height: calc(2 * 1.2em); /* 假设行高为 1.2em，两行的最大高度 */
+    line-height: 1.2em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; /* 最多显示两行 */
 }
 
 .arrow {
