@@ -20,6 +20,9 @@
     <label class="checkbox-label">
       <checkbox value="学界" />学界
     </label>
+    <label class="checkbox-label">
+      <checkbox value="其他" />其他
+    </label>
   </checkbox-group>
 </view>
 
