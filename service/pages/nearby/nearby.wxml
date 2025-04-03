@@ -4,22 +4,7 @@
 </view>
 
 <!-- 地图区域 -->
-<map
-  id="map"
-  class="map"
-  longitude="{{longitude}}"
-  latitude="{{latitude}}"
-  scale="{{scale}}"
-  markers="{{markers}}"
-  show-location
-  bindmarkertap="handleMarkerTap"
-  bindregionchange="regionchange"
-  subkey="{{mapKey}}"
-  layer-style="1"
-  enable-3D="true"
-  enable-overlooking="true"
-  enable-rotate="true"
-></map>
+<map id="map" class="map" longitude="{{longitude}}" latitude="{{latitude}}" scale="{{scale}}" markers="{{markers}}" show-location bindmarkertap="handleMarkerTap" bindregionchange="regionchange" subkey="{{mapKey}}" layer-style="1" enable-3D="true" enable-overlooking="true" enable-rotate="true"></map>
 
 <!-- 校友列表 -->
 <view class="alumni-list">
@@ -27,7 +12,7 @@
     <text class="title">附近校友</text>
     <text class="count">(共{{alumniList.length}}人)</text>
   </view>
-  
+
   <scroll-view scroll-y class="list-content">
     <view class="alumni-item" wx:for="{{alumniList}}" wx:key="_id" bindtap="showDetail" data-id="{{item.id}}">
       <image class="avatar" src="{{item.avatar || 'https://636c-cloud1-6gsqyvkd3f24bdd8-1311119192.tcb.qcloud.la/images/default-avatar.png?sign=c74ca9bb99d2709acf594a94cb26717a&t=1742101187'}}" mode="aspectFill"></image>

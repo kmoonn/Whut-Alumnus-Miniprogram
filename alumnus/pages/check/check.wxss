@@ -1,3 +1,4 @@
+/* 顶部栏 */
 .top-bar {
   display: flex;
   padding: 15px 13px;
@@ -19,161 +20,143 @@
   margin-top: 10px;
 }
 
-
+/* 头部部分 */
 .header {
-  display: flex;
-  justify-content: center;
-  padding: 20rpx 0;
-  margin-bottom: 20rpx;
+  padding: 10rpx 20rpx;
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 .count {
-  font-size: 28rpx;
-  color: #666;
-  background-color: #e6f7ff;
-  padding: 10rpx 30rpx;
-  border-radius: 30rpx;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
-}
-
-/* 信息对比容器 */
-.comparison-container {
-  padding: 10rpx;
-}
-
-/* 信息对比区域 */
-.info-comparison {
-  display: flex;
-  flex-direction: row;
-  gap: 20rpx;
-  margin-bottom: 20rpx;
-}
-
-/* 信息区域 */
-.info-section {
-  width: 50%;
-}
-
-.section-title {
-  font-size: 32rpx;
-  font-weight: bold;
-  margin-bottom: 15rpx;
+  font-size: 36rpx;
   color: #333;
   text-align: center;
-  background-color: #f0f8ff;
-  padding: 10rpx 0;
-  border-radius: 10rpx;
 }
 
-.card {
-  background-color: #fff;
-  border-radius: 16rpx;
-  padding: 25rpx;
-  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-.info {
-  margin-bottom: 20rpx;
-  font-size: 28rpx;
-  color: #333;
-  line-height: 1.5;
-  word-break: break-all;
-}
-
-/* 来源信息 */
-.source-info {
-  background-color: #fff;
-  border-radius: 16rpx;
-  padding: 20rpx;
-  margin-top: 10rpx;
-  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
-}
-
-/* 差异高亮 */
-.diff {
-  color: #ff4500;
-  font-weight: bold;
-  background-color: rgba(255, 69, 0, 0.1);
-  padding: 4rpx 8rpx;
-  border-radius: 6rpx;
-}
-
-.action-area {
-  margin-top: 30rpx;
-  padding: 20rpx;
-  background-color: #fff;
-  border-radius: 16rpx;
-  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
-}
-
-.action-title {
-  font-size: 32rpx;
-  font-weight: bold;
-  margin-bottom: 25rpx;
-  text-align: center;
-  color: #333;
-}
-
-.action-buttons {
-  display: flex;
-  justify-content: space-around;
-}
-
-.approve-btn, .reject-btn {
-  width: 45%;
-  padding: 20rpx 0;
-  border-radius: 50rpx;
-  font-size: 32rpx;
-  font-weight: bold;
-  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.15);
-}
-
-.approve-btn {
-  background-color: #52c41a;
-  color: #fff;
-}
-
-.reject-btn {
-  background-color: #f5222d;
-  color: #fff;
-}
-
-/* 空状态样式 */
+/* 空状态 */
 .empty-state {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  padding: 100rpx 0;
+  align-items: center;
+  padding: 40rpx;
   background-color: #fff;
-  border-radius: 16rpx;
-  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
-  margin: 30rpx 0;
 }
 
 .empty-image {
   width: 200rpx;
   height: 200rpx;
-  margin-bottom: 30rpx;
+  margin-bottom: 20rpx;
 }
 
 .empty-text {
-  font-size: 32rpx;
-  color: #999;
-  margin-bottom: 40rpx;
+  font-size: 24rpx;
+  color: #888;
+  margin-bottom: 30rpx;
 }
 
 .refresh-btn {
-  background: #007bff;
-  color: white;
+  background-color: #0066cc;
+  color: #fff;
+  padding: 10rpx 20rpx;
+  border-radius: 30rpx;
+  font-size: 22rpx;
+  cursor: pointer;
+}
+
+/* 信息对比容器 */
+.comparison-container {
+  padding: 20rpx;
+  background-color: #fff;
+}
+
+/* 每个信息区块 */
+.info-comparison {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20rpx;
+}
+
+.info-section {
+  width: 50%;
+  background-color: #fafafa;
+  padding: 20rpx;
+  border-radius: 10rpx;
+  box-shadow: 0 4rpx 8rpx rgba(0, 0, 0, 0.1);
+}
+
+.section-title {
   font-size: 32rpx;
-  padding: 20rpx 60rpx;
-  border-radius: 50rpx;
-  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.15);
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 15rpx;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+}
+
+.info {
+  font-size: 28rpx;
+  color: #555;
+  margin-bottom: 18rpx;
+}
+
+.diff {
+  color: #ff3300; 
+}
+
+/* 来源信息 */
+.source-info {
+  padding: 30rpx;
+  background-color: #f9f9f9;
+}
+
+.info.diff {
+  font-weight: bold;
+}
+
+/* 审核按钮区 */
+.action-area {
+  padding: 20rpx;
+  background-color: #fff;
+  border-top: 1px solid #e0e0e0;
+}
+
+.action-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 15rpx;
+  text-align: center;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.reject-btn, .approve-btn {
+  width: 48%;
+  padding: 12rpx;
+  font-size: 30rpx;
+  border-radius: 90rpx;
+  cursor: pointer;
+  border: none;
+}
+
+.reject-btn {
+  background-color: #ff4d4d;
+  color: #fff;
+}
+
+.approve-btn {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+/* 按钮交互效果 */
+.reject-btn:hover, .approve-btn:hover {
+  opacity: 0.8;
 }

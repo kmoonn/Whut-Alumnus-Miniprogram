@@ -22,23 +22,23 @@ const CONFIG = {
 const locationCache = {
   // 缓存数据
   cache: {},
-  
+
   // 获取缓存
-  get: function(key) {
+  get: function (key) {
     const item = this.cache[key];
     if (!item) return null;
-    
+
     // 检查缓存是否过期
     if (Date.now() - item.timestamp > CONFIG.CACHE_EXPIRATION) {
       delete this.cache[key];
       return null;
     }
-    
+
     return item.data;
   },
-  
+
   // 设置缓存
-  set: function(key, data) {
+  set: function (key, data) {
     this.cache[key] = {
       data: data,
       timestamp: Date.now()
@@ -51,9 +51,9 @@ const rateLimiter = {
   queue: [],
   running: 0,
   lastRequestTime: 0,
-  
+
   // 添加请求到队列
-  add: function(fn) {
+  add: function (fn) {
     return new Promise((resolve, reject) => {
       this.queue.push({
         fn,
@@ -64,32 +64,32 @@ const rateLimiter = {
       this.process();
     });
   },
-  
+
   // 处理队列
-  process: async function() {
+  process: async function () {
     if (this.running >= CONFIG.RATE_LIMIT.REQUESTS_PER_SECOND || this.queue.length === 0) {
       return;
     }
-    
+
     // 计算需要等待的时间
     const now = Date.now();
     const timeToWait = Math.max(0, 1000 / CONFIG.RATE_LIMIT.REQUESTS_PER_SECOND - (now - this.lastRequestTime));
-    
+
     if (timeToWait > 0) {
       await Utils.delay(timeToWait);
     }
-    
+
     this.running++;
     const task = this.queue.shift();
     this.lastRequestTime = Date.now();
-    
+
     try {
       const result = await task.fn();
       task.resolve(result);
     } catch (error) {
       // 如果失败且未超过最大重试次数，则重新加入队列
-      if (error.message && error.message.includes('请求量已达到上限') && 
-          task.retries < CONFIG.RATE_LIMIT.MAX_RETRIES) {
+      if (error.message && error.message.includes('请求量已达到上限') &&
+        task.retries < CONFIG.RATE_LIMIT.MAX_RETRIES) {
         task.retries++;
         console.log(`重试请求 (${task.retries}/${CONFIG.RATE_LIMIT.MAX_RETRIES})...`);
         await Utils.delay(CONFIG.RATE_LIMIT.RETRY_DELAY);
@@ -108,10 +108,10 @@ const rateLimiter = {
 const Utils = {
   // 延迟函数
   delay: (ms) => new Promise(resolve => setTimeout(resolve, ms)),
-  
+
   // 角度转弧度
   deg2rad: (deg) => deg * (Math.PI / 180),
-  
+
   // 计算两点之间的距离（单位：公里）
   calculateDistance: (lat1, lon1, lat2, lon2) => {
     const dLat = Utils.deg2rad(lat2 - lat1);
@@ -123,13 +123,13 @@ const Utils = {
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return CONFIG.EARTH_RADIUS * c;
   },
-  
+
   // 根据工作单位获取经纬度
   getLocationByWorkplace: async (workplace) => {
     if (!workplace) {
       throw new Error('工作单位信息缺失');
     }
-    
+
     // 检查缓存
     const cacheKey = workplace.trim().toLowerCase();
     const cachedLocation = locationCache.get(cacheKey);
@@ -137,7 +137,7 @@ const Utils = {
       console.log(`使用缓存的位置信息: ${workplace}`);
       return cachedLocation;
     }
-    
+
     // 使用限流器发送请求
     return rateLimiter.add(async () => {
       try {
@@ -159,12 +159,12 @@ const Utils = {
             }
           });
         });
-        
+
         // 缓存结果
         if (location) {
           locationCache.set(cacheKey, location);
         }
-        
+
         return location;
       } catch (err) {
         console.error(`获取位置过程中出现错误 (${workplace}):`, err);
@@ -172,7 +172,7 @@ const Utils = {
       }
     });
   },
-  
+
   // 处理校友数据批次
   processBatch: async (batch, userLat, userLng) => {
     return Promise.all(batch.map(async (alumni) => {
@@ -182,9 +182,9 @@ const Utils = {
           alumni.distance = '0.0';
           return alumni;
         }
-        
+
         const location = await Utils.getLocationByWorkplace(alumni.company);
-        
+
         if (location) {
           alumni.location = location;
           alumni.distance = Utils.calculateDistance(
@@ -205,7 +205,7 @@ const Utils = {
       return alumni;
     }));
   },
-  
+
   // 预处理校友数据，过滤掉无效数据
   preprocessAlumniList: (alumniList) => {
     // 过滤掉没有公司信息的校友
@@ -237,16 +237,16 @@ Page({
   onLoad(options) {
     this.initMap();
     this.getLocation();
-    
+
     // 尝试从本地存储加载缓存
     this.loadCacheFromStorage();
   },
-  
+
   onUnload() {
     // 保存缓存到本地存储
     this.saveCacheToStorage();
   },
-  
+
   // 加载缓存
   loadCacheFromStorage() {
     try {
@@ -265,7 +265,7 @@ Page({
       console.error('加载缓存失败:', e);
     }
   },
-  
+
   // 保存缓存
   saveCacheToStorage() {
     try {
@@ -275,7 +275,7 @@ Page({
       console.error('保存缓存失败:', e);
     }
   },
-  
+
   // 初始化地图
   initMap() {
     // 初始化腾讯地图 SDK
@@ -284,14 +284,14 @@ Page({
     });
     this.mapCtx = wx.createMapContext('myMap');
   },
-  
+
   // 获取当前位置
   getLocation() {
-    this.setData({ 
+    this.setData({
       isLoading: true,
       loadingText: '获取位置中...'
     });
-    
+
     wx.authorize({
       scope: 'scope.userLocation',
       success: () => {
@@ -299,7 +299,7 @@ Page({
           type: 'gcj02',
           success: (res) => {
             const { latitude, longitude } = res;
-            
+
             this.setData({
               latitude,
               longitude,
@@ -308,7 +308,7 @@ Page({
                 longitude
               }
             });
-            
+
             // 获取附近的校友
             this.fetchNearbyAlumni(latitude, longitude);
           },
@@ -368,13 +368,13 @@ Page({
 
   // 获取附近的校友
   async fetchNearbyAlumni(latitude, longitude) {
-    this.setData({ 
+    this.setData({
       isLoading: true,
       loadingText: '获取校友数据中...',
       processedCount: 0,
       totalCount: 0
     });
-    
+
     try {
       const result = await wx.cloud.callFunction({
         name: 'getAlumnus',
@@ -382,57 +382,57 @@ Page({
           category: '%'
         }
       });
-      
+
       if (result.result.code === 200) {
         let alumniList = result.result.result;
-        
+
         // 预处理校友数据
         alumniList = Utils.preprocessAlumniList(alumniList);
-        
+
         this.setData({
           totalCount: alumniList.length,
           loadingText: `正在处理校友数据 (0/${alumniList.length})...`
         });
-        
+
         // 批量处理校友数据以提高性能
         const processedAlumni = [];
         for (let i = 0; i < alumniList.length; i += CONFIG.BATCH_SIZE) {
           const batch = alumniList.slice(i, i + CONFIG.BATCH_SIZE);
           const processedBatch = await Utils.processBatch(batch, latitude, longitude);
           processedAlumni.push(...processedBatch);
-          
+
           // 更新进度
           this.setData({
             processedCount: Math.min(i + CONFIG.BATCH_SIZE, alumniList.length),
             loadingText: `正在处理校友数据 (${Math.min(i + CONFIG.BATCH_SIZE, alumniList.length)}/${alumniList.length})...`
           });
-          
+
           // 每处理一批次就更新一次界面，提高用户体验
           if (i % (CONFIG.BATCH_SIZE * 5) === 0 && i > 0) {
             const currentFiltered = processedAlumni.filter(
               alumni => parseFloat(alumni.distance) <= CONFIG.MAX_DISTANCE
             );
-            
-            this.setData({ 
+
+            this.setData({
               alumniList: currentFiltered
             });
-            
+
             this.updateMarkers(currentFiltered);
           }
         }
-        
+
         // 过滤出距离在最大距离以内的校友
         const filteredAlumniList = processedAlumni.filter(
           alumni => parseFloat(alumni.distance) <= CONFIG.MAX_DISTANCE
         );
-        
-        this.setData({ 
+
+        this.setData({
           alumniList: filteredAlumniList,
-          isLoading: false 
+          isLoading: false
         });
-        
+
         this.updateMarkers(filteredAlumniList);
-        
+
         // 保存缓存
         this.saveCacheToStorage();
       } else {
@@ -468,7 +468,7 @@ Page({
   handleAlumniTap(e) {
     const id = e.currentTarget.dataset.id;
     const alumni = this.data.alumniList.find(item => item.id === id);
-    
+
     if (alumni) {
       this.showAlumniDetail(alumni);
     }
@@ -483,7 +483,7 @@ Page({
       });
       return;
     }
-    
+
     wx.navigateTo({
       url: `/alumnus/pages/famous_detail/famous_detail?id=${alumni.id}`
     });
@@ -492,7 +492,7 @@ Page({
   // 查看校友详情
   showDetail(e) {
     const id = e.currentTarget.dataset.id;
-    
+
     if (id) {
       wx.navigateTo({
         url: `/alumnus/pages/famous_detail/famous_detail?id=${id}`
