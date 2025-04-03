@@ -82,7 +82,7 @@ WHUT-ALMNUS-MINIPROGRAM
 
 ## 2025.3.28 汇报返修意见
 
-异步 [dev](https://github.com/kmoonn/Whut-Almnus-Miniprogram/blob/dev/README.md) 分支 
+请移步 [dev](https://github.com/kmoonn/Whut-Almnus-Miniprogram/blob/dev/README.md) 分支 
 
 
 ## 版权说明
