@@ -1,68 +1,66 @@
+// pages/my/index.js
 Page({
+
+  /**
+   * 页面的初始数据
+   */
   data: {
-    userInfo: null,
-    showContactModal: false
-  },
-  
-  contactService() {
-    this.setData({
-      showContactModal: true
-    });
-  },
-  
-  hideModal() {
-    this.setData({
-      showContactModal: false
-    });
+
   },
 
-  onLoad() {
-    this.fetchUserInfo();
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad(options) {
+
   },
 
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady() {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
   onShow() {
+
   },
 
-  async fetchUserInfo() {
-    try {
-      const userInfo = wx.getStorageSync('userInfo');
-      if (userInfo) {
-        this.setData({ userInfo });
-      } else {
-        wx.showToast({
-          title: '请先登录',
-          icon: 'none'
-        });
-      }
-    } catch (error) {
-      console.error('获取用户信息失败：', error);
-      wx.showToast({
-        title: '获取用户信息失败',
-        icon: 'none'
-      });
-    }
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide() {
+
   },
 
-  navigateTo(e) {
-    const { url } = e.currentTarget.dataset;
-    wx.navigateTo({ url });
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload() {
+
   },
 
-  // 退出登录
-  logout() {
-    wx.showModal({
-      title: '确认退出',
-      content: '确定要退出登录吗？',
-      success: (res) => {
-        if (res.confirm) {
-          // 执行退出登录逻辑
-          wx.clearStorageSync();  // 清除缓存
-          wx.redirectTo({
-            url: '/pages/login/login'  // 跳转到登录页面
-          });
-        }
-      }
-    });
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh() {
+
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom() {
+
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage() {
+
   }
-
-}); 
+})

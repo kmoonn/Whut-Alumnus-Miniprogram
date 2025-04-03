@@ -1,7 +1,6 @@
 {
   "pages": [ 
     "pages/login/login",
-    "pages/index/index",
     "pages/service/index",
     "pages/my/index"
   ],
@@ -33,32 +32,6 @@
     "navigationBarTitleText": "武理校友汇",
     "navigationBarTextStyle": "black",
     "backgroundTextStyle": "dark"
-  },
-  "tabBar": {
-    "color": "#6e6d6b",
-    "selectedColor": "#ff9966",
-    "borderStyle": "black",
-    "backgroundColor": "#ffffff",
-    "list": [
-      {
-        "pagePath": "pages/index/index",
-        "text": "首页",
-        "iconPath": "/images/index.png",
-        "selectedIconPath": "/images/index.png"
-      },
-      {
-        "pagePath": "pages/service/index",
-        "text": "服务",
-        "iconPath": "/images/service.png",
-        "selectedIconPath": "/images/service.png"
-      },
-      {
-        "pagePath": "pages/my/index",
-        "text": "我的",
-        "iconPath": "/images/my.png",
-        "selectedIconPath": "/images/my.png"
-      }
-    ]
   },
   "style": "v2",
   "useExtendedLib": {

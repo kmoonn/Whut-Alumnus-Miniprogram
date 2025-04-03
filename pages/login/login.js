@@ -147,8 +147,9 @@ Page({
           duration: 1500,
           success: () => {
             setTimeout(() => {
-              wx.switchTab({
-                url: '/pages/index/index'
+              console.log(111111)
+              wx.navigateTo({
+                url: '/pages/service/index'
               });
             }, 1500);
           }
