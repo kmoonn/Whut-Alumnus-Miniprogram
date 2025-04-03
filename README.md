@@ -54,7 +54,7 @@
 
 修改user表role字段，更改权限。
 
-修改famous_alumnus表，增加lat，lng经纬度字段。
+~~修改famous_alumnus表，增加lat，lng经纬度字段。~~
 
 
 ## 版权说明
