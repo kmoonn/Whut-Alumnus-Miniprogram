@@ -5,15 +5,28 @@ Page({
     pendingCount: 0
   },
 
+  onShow: function () {
+    this.showAgreement();
+  },
+
   onLoad() {
     this.fetchPendingMatches();
+  },
+
+  showAgreement() {
+    wx.showModal({
+      title: '校友审核要求须知',
+      content: '这里是校友审核要求的内容。',
+      showCancel: false,
+      confirmText: '我已阅读'
+    });
   },
 
   // 获取待匹配的信息对
   fetchPendingMatches() {
     wx.cloud.callFunction({
       name: 'check',
-      data: { 
+      data: {
         action: 'getPendingMatches',
         reviewerId: wx.getStorageSync('userInfo').id
       },
@@ -34,7 +47,7 @@ Page({
             month: '2-digit',
             day: '2-digit'
           });
-          
+
           this.setData({
             sourceInfo: sourceAlumnus,  // 源校友库信息
             pendingInfo: pendingAlumnus, // 待审核校友信息

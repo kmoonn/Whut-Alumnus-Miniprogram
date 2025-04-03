@@ -1,8 +1,7 @@
 {
   "pages": [ 
     "pages/login/login",
-    "pages/service/index",
-    "pages/my/index"
+    "pages/service/index"
   ],
   "subPackages": [
     {
@@ -17,13 +16,10 @@
     {
       "root": "service",
       "pages": [
-        "pages/activity/activity",
-        "pages/activityDetail/activityDetail",
         "pages/nearby/nearby",
         "pages/search/search",
         "pages/visual/visual",
-        "pages/company/company",
-        "pages/companyDetail/companyDetail"
+        "pages/map/map"
       ]
     }
   ],
@@ -33,7 +29,6 @@
     "navigationBarTextStyle": "black",
     "backgroundTextStyle": "dark"
   },
-  "style": "v2",
   "useExtendedLib": {
     "kbone": true,
     "weui": true
@@ -45,5 +40,9 @@
         "desc": "你的位置信息将用于小程序定位"
     }
   },
-  "requiredPrivateInfos": ["getLocation"]
+  "requiredPrivateInfos": ["getLocation"],
+  "usingComponents": {
+    "t-button": "tdesign-miniprogram/button/button",
+    "t-dialog": "tdesign-miniprogram/dialog/dialog"
+  }
 }

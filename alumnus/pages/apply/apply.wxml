@@ -1,79 +1,67 @@
 <!-- 顶部校友会导航栏 -->
 <view class="top-bar">
   <image src="https://636c-cloud1-6gsqyvkd3f24bdd8-1311119192.tcb.qcloud.la/images/logo.png" class="logo"></image>
-    <text class="title">校友申报</text>
-  </view>
-  <view class="header">
-    <text class="title" style="font-size: medium;">信息填写</text>
-  </view>
-
-  <view class="form">
-    <view class="form-item">
-  <text class="label">类别<text class="required">*</text></text>
-  <checkbox-group class="checkbox-group" bindchange="onCategoryChange">
-    <label class="checkbox-label">
-      <checkbox value="政界" />政界
-    </label>
-    <label class="checkbox-label">
-      <checkbox value="商界" />商界
-    </label>
-    <label class="checkbox-label">
-      <checkbox value="学界" />学界
-    </label>
-    <label class="checkbox-label">
-      <checkbox value="其他" />其他
-    </label>
-  </checkbox-group>
+  <text class="title">校友申报</text>
+</view>
+<view class="header">
+  <text class="title" style="font-size: medium;">信息填写</text>
 </view>
 
-    <view class="form-item">
-      <text class="label">姓名<text class="required">*</text></text>
-      <input class="input" placeholder="请输入姓名" bindinput="onInputChange" data-field="name" />
-    </view>
+<view class="form">
+  <view class="form-item">
+    <text class="label">类别<text class="required">*</text></text>
+    <checkbox-group class="checkbox-group" bindchange="onCategoryChange">
+      <block wx:for="{{['政界', '商界', '学界', '其他']}}" wx:key="item">
+        <label class="checkbox-label">
+          <checkbox value="{{item}}" />{{item}}
+        </label>
+      </block>
+    </checkbox-group>
+  </view>
 
-        <!-- 所在地 -->
+  <view class="form-item">
+    <text class="label">姓名<text class="required">*</text></text>
+    <input class="input" placeholder="请输入姓名" bindinput="onInputChange" data-field="name" />
+  </view>
   <view class="form-item">
     <text class="label">所在地</text>
     <picker mode="region" bindchange="onRegionChange">
       <view class="picker">{{region || '请选择所在地'}}</view>
     </picker>
   </view>
-
   <view class="form-item">
-      <text class="label">工作单位</text>
-      <input class="input" placeholder="请输入工作单位" bindinput="onInputChange" data-field="company" />
-    </view>
-
-    <view class="form-item">
-      <text class="label">职务</text>
-      <input class="input" placeholder="请输入职务" bindinput="onInputChange" data-field="position" />
-    </view>
-
-
-    <view class="form-item">
-      <text class="label">毕业年份</text>
-      <picker mode="date" fields="year" bindchange="onDateChange">
-        <view class="picker">{{graduation_year || '请选择毕业年份'}}</view>
-      </picker>
-    </view>
-
-
-    <view class="form-item">
-      <text class="label">专业</text>
-      <input class="input" placeholder="请输入专业" bindinput="onInputChange" data-field="major" />
-    </view>
-
-
-
-
-
-    <view class="agreement">
-      <checkbox-group bindchange="onAgreeChange">
-        <label>
-          <checkbox value="agree" checked="{{isAgreed}}" /> 我已阅读并同意 <text class="link" bindtap="showAgreement">《校友信息服务协议》</text>
-        </label>
-      </checkbox-group>
-    </view>
-
-    <button class="submit-btn" bindtap="submitForm" disabled="{{!isAgreed}}">提交</button>
+    <text class="label">工作单位<text class="required">*</text></text>
+    <input class="input" placeholder="请输入工作单位" bindinput="onInputChange" data-field="company" />
   </view>
+  <view class="form-item">
+    <text class="label">职务</text>
+    <input class="input" placeholder="请输入职务" bindinput="onInputChange" data-field="position" />
+  </view>
+  <view class="form-item">
+    <text class="label">毕业年份</text>
+    <picker mode="date" fields="year" bindchange="onDateChange">
+      <view class="picker">{{graduation_year || '请选择毕业年份'}}</view>
+    </picker>
+  </view>
+  <view class="form-item">
+    <text class="label">专业</text>
+    <input class="input" placeholder="请输入专业" bindinput="onInputChange" data-field="major" />
+  </view>
+
+  <block wx:for="{{category}}" wx:key="*this">
+    <view class="form-item" wx:if="{{item === '其他'}}">
+      <text class="label">重大荣誉或事迹<text class="required">*</text></text>
+      <input class="input" placeholder="请输入相关重大荣誉或事迹" bindinput="onInputChange" data-field="deeds" />
+    </view>
+  </block>
+
+  <view class="agreement">
+    <checkbox-group bindchange="onAgreeChange">
+      <label>
+        <checkbox value="agree" checked="{{isAgreed}}" /> 我已阅读并同意 <text class="link" bindtap="showAgreement">《校友信息服务协议》</text>
+      </label>
+    </checkbox-group>
+  </view>
+
+  <button class="submit-btn" bindtap="submitForm" disabled="{{!isAgreed}}">提交</button>
+</view>
