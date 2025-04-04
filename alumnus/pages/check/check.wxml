@@ -45,9 +45,14 @@
     </view>
   </view>
 </view>
-
+<!-- 点击链接，跳转到来源网页  -->
 <view class="source-info">
-  <text class="info {{diffFields.includes('source') ? 'diff' : ''}}">来源: {{pendingInfo.source}}</text>
+  <navigator 
+    url="/alumnus/pages/review_sourse/review_sourse?url={{pendingInfo.source}}" 
+    class="info"
+  >
+    来源: {{pendingInfo.source}}
+  </navigator>
 </view>
 
 <view class="action-area" wx:if="{{!noMoreData}}">

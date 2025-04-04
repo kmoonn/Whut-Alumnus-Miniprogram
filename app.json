@@ -10,7 +10,8 @@
         "pages/apply/apply",
         "pages/check/check",
         "pages/famous/famous",
-        "pages/famous_detail/famous_detail"
+        "pages/famous_detail/famous_detail",
+        "pages/review_sourse/review_sourse"
       ]
     },
     {

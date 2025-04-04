@@ -21,6 +21,11 @@
     bindtap="switchTab" 
     data-tab="学界"
   >学界</view>
+  <view 
+    class="sidebar-item {{currentTab === 'other' ? 'active' : ''}}" 
+    bindtap="switchTab" 
+    data-tab="其他"
+  >其他</view>
 </view>
 
 <!-- 主内容区 -->

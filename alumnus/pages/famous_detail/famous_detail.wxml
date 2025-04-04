@@ -12,4 +12,6 @@
   <text data-label="职务">{{alumnusDetail.position}}</text>
   <text data-label="毕业年份">{{alumnusDetail.graduation_year}}</text>
   <text data-label="专业">{{alumnusDetail.major}}</text>   
+  <!-- 只有当类别为“其他”时才显示 -->
+  <text wx:if="{{alumnusDetail.category === '其他'}}" data-label="重大荣誉或事迹">{{alumnusDetail.deeds}}</text> 
 </view>
