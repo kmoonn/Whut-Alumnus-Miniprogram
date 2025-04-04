@@ -51,7 +51,7 @@
   <block wx:for="{{category}}" wx:key="*this">
     <view class="form-item" wx:if="{{item === '其他'}}">
       <text class="label">重大荣誉或事迹<text class="required">*</text></text>
-      <input class="input" placeholder="请输入相关重大荣誉或事迹" bindinput="onInputChange" data-field="deeds" />
+      <textarea class="input" style="line-height: 24px; height: 90px; width: 95%; "placeholder="请输入相关重大荣誉或事迹" bindinput="onInputChange" data-field="deeds" />
     </view>
   </block>
 
