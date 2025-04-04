@@ -1,0 +1,3 @@
+<!--alumnus/pages/review/review.wxml-->
+<!-- 网页容器 -->
+<web-view src="{{url}}" />

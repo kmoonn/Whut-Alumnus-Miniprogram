@@ -112,6 +112,20 @@
   padding: 30rpx;
   background-color: #f9f9f9;
 }
+/* 来源链接多行显示，最多2行，超出显示省略号 */
+.info {
+  display: -webkit-box;          
+  -webkit-box-orient: vertical;  
+  -webkit-line-clamp: 2;         
+  overflow: hidden;           
+  text-overflow: ellipsis;      
+  word-break: break-all;      
+}
+
+.navigator-hover {
+  opacity: 0.7;
+  background-color: #f0f0f0;
+}
 
 .info.diff {
   font-weight: bold;
