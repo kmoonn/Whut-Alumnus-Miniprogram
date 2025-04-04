@@ -32,7 +32,7 @@
 
 .alumnus-info text[data-label]::before {
   content: attr(data-label);
-  width: 30%;
+  width: 35%;
   color: #007AFF;
   font-size: 28rpx;
   margin-bottom: 16rpx;
