@@ -13,34 +13,36 @@ Page({
   fetchAlumnusDetail(id) {
     wx.showLoading({ title: '加载中' });
     wx.cloud.callFunction({
-      name: 'getAlumnusDetail', // 云函数名称，用于根据 id 查询校友详细信息
-      data: {
-        id: id
-      },
-      
-      success: res => {
-        if (res.result.code === 200) {
-          console.log(res.result.result);
-          this.setData({
-            alumnusDetail: res.result.result
-          });
-        } else {
-          wx.showToast({
-            title: res.result.message,
-            icon: 'none'
-          });
+        name: 'getAlumnusDetail', // 云函数名称，用于根据 id 查询校友详细信息
+        data: {
+            id: id
+        },
+        success: res => {
+            if (res.result.code === 200) {
+                
+                let alumnusDetail = res.result.result;
+                // 确保 category 是字符串类型
+                this.setData({
+                    alumnusDetail: alumnusDetail
+                });
+                console.log(alumnusDetail);
+            } else {
+                wx.showToast({
+                    title: res.result.message,
+                    icon: 'none'
+                });
+            }
+        },
+        fail: err => {
+            console.error('获取校友详情失败', err);
+            wx.showToast({
+                title: '获取数据失败',
+                icon: 'none'
+            });
+        },
+        complete: () => {
+            wx.hideLoading();
         }
-      },
-      fail: err => {
-        console.error('获取校友详情失败', err);
-        wx.showToast({
-          title: '获取数据失败',
-          icon: 'none'
-        });
-      },
-      complete: () => {
-        wx.hideLoading();
-      }
     });
-  }
+  } 
 });
