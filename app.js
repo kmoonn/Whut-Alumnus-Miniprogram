@@ -1,5 +1,3 @@
-const tdesign = require('tdesign-miniprogram');
-
 App({
   onLaunch() {
     wx.cloud.init({

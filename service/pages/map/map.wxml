@@ -1,2 +1,27 @@
-<!--service/pages/map/map.wxml-->
-<text>service/pages/map/map.wxml</text>
+<view class="top-bar">
+  <image src="https://636c-cloud1-6gsqyvkd3f24bdd8-1311119192.tcb.qcloud.la/images/logo.png" class="logo"></image>
+  <text class="top-title">校友地图</text>
+</view>
+
+<map
+  id="map"
+  longitude="{{longitude}}"
+  latitude="{{latitude}}"
+  scale="12"
+  markers="{{markers}}"
+  show-location
+  enable-poi="false"
+  class="map"
+  bindmarkertap="onMarkerTap">
+</map>
+
+<view class="unit-list">
+  <text class="title">📍附近校友单位</text>
+  <view class="unit-items">
+    <block wx:for="{{nearestUnits}}" wx:key="id">
+      <view class="unit-item" bindtap="onUnitTap" data-id="{{item.id}}">
+        <text>{{item.company}}</text>
+      </view>
+    </block>
+  </view>
+</view>

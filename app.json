@@ -17,10 +17,10 @@
     {
       "root": "service",
       "pages": [
-        "pages/nearby/nearby",
         "pages/search/search",
         "pages/visual/visual",
-        "pages/map/map"
+        "pages/map/map",
+        "pages/unit_alumnus/unit_alumnus"
       ]
     }
   ],
@@ -30,6 +30,7 @@
     "navigationBarTextStyle": "black",
     "backgroundTextStyle": "dark"
   },
+  "style": "v2",
   "useExtendedLib": {
     "kbone": true,
     "weui": true

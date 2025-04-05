@@ -1,0 +1,31 @@
+<!-- 顶部公司信息 -->
+<view class="company-header">
+  <view class="company-info">
+    <image class="company-logo" src="https://636c-cloud1-6gsqyvkd3f24bdd8-1311119192.tcb.qcloud.la/images/%E5%85%AC%E5%8F%B8.png"></image>
+    <view class="company-detail">
+      <text class="company-name">{{company}}</text>
+      <text class="alumni-count">{{alumniList.length}} 位校友</text>
+    </view>
+  </view>
+</view>
+
+<!-- 校友列表 -->
+<view class="alumni-list">
+  <block wx:for="{{alumniList}}" wx:key="id">
+    <view class="alumni-card">
+      <view class="alumni-info">
+        <image class="avatar" src="{{item.avatar || 'https://636c-cloud1-6gsqyvkd3f24bdd8-1311119192.tcb.qcloud.la/images/%E6%A0%A1%E5%8F%8B%E5%A4%B4%E5%83%8F.png?sign=dff5a0179078064339860fc0c2a63c5a&t=1743839998'}}"></image>
+        <view class="info-content">
+          <view class="name-row">
+            <text class="name">{{item.name}}</text>
+          </view>
+          <text class="position">{{item.position}}</text>
+          <view class="detail-row">
+            <text class="major">{{item.major || ''}}</text>
+            <text class="graduation">{{item.graduationYear || ''}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>

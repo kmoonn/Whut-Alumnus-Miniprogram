@@ -51,7 +51,7 @@
     url="/alumnus/pages/review_sourse/review_sourse?url={{pendingInfo.source}}" 
     class="info"
   >
-    来源: {{pendingInfo.source}}
+    来源: <text style="color: blue;">点击跳转</text>
   </navigator>
 </view>
 

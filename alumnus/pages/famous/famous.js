@@ -62,6 +62,17 @@ Page({
   // 显示校友详情
   showDetail(e) {
     const id = e.currentTarget.dataset.id;
+    const userInfo = wx.getStorageSync('userInfo'); 
+    const userRole = userInfo ? userInfo.role : null; 
+
+    if (userRole !== 'admin' && userRole !== 'leader') {
+      wx.showToast({
+        title: '无详细信息查看权限',
+        icon: 'none'
+      });
+      return;
+    }
+
     if (id) {
         wx.navigateTo({
             url: `/alumnus/pages/famous_detail/famous_detail?id=${id}`

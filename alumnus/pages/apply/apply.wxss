@@ -83,13 +83,12 @@
 }
 
 .submit-btn {
-  width: 100%;
-  padding: 20rpx;
+  width: 60%;
   margin-top: 20rpx;
   border-radius: 8rpx;
   background-color: #007AFF;
   color: white;
-  font-size: 30rpx;
+  font-size: 40rpx;
   text-align: center;
 }
 

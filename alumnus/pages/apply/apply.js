@@ -97,7 +97,8 @@ Page({
         position: this.data.position,
         graduation_year: this.data.graduation_year,
         major: this.data.major,
-        deeds: this.data.deeds
+        deeds: this.data.deeds,
+        userId: wx.getStorageSync('userInfo').id
       },
       success: () => {
         wx.hideLoading();

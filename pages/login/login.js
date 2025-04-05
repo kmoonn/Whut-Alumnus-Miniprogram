@@ -149,7 +149,6 @@ Page({
             duration: 1500,
             success: () => {
               setTimeout(() => {
-                console.log(111111)
                 wx.navigateTo({
                   url: '/pages/service/index'
                 });

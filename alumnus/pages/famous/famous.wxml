@@ -4,39 +4,18 @@
 </view>
 
 <!-- 侧边栏 -->
-<view class="trigger" wx:if="{{!showSidebar}}" bindtap="toggleSidebar"> ☰ </view> 
+<view class="trigger" wx:if="{{!showSidebar}}" bindtap="toggleSidebar"> ☰ </view>
 <view wx:if="{{showSidebar}}" class="sidebar">
-  <view 
-    class="sidebar-item {{currentTab === 'politics' ? 'active' : ''}}" 
-    bindtap="switchTab" 
-    data-tab="政界"
-  >政界</view>
-  <view 
-    class="sidebar-item {{currentTab === 'business' ? 'active' : ''}}" 
-    bindtap="switchTab" 
-    data-tab="商界"
-  >商界</view>
-  <view 
-    class="sidebar-item {{currentTab === 'academic' ? 'active' : ''}}" 
-    bindtap="switchTab" 
-    data-tab="学界"
-  >学界</view>
-  <view 
-    class="sidebar-item {{currentTab === 'other' ? 'active' : ''}}" 
-    bindtap="switchTab" 
-    data-tab="其他"
-  >其他</view>
+  <view class="sidebar-item {{currentTab === 'politics' ? 'active' : ''}}" bindtap="switchTab" data-tab="政界">政界</view>
+  <view class="sidebar-item {{currentTab === 'business' ? 'active' : ''}}" bindtap="switchTab" data-tab="商界">商界</view>
+  <view class="sidebar-item {{currentTab === 'academic' ? 'active' : ''}}" bindtap="switchTab" data-tab="学界">学界</view>
+  <view class="sidebar-item {{currentTab === 'other' ? 'active' : ''}}" bindtap="switchTab" data-tab="其他">其他</view>
 </view>
 
 <!-- 主内容区 -->
 <view wx:if="{{!showSidebar}}" class="main-content">
   <scroll-view scroll-y class="alumni-list">
-    <view class="alumni-item" 
-      wx:for="{{alumniList}}" 
-      wx:key="id" 
-      bindtap="showDetail" 
-      data-id="{{item.id}}"
-    >
+    <view class="alumni-item" wx:for="{{alumniList}}" wx:key="id" bindtap="showDetail" data-id="{{item.id}}">
       <image class="avatar" src="{{item.avatar || 'https://636c-cloud1-6gsqyvkd3f24bdd8-1311119192.tcb.qcloud.la/images/default-avatar.png?sign=c74ca9bb99d2709acf594a94cb26717a&t=1742101187'}}" mode="aspectFill"></image>
       <view class="info">
         <view class="name">{{item.name}}</view>
