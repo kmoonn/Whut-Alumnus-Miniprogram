@@ -10,7 +10,7 @@ exports.main = async (event, context) => {
   const connection = await mysql.createConnection(config.MYSQL); 
 
   try {
-    const sql = `select name, gender, graduate_year, college, major, region, company, position, from alumnus where status = 1`;
+    const sql = `select name, gender, graduate_year, college, major, region, company, position, deeds from alumnus where status = 1`;
     
     const [result] = await connection.execute(sql);
     await connection.end();
