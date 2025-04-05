@@ -3,14 +3,10 @@
   <text class="title">知名校友</text>
 </view>
 
-<!-- 侧边栏 -->
-<view class="trigger" wx:if="{{!showSidebar}}" bindtap="toggleSidebar"> ☰ </view>
-<view wx:if="{{showSidebar}}" class="sidebar">
-  <view class="sidebar-item {{currentTab === 'politics' ? 'active' : ''}}" bindtap="switchTab" data-tab="政界">政界</view>
-  <view class="sidebar-item {{currentTab === 'business' ? 'active' : ''}}" bindtap="switchTab" data-tab="商界">商界</view>
-  <view class="sidebar-item {{currentTab === 'academic' ? 'active' : ''}}" bindtap="switchTab" data-tab="学界">学界</view>
-  <view class="sidebar-item {{currentTab === 'other' ? 'active' : ''}}" bindtap="switchTab" data-tab="其他">其他</view>
-</view>
+<t-tabs value="{{currentTab}}" space-evenly bind:change="onTabsChange">
+  <t-tab-panel wx:for="{{tabList}}" wx:key="value" label="{{item.label}}" value="{{item.value}}">    
+  </t-tab-panel>
+</t-tabs>
 
 <!-- 主内容区 -->
 <view wx:if="{{!showSidebar}}" class="main-content">

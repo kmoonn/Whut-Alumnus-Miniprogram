@@ -109,7 +109,7 @@
 
 /* 来源信息 */
 .source-info {
-  padding: 30rpx;
+  padding: 40rpx;
   background-color: #f9f9f9;
 }
 /* 来源链接多行显示，最多2行，超出显示省略号 */
@@ -121,6 +121,15 @@
   text-overflow: ellipsis;      
   word-break: break-all;      
 }
+
+.link-example {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 96rpx;
+  background-color: var(--bg-color-demo);
+}
+
 
 .navigator-hover {
   opacity: 0.7;

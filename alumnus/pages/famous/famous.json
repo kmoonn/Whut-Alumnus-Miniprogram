@@ -1,4 +1,8 @@
 {
   "navigationBarTitleText": "知名校友",
-  "usingComponents": {}
+  "component": true,
+  "usingComponents": {
+    "t-tabs": "tdesign-miniprogram/tabs/tabs",
+    "t-tab-panel": "tdesign-miniprogram/tab-panel/tab-panel"
+  }
 }

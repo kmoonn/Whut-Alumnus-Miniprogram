@@ -16,12 +16,19 @@
 </map>
 
 <view class="unit-list">
-  <text class="title">📍附近校友单位</text>
-  <view class="unit-items">
-    <block wx:for="{{nearestUnits}}" wx:key="id">
-      <view class="unit-item" bindtap="onUnitTap" data-id="{{item.id}}">
-        <text>{{item.company}}</text>
-      </view>
-    </block>
-  </view>
+  <view class="title">📍附近校友单位</view>
+
+  <t-cell-group>
+    <t-cell
+      wx:for="{{nearestUnits}}"
+      wx:key="id"
+      title="{{item.company}}"
+      arrow
+      hover
+      bind:click="onUnitTap"
+      data-id="{{item.id}}"
+    />
+  </t-cell-group>
 </view>
+
+

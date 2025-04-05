@@ -27,17 +27,16 @@
   box-shadow: 0 0 10rpx rgba(0, 0, 0, 0.1);
 }
 
-/* Unit list */
 .unit-list {
-  padding: 20rpx;
+  margin: 32rpx;
 }
 
 .title {
-  font-size: 30rpx;
+  font-size: 32rpx;
   font-weight: bold;
-  color: #333333;
-  margin-bottom: 15rpx;
+  margin-bottom: 24rpx;
 }
+
 
 .unit-items {
   margin-top: 15rpx;
@@ -54,4 +53,14 @@
 .unit-item text {
   font-size: 28rpx;
   color: #333333;
+}
+
+.unit-list {
+  margin: 32rpx;
+}
+
+.title {
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-bottom: 24rpx;
 }

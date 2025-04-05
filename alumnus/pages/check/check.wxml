@@ -23,9 +23,9 @@
         <text class="info {{diffFields.includes('birthday') ? 'diff' : ''}}">生日: {{sourceInfo.birthday}}</text>
         <text class="info {{diffFields.includes('graduation_year') ? 'diff' : ''}}">毕业年份: {{sourceInfo.graduation_year}}</text>
         <text class="info {{diffFields.includes('major') ? 'diff' : ''}}">专业: {{sourceInfo.major}}</text>
-        <text class="info {{diffFields.includes('region') ? 'diff' : ''}}">地区: {{sourceInfo.region}}</text>
-        <text class="info {{diffFields.includes('company') ? 'diff' : ''}}">公司: {{sourceInfo.company}}</text>
-        <text class="info {{diffFields.includes('position') ? 'diff' : ''}}">职位: {{sourceInfo.position}}</text>
+        <text class="info {{diffFields.includes('region') ? 'diff' : ''}}">所在地: {{sourceInfo.region || ''}}</text>
+        <text class="info {{diffFields.includes('company') ? 'diff' : ''}}">工作单位: {{sourceInfo.company || ''}}</text>
+        <text class="info {{diffFields.includes('position') ? 'diff' : ''}}">职务: {{sourceInfo.position || ''}}</text>
       </view>
     </view>
 
@@ -37,9 +37,9 @@
         <text class="info {{diffFields.includes('birthday') ? 'diff' : ''}}">生日: {{pendingInfo.birthday}}</text>
         <text class="info {{diffFields.includes('graduation_year') ? 'diff' : ''}}">毕业年份: {{pendingInfo.graduation_year}}</text>
         <text class="info {{diffFields.includes('major') ? 'diff' : ''}}">专业: {{pendingInfo.major}}</text>
-        <text class="info {{diffFields.includes('region') ? 'diff' : ''}}">地区: {{pendingInfo.region}}</text>
-        <text class="info {{diffFields.includes('company') ? 'diff' : ''}}">公司: {{pendingInfo.company}}</text>
-        <text class="info {{diffFields.includes('position') ? 'diff' : ''}}">职位: {{pendingInfo.position}}</text>
+        <text class="info {{diffFields.includes('region') ? 'diff' : ''}}">所在地: {{pendingInfo.region}}</text>
+        <text class="info {{diffFields.includes('company') ? 'diff' : ''}}">工作单位: {{pendingInfo.company}}</text>
+        <text class="info {{diffFields.includes('position') ? 'diff' : ''}}">职务: {{pendingInfo.position}}</text>
         <text class="info {{diffFields.includes('deeds') ? 'diff' : ''}}">重大荣誉或事迹: {{pendingInfo.deeds}}</text>
       </view>
     </view>
@@ -50,9 +50,11 @@
   <navigator 
     url="/alumnus/pages/review_sourse/review_sourse?url={{pendingInfo.source}}" 
     class="info"
-  >
-    来源: <text style="color: blue;">点击跳转</text>
+  >信息来源: <t-link size="big" theme="primary" content="跳转链接" prefixIcon="link" hover />
   </navigator>
+
+  
+
 </view>
 
 <view class="action-area" wx:if="{{!noMoreData}}">

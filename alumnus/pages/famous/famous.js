@@ -1,32 +1,25 @@
 Page({
   data: {
-    showSidebar: false,
-    Sidebartrigger: true,
-    currentTab: '政界', // 当前选中的标签
+    tabList: [
+      { label: '政界', value: '政界' },
+      { label: '商界', value: '商界' },
+      { label: '学界', value: '学界' },
+      { label: '其他', value: '其他' }
+    ],
+    currentTab: '政界',
     alumniList: [] // 校友列表
-  },
-
-  //显示侧边栏 关闭侧边栏触发器
-  toggleSidebar: function() {
-    this.setData({
-      showSidebar: !this.data.showSidebar,
-      Sidebartrigger: !this.data.Sidebartrigger
-    });
   },
 
   onLoad() {
     this.fetchFamousAlumni('政界');
   },
 
-  // 切换标签
-  switchTab(e) {
-    this.setData({ 
-      currentTab: e.currentTarget.dataset.tab,
-      showSidebar:!this.data.showSidebar,
-      Sidebartrigger:!this.data.Sidebartrigger
-    }, () => {
-      this.fetchFamousAlumni(this.data.currentTab);
+
+  onTabsChange(e) {
+    this.setData({
+      currentTab: e.detail.value
     });
+    this.fetchFamousAlumni(e.detail.value);
   },
 
   // 获取知名校友列表
@@ -62,8 +55,8 @@ Page({
   // 显示校友详情
   showDetail(e) {
     const id = e.currentTarget.dataset.id;
-    const userInfo = wx.getStorageSync('userInfo'); 
-    const userRole = userInfo ? userInfo.role : null; 
+    const userInfo = wx.getStorageSync('userInfo');
+    const userRole = userInfo ? userInfo.role : null;
 
     if (userRole !== 'admin' && userRole !== 'leader') {
       wx.showToast({
@@ -74,11 +67,11 @@ Page({
     }
 
     if (id) {
-        wx.navigateTo({
-            url: `/alumnus/pages/famous_detail/famous_detail?id=${id}`
-        });
+      wx.navigateTo({
+        url: `/alumnus/pages/famous_detail/famous_detail?id=${id}`
+      });
     } else {
-        console.error('未获取到有效的 id');
+      console.error('未获取到有效的 id');
     }
-}
- });
+  }
+});

@@ -62,6 +62,6 @@
       </label>
     </checkbox-group>
   </view>
-
+  
   <button class="submit-btn" bindtap="submitForm" disabled="{{!isAgreed}}">提交</button>
 </view>

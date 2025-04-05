@@ -30,7 +30,6 @@
     "navigationBarTextStyle": "black",
     "backgroundTextStyle": "dark"
   },
-  "style": "v2",
   "useExtendedLib": {
     "kbone": true,
     "weui": true

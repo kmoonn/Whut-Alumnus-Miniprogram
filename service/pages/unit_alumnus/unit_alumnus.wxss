@@ -1,124 +1,42 @@
-.container {
-  min-height: 100vh;
-  background-color: #f5f5f5;
-}
-
-.company-header {
-  background-color: #fff;
-  padding: 30rpx;
-  margin-bottom: 20rpx;
-  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
-}
-
-.company-info {
-  display: flex;
-  align-items: center;
-}
-
-.company-logo {
-  width: 100rpx;
-  height: 100rpx;
-  border-radius: 20rpx;
-  margin-right: 20rpx;
-}
-
-.company-detail {
-  flex: 1;
-}
-
-.company-name {
-  font-size: 36rpx;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 8rpx;
-  display: block;
-}
-
-.alumni-count {
-  font-size: 28rpx;
-  color: #666;
-}
-
 .alumni-list {
-  padding: 20rpx;
+  padding: 24rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
 }
 
 .alumni-card {
-  background-color: #fff;
-  border-radius: 20rpx;
-  padding: 30rpx;
-  margin-bottom: 20rpx;
-  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+  background-color: #ffffff;
+  border-radius: 24rpx;
+  padding: 24rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
 }
 
 .alumni-info {
   display: flex;
-  align-items: center;
-  margin-bottom: 20rpx;
+  gap: 24rpx;
 }
 
-.avatar {
-  width: 120rpx;
-  height: 120rpx;
-  border-radius: 60rpx;
-  margin-right: 20rpx;
-  background-color: #f0f0f0;
-}
-
-.info-content {
-  flex: 1;
-}
-
-.name-row {
+.alumni-text {
   display: flex;
-  align-items: center;
-  margin-bottom: 10rpx;
+  flex-direction: column;
+  gap: 8rpx;
 }
 
 .name {
+  font-weight: bold;
   font-size: 32rpx;
-  font-weight: 600;
-  color: #333;
-  margin-right: 20rpx;
 }
 
 .position {
-  font-size: 28rpx;
   color: #666;
-  background-color: #f5f5f5;
-  padding: 4rpx 16rpx;
-  border-radius: 20rpx;
-}
-
-.detail-row {
-  display: flex;
-  align-items: center;
-}
-
-.major, .graduation {
   font-size: 26rpx;
-  color: #888;
 }
 
-.major {
-  margin-right: 20rpx;
-}
-
-.contact-row {
+.tags {
   display: flex;
-  justify-content: flex-end;
-  border-top: 1rpx solid #f0f0f0;
-  padding-top: 20rpx;
-}
-
-.contact-btn {
-  background-color: #1aad19;
-  color: #fff;
-  font-size: 26rpx;
-  padding: 0 30rpx;
-  border-radius: 30rpx;
-}
-
-.contact-btn:active {
-  opacity: 0.8;
+  gap: 12rpx;
+  margin-top: 8rpx;
 }
