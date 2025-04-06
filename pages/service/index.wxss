@@ -20,48 +20,49 @@
 }
 
 .container {
-  padding: 0;
-  background-color: #f5f5f5;
-  min-height: 100vh;
-  width: 100%;
+  padding: 25rpx;
+  background-color: #ffffff;
+  min-height: 50vh;
 }
 
 .service-grid {
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10rpx;
-  padding: 10rpx 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .service-item {
-  background: #ffffff;
-  border-radius: 12rpx;
-  padding: 20rpx 20rpx;
+  width: 100%;
+  margin-bottom: 32rpx;
+  background-color: #ffffff;
+  border-radius: 24rpx;
+  box-shadow: 0 8rpx 20rpx rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  box-shadow: 0 1rpx 4rpx rgba(0, 0, 0, 0.05);
-  transition: all 0.2s ease;
-  aspect-ratio: 1;
+  padding: 10rpx 16rpx;
+  transition: transform 0.2s;
 }
 
-.service-item:active {
-  transform: scale(0.98);
-  background: #f8f8f8;
+.service-item {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  padding: 20rpx 32rpx;
+  border-radius: 16rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 4rpx 10rpx rgba(0, 0, 0, 0.05);
 }
 
 .service-icon {
-  width: 100rpx;
-  height: 80rpx;
-  margin-bottom: 20rpx;
+  width: 96rpx;
+  height: 96rpx;
+  margin-bottom: 5rpx;
 }
 
 .service-name {
-  font-size: 24rpx;
-  color: #333333;
-  font-weight: 500;
+  font-size: 30rpx;
+  color: #333;
   text-align: center;
-  line-height: 1.2;
-} 
+  font-weight: 500;
+}

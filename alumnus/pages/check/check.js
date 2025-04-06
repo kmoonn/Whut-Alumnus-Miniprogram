@@ -16,7 +16,7 @@ Page({
   showAgreement() {
     wx.showModal({
       title: '校友审核要求须知',
-      content: '这里是校友审核要求的内容。',
+      content: '这里是校友审核要求的内容哦。',
       showCancel: false,
       confirmText: '我已阅读'
     });

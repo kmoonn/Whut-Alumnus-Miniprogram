@@ -16,10 +16,12 @@ Page({
 
 
   onTabsChange(e) {
+    const selectedTab = e.detail.value;
+    if (selectedTab === this.data.currentTab) return;
     this.setData({
-      currentTab: e.detail.value
+      currentTab: selectedTab
     });
-    this.fetchFamousAlumni(e.detail.value);
+    this.fetchFamousAlumni(selectedTab);
   },
 
   // 获取知名校友列表
@@ -67,6 +69,7 @@ Page({
     }
 
     if (id) {
+      wx.showLoading({ title: '加载中', mask: true });
       wx.navigateTo({
         url: `/alumnus/pages/famous_detail/famous_detail?id=${id}`
       });

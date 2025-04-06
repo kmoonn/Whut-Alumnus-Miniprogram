@@ -20,24 +20,19 @@
       <text class="service-name">知名校友</text>
     </view>
 
-    <!-- <view class="service-item" bindtap="navigateTo" data-path="/service/pages/nearby/nearby">
-      <image class="service-icon" src="https://636c-cloud1-6gsqyvkd3f24bdd8-1311119192.tcb.qcloud.la/images/nearby.png" mode="aspectFit"></image>
-      <text class="service-name">附近校友</text>
-    </view> -->
-
     <view class="service-item" bindtap="navigateTo" data-path="/service/pages/search/search">
       <image class="service-icon" src="https://636c-cloud1-6gsqyvkd3f24bdd8-1311119192.tcb.qcloud.la/images/search.png" mode="aspectFit"></image>
       <text class="service-name">找校友</text>
     </view>
 
-    <!-- <view class="service-item" bindtap="navigateTo" data-path="/service/pages/visual/visual">
-      <image class="service-icon" src="https://636c-cloud1-6gsqyvkd3f24bdd8-1311119192.tcb.qcloud.la/images/visual.png" mode="aspectFit"></image>
-      <text class="service-name">可视化</text>
-    </view> -->
-
     <view class="service-item" bindtap="navigateTo" data-path="/service/pages/map/map">
       <image class="service-icon" src="https://636c-cloud1-6gsqyvkd3f24bdd8-1311119192.tcb.qcloud.la/images/map.png?sign=4880713058f244a716b419c79bd04f07&t=1743828689" mode="aspectFit"></image>
       <text class="service-name">校友地图</text>
+    </view>
+
+    <view class="service-item" bindtap="navigateTo" data-path="/service/pages/message/message">
+      <image class="service-icon" src="https://636c-cloud1-6gsqyvkd3f24bdd8-1311119192.tcb.qcloud.la/images/%E9%80%9A%E7%9F%A5.png?sign=3e060723c81d617c03b5e2162ea8c76a&t=1743914170" mode="aspectFit"></image>
+      <text class="service-name">相关通知</text>
     </view>
   </view>
 </view> 

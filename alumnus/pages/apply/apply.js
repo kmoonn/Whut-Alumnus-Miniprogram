@@ -60,7 +60,7 @@ Page({
   showAgreement() {
     wx.showModal({
       title: '校友申报要求须知',
-      content: '这里是校友申报要求的内容。',
+      content: '校友申报要求须知：1.必填项：类别、姓名、工作单位',
       showCancel: false,
       confirmText: '我已阅读'
     });

@@ -15,6 +15,7 @@
           <view class="name">{{item.name}}</view>
           <view class="position">{{item.position}}</view>
           <view class="tags">
+            <t-tag size="small" shape="round" theme="success">{{item.category || ''}}</t-tag>
             <t-tag size="small" shape="round" theme="primary">{{item.major || '专业未知'}}</t-tag>
             <t-tag size="small" shape="round" theme="default" variant="light-outline">{{item.graduationYear || '毕业年份未知'}}</t-tag>
           </view>

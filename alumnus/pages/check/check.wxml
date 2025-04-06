@@ -47,15 +47,15 @@
 </view>
 <!-- 点击链接，跳转到来源网页  -->
 <view class="source-info">
+  <text class="label">信息来源：</text>
   <navigator 
     url="/alumnus/pages/review_sourse/review_sourse?url={{pendingInfo.source}}" 
-    class="info"
-  >信息来源: <t-link size="big" theme="primary" content="跳转链接" prefixIcon="link" hover />
+    class="link"
+  >
+    <t-link size="small" theme="primary" content="跳转链接" prefixIcon="link" hover />
   </navigator>
-
-  
-
 </view>
+
 
 <view class="action-area" wx:if="{{!noMoreData}}">
   <view class="action-title">审核结果</view>
