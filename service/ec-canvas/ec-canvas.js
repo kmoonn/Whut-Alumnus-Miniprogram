@@ -78,7 +78,7 @@ Component({
 
   methods: {
     init: function (callback) {
-      const version = wx.getSystemInfoSync().SDKVersion
+      const version = wx.getSystemSetting().SDKVersion
 
       const canUseNewCanvas = compareVersion(version, '2.9.0') >= 0;
       const forceUseOldCanvas = this.data.forceUseOldCanvas;
@@ -119,7 +119,6 @@ Component({
       } else {
         echarts.setCanvasCreator(() => canvas);
       };
-      // const canvasDpr = wx.getSystemInfoSync().pixelRatio // 微信旧的canvas不能传入dpr
       const canvasDpr = 1
       var query = wx.createSelectorQuery().in(this);
       query.select('.ec-canvas').boundingClientRect(res => {
@@ -150,7 +149,7 @@ Component({
           const canvasNode = res[0].node
           this.canvasNode = canvasNode
 
-          const canvasDpr = wx.getSystemInfoSync().pixelRatio
+          const canvasDpr = wx.getSystemSetting().pixelRatio
           const canvasWidth = res[0].width
           const canvasHeight = res[0].height
 

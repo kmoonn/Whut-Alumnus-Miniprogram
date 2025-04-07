@@ -155,7 +155,7 @@
 
 /* 审核按钮区 */
 .action-area {
-  padding: 20rpx;
+  padding: 30rpx;
   background-color: #fff;
   border-top: 1px solid #e0e0e0;
 }

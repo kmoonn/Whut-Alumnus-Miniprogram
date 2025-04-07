@@ -9,11 +9,11 @@ export const getObserver = (context, selector) => {
     });
 };
 export const getWindowInfo = () => {
-    return wx.getWindowInfo ? wx.getWindowInfo() || wx.getSystemInfoSync() : wx.getSystemInfoSync();
+    return wx.getWindowInfo ? wx.getWindowInfo() || wx.getSystemSetting() : wx.getSystemSetting();
 };
 export const getAppBaseInfo = () => {
-    return wx.getAppBaseInfo ? wx.getAppBaseInfo() || wx.getSystemInfoSync() : wx.getSystemInfoSync();
+    return wx.getAppBaseInfo ? wx.getAppBaseInfo() || wx.getSystemSetting() : wx.getSystemSetting();
 };
 export const getDeviceInfo = () => {
-    return wx.getDeviceInfo ? wx.getDeviceInfo() || wx.getSystemInfoSync() : wx.getSystemInfoSync();
+    return wx.getDeviceInfo ? wx.getDeviceInfo() || wx.getSystemSetting() : wx.getSystemSetting();
 };

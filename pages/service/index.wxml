@@ -5,34 +5,9 @@
 
 <view class="container">
   <view class="service-grid">
-    <view class="service-item" bindtap="navigateTo" data-path="/alumnus/pages/apply/apply">
-      <image class="service-icon" src="https://636c-cloud1-6gsqyvkd3f24bdd8-1311119192.tcb.qcloud.la/images/apply.png" mode="aspectFit"></image>
-      <text class="service-name">校友申报</text>
-    </view>
-
-    <view class="service-item" bindtap="navigateTo" data-path="/alumnus/pages/check/check">
-      <image class="service-icon" src="https://636c-cloud1-6gsqyvkd3f24bdd8-1311119192.tcb.qcloud.la/images/check.png" mode="aspectFit"></image>
-      <text class="service-name">校友审核</text>
-    </view>
-
-    <view class="service-item" bindtap="navigateTo" data-path="/alumnus/pages/famous/famous">
-      <image class="service-icon" src="https://636c-cloud1-6gsqyvkd3f24bdd8-1311119192.tcb.qcloud.la/images/famous.png" mode="aspectFit"></image>
-      <text class="service-name">知名校友</text>
-    </view>
-
-    <view class="service-item" bindtap="navigateTo" data-path="/service/pages/search/search">
-      <image class="service-icon" src="https://636c-cloud1-6gsqyvkd3f24bdd8-1311119192.tcb.qcloud.la/images/search.png" mode="aspectFit"></image>
-      <text class="service-name">找校友</text>
-    </view>
-
-    <view class="service-item" bindtap="navigateTo" data-path="/service/pages/map/map">
-      <image class="service-icon" src="https://636c-cloud1-6gsqyvkd3f24bdd8-1311119192.tcb.qcloud.la/images/map.png?sign=4880713058f244a716b419c79bd04f07&t=1743828689" mode="aspectFit"></image>
-      <text class="service-name">校友地图</text>
-    </view>
-
-    <view class="service-item" bindtap="navigateTo" data-path="/service/pages/message/message">
-      <image class="service-icon" src="https://636c-cloud1-6gsqyvkd3f24bdd8-1311119192.tcb.qcloud.la/images/%E9%80%9A%E7%9F%A5.png?sign=3e060723c81d617c03b5e2162ea8c76a&t=1743914170" mode="aspectFit"></image>
-      <text class="service-name">相关通知</text>
+    <view class="service-item" wx:for="{{visibleServiceList}}" wx:key="path" bindtap="navigateTo" data-path="{{item.path}}">
+      <image class="service-icon" src="{{item.icon}}" mode="aspectFit"></image>
+      <text class="service-name">{{item.name}}</text>
     </view>
   </view>
-</view> 
+</view>
