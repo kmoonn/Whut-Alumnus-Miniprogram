@@ -22,6 +22,7 @@
         <text class="info {{diffFields.includes('gender') ? 'diff' : ''}}">性别: {{sourceInfo.gender}}</text>
         <text class="info {{diffFields.includes('birthday') ? 'diff' : ''}}">生日: {{sourceInfo.birthday}}</text>
         <text class="info {{diffFields.includes('graduation_year') ? 'diff' : ''}}">毕业年份: {{sourceInfo.graduation_year}}</text>
+        <text class="info {{diffFields.includes('department') ? 'diff' : ''}}">学院: {{sourceInfo.department}}</text>
         <text class="info {{diffFields.includes('major') ? 'diff' : ''}}">专业: {{sourceInfo.major}}</text>
         <text class="info {{diffFields.includes('region') ? 'diff' : ''}}">所在地: {{sourceInfo.region || ''}}</text>
         <text class="info {{diffFields.includes('company') ? 'diff' : ''}}">工作单位: {{sourceInfo.company || ''}}</text>
