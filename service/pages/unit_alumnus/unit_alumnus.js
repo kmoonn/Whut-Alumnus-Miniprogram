@@ -36,5 +36,29 @@ Page({
         });
       }
     });
+  },
+
+  // 显示校友详情
+  showDetail(e) {
+    const id = e.currentTarget.dataset.id;
+    const userInfo = wx.getStorageSync('userInfo');
+    const userRole = userInfo ? userInfo.role : null;
+
+    if (userRole !== 'admin' && userRole !== 'leader') {
+      wx.showToast({
+        title: '无详细信息查看权限',
+        icon: 'none'
+      });
+      return;
+    }
+
+    if (id) {
+      wx.showLoading({ title: '加载中', mask: true });
+      wx.navigateTo({
+        url: `/alumnus/pages/famous_detail/famous_detail?id=${id}`
+      });
+    } else {
+      console.error('未获取到有效的 id');
+    }
   }
 });

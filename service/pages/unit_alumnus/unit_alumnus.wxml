@@ -8,7 +8,7 @@
 <!-- 校友列表 -->
 <view class="alumni-list">
   <block wx:for="{{alumniList}}" wx:key="id">
-    <view class="alumni-card" bindtap="onAlumnusTap" data-id="{{item.id}}">
+    <view class="alumni-card" bindtap="showDetail" data-id="{{item.id}}">
       <view class="alumni-info">
         <t-avatar image="{{item.avatar || defaultAvatar}}" size="large" />
         <view class="alumni-text">
