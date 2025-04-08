@@ -1,18 +1,20 @@
 Page({
   data: {
-    sourceInfo: null,
-    pendingInfo: null,
-    pendingCount: 0
+    sourceInfo: null,       // 源校友库信息
+    pendingInfo: null,      // 待审核校友信息
+    pendingCount: 0         // 待审核数量
   },
 
-  onShow: function () {
-    this.showAgreement();
-  },
-
+  // 页面生命周期：onLoad 拉取数据，onShow 展示须知
   onLoad() {
     this.fetchPendingMatches();
   },
 
+  onShow() {
+    this.showAgreement();
+  },
+
+  // 弹出审核须知
   showAgreement() {
     wx.showModal({
       title: '校友审核要求须知',
@@ -22,36 +24,33 @@ Page({
     });
   },
 
-  // 获取待匹配的信息对
+  // 获取一组待匹配的校友信息
   fetchPendingMatches() {
+    const reviewerId = wx.getStorageSync('userInfo').id;
+
     wx.cloud.callFunction({
       name: 'check',
       data: {
         action: 'getPendingMatches',
-        reviewerId: wx.getStorageSync('userInfo').id
+        reviewerId
       },
       success: res => {
         if (res.result.code === 200) {
-          const { sourceAlumnus, pendingAlumnus, pendingCount } = res.result.data;
+          let { sourceAlumnus, pendingAlumnus, pendingCount } = res.result.data;
 
-          const birthday = new Date(pendingAlumnus.birthday);
-          pendingAlumnus.birthday = birthday.toLocaleDateString('zh-CN', {
-            year: 'numeric',
-            month: '2-digit',
-            day: '2-digit'
-          });
+          // 格式化出生日期（源与待审核）
+          const formatDate = date => {
+            let d = new Date(date);
+            return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
+          };
 
-          const s_birthday = new Date(sourceAlumnus.birthday);
-          sourceAlumnus.birthday = s_birthday.toLocaleDateString('zh-CN', {
-            year: 'numeric',
-            month: '2-digit',
-            day: '2-digit'
-          });
+          pendingAlumnus.birthday = formatDate(pendingAlumnus.birthday);
+          sourceAlumnus.birthday = formatDate(sourceAlumnus.birthday);
 
           this.setData({
-            sourceInfo: sourceAlumnus,  // 源校友库信息
-            pendingInfo: pendingAlumnus, // 待审核校友信息
-            pendingCount: pendingCount  // 待审核数量（已匹配source_id的记录数）
+            sourceInfo: sourceAlumnus,
+            pendingInfo: pendingAlumnus,
+            pendingCount
           });
         } else {
           wx.showToast({
@@ -70,41 +69,49 @@ Page({
     });
   },
 
-  // 确认信息匹配
+  // 审核通过
   approveMatch() {
-    this.submitMatch('approved'); // 表示信息匹配
+    this.submitMatch('approved');
   },
 
-  // 确认信息不匹配
+  // 审核不通过
   rejectMatch() {
-    this.submitMatch('rejected'); // 0 表示信息不匹配
+    this.submitMatch('rejected');
   },
 
-  // 提交匹配结果
+  // 提交审核结果
   submitMatch(status) {
-    if (!this.data.sourceInfo || !this.data.pendingInfo) {
+    const { sourceInfo, pendingInfo } = this.data;
+    const reviewerId = wx.getStorageSync('userInfo').id;
+
+    if (!sourceInfo || !pendingInfo) {
       wx.showToast({ title: '没有待匹配数据', icon: 'none' });
       return;
     }
 
     wx.showModal({
       title: '确认提交',
-      content: status === 'approved' ? '确认这两条信息匹配吗？' : '确认这两条信息不匹配吗？',
+      content: status === 'approved'
+        ? '确认这两条信息匹配吗？'
+        : '确认这两条信息不匹配吗？',
       success: (res) => {
         if (res.confirm) {
           wx.cloud.callFunction({
             name: 'check',
             data: {
               action: 'submitMatch',
-              pendingId: this.data.pendingInfo.id,
-              reviewerId: wx.getStorageSync('userInfo').id,
-              status: status
+              pendingId: pendingInfo.id,
+              reviewerId,
+              status
             },
             success: res => {
-              wx.showToast({ title: res.result.message, icon: 'success' });
-              this.fetchPendingMatches(); // 获取下一组待匹配数据
+              wx.showToast({ title: res.result.message || '提交成功', icon: 'success' });
+              this.fetchPendingMatches(); // 加载下一组
             },
-            fail: err => console.error('提交匹配结果失败', err)
+            fail: err => {
+              console.error('提交匹配结果失败', err);
+              wx.showToast({ title: '提交失败', icon: 'none' });
+            }
           });
         }
       }
