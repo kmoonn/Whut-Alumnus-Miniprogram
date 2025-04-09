@@ -4,29 +4,28 @@ Page({
     sourceInfo: null,       // 源校友库信息
     pendingInfo: null,      // 疑似校友信息
     pendingCount: 0,        // 待审核数量
-    selectedDepartments: [] // 所选择学院
+    receivedDepartments: [] // 所选择学院
   },
 
-  onLoad: function() {
+  onLoad: function(options) {
     const app = getApp();
     this.setData({
       imageBaseUrl: app.globalData.imageBaseUrl
     });
-  },
-
-  onShow() {
-    if (this.data.selectedDepartments.length < 2) {
-      this.showAgreement(this.selectDepartment);
-    } else {
-      this.fetchPendingMatches();
+    // 从查询参数中获取选中的学院信息
+    const selectedStr = options.selectedDepartments;
+    if (selectedStr) {
+      const receivedDepartments = decodeURIComponent(selectedStr).split(',');
+      this.setData({
+        receivedDepartments:receivedDepartments
+      });
     }
   },
 
-  selectDepartment() {
-    wx.navigateTo({
-      url: '/alumnus/pages/check/selectDepartment/selectDepartment'
-    });
+  onShow() {
+      this.fetchPendingMatches();
   },
+
 
   showAgreement(callback) {
     wx.showModal({

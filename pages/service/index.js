@@ -21,7 +21,7 @@ Page({
       {
         name: '疑似校友确认',
         icon: 'check.png',
-        path: '/alumnus/pages/check/check',
+        path: '/alumnus/pages/check/selectDepartment/selectDepartment',
         key: 'check'
       },
       {

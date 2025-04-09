@@ -20,14 +20,11 @@ Page({
       return;
     }
 
-    // 回传到上一个页面
-    const pages = getCurrentPages();
-    const prevPage = pages[pages.length - 2];
-
-    prevPage.setData({
-      selectedDepartments: selected
+    // 构建查询参数，将选中的学院信息用逗号连接
+    const selectedStr = selected.join(',');
+    // 跳转到 check 页面并传递选中的学院信息，同时销毁当前页面
+    wx.redirectTo({
+      url: `/alumnus/pages/check/check?selectedDepartments=${encodeURIComponent(selectedStr)}`
     });
-
-    wx.navigateBack();
   }
-});
+});    
