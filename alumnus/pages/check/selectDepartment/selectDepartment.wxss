@@ -1,0 +1,51 @@
+.container {
+  padding: 40rpx 30rpx;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+}
+
+.title {
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-bottom: 40rpx;
+  text-align: center;
+  color: #333;
+}
+
+.checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10rpx;
+  justify-content: space-between;
+  margin-bottom: 60rpx;
+}
+
+.checkbox-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 20rpx;
+  background-color: #fff;
+  border: 2rpx solid #ccc;
+  border-radius: 12rpx;
+  box-shadow: 0 4rpx 8rpx rgba(0, 0, 0, 0.05);
+}
+
+.checkbox {
+  transform: scale(0.8);
+  margin-right: 20rpx;
+}
+
+.checkbox-text {
+  font-size: 30rpx;
+  color: #333;
+}
+
+.confirm-btn {
+  width: 40%;
+  background-color: #007aff;
+  color: white;
+  font-size: 36rpx;
+  padding: 20rpx 0;
+  border-radius: 12rpx;
+}

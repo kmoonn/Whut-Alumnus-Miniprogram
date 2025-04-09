@@ -59,9 +59,10 @@
 
 
 <view class="action-area" wx:if="{{!noMoreData}}">
-  <view class="action-title">审核结果</view>
+  <view class="action-title">提交结果</view>
   <view class="action-buttons">
-    <button class="reject-btn" bindtap="rejectMatch">不匹配</button>
-    <button class="approve-btn" bindtap="approveMatch">匹配</button>
+    <button class="reject-btn" bindtap="rejectMatch">非校友</button>
+    <button class="middle-btn">不确定</button>
+    <button class="approve-btn" bindtap="approveMatch">是校友</button>
   </view>
 </view>

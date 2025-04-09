@@ -7,6 +7,7 @@ Page({
     position: '',
     graduation_year: '',
     major: '',
+    phone: '',
     deeds: '',
     isAgreed: false
   },
@@ -59,8 +60,8 @@ Page({
   // 显示协议
   showAgreement() {
     wx.showModal({
-      title: '校友申报要求须知',
-      content: '校友申报要求须知：1.必填项：类别、姓名、工作单位',
+      title: '重点校友推荐标准',
+      content: '1. 中央机关及其直属机构工作人员；2.各地方机关及有关单位副处级及以上人员；3.高校和科研机构副高级职称及以上人员；4.目前运行良好的各类企业高管及以上负责人员；5.获省部级及以上奖励和荣誉称号人员；6. 其他重点校友',
       showCancel: false,
       confirmText: '我已阅读'
     });
@@ -68,16 +69,8 @@ Page({
 
   // 提交表单
   submitForm() {
-    if (!this.data.name) {
-      wx.showToast({ title: '请填写姓名！', icon: 'none' });
-      return;
-    }
-    if (!this.data.company) {
-      wx.showToast({ title: '请填写工作单位！', icon: 'none' });
-      return;
-    }
-    if (this.data.category.length === 0) {
-      wx.showToast({ title: '请选择类别！', icon: 'none' });
+    if (this.data.category.length === 0 || !this.data.name || !this.data.company || !this.data.phone) {
+      wx.showToast({ title: '请填写必填项！', icon: 'none' });
       return;
     }
     if (this.data.category.includes('其他') && !this.data.deeds) {
@@ -97,6 +90,7 @@ Page({
         position: this.data.position,
         graduation_year: this.data.graduation_year,
         major: this.data.major,
+        phone: this.data.phone,
         deeds: this.data.deeds,
         userId: wx.getStorageSync('userInfo').id
       },

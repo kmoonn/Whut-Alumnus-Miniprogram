@@ -2,7 +2,8 @@ Page({
   data: {
     sourceInfo: null,       // 源校友库信息
     pendingInfo: null,      // 待审核校友信息
-    pendingCount: 0         // 待审核数量
+    pendingCount: 0,         // 待审核数量
+    selectedDepartments: []
   },
 
   // 页面生命周期：onLoad 拉取数据，onShow 展示须知
@@ -11,16 +12,34 @@ Page({
   },
 
   onShow() {
-    this.showAgreement();
+    console.log(this.data.selectedDepartments);
+    if (!this.data.selectedDepartments || this.data.selectedDepartments.length < 2) {
+      this.showAgreement(() => {
+        this.selectDepartment();  // 用户阅读须知后再选学院
+      });
+    } else {
+      this.fetchPendingMatches();  // 已经选过学院则直接拉数据
+    }
+  },
+
+  selectDepartment() {
+    wx.navigateTo({
+      url: '/alumnus/pages/check/selectDepartment/selectDepartment'
+    });
   },
 
   // 弹出审核须知
-  showAgreement() {
+  showAgreement(callback) {
     wx.showModal({
       title: '校友审核要求须知',
       content: '这里是校友审核要求的内容哦。',
       showCancel: false,
-      confirmText: '我已阅读'
+      confirmText: '我已阅读',
+      success: () => {
+        if (typeof callback === 'function') {
+          callback();
+        }
+      }
     });
   },
 

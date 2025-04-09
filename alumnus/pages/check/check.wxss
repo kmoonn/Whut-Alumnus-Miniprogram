@@ -173,8 +173,8 @@
   justify-content: space-between;
 }
 
-.reject-btn, .approve-btn {
-  width: 48%;
+.reject-btn, .approve-btn, .middle-btn {
+  width: 28%;
   padding: 12rpx;
   font-size: 30rpx;
   border-radius: 90rpx;
@@ -184,6 +184,11 @@
 
 .reject-btn {
   background-color: #ff4d4d;
+  color: #fff;
+}
+
+.middle-btn {
+  background-color: #4c4e43;
   color: #fff;
 }
 

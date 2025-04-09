@@ -1,7 +1,6 @@
-<!-- 顶部校友会导航栏 -->
 <view class="top-bar">
   <image src="https://636c-cloud1-6gsqyvkd3f24bdd8-1311119192.tcb.qcloud.la/images/logo.png" class="logo"></image>
-  <text class="title">校友申报</text>
+  <text class="title">重点校友推荐</text>
 </view>
 <view class="header">
   <text class="title" style="font-size: medium;">信息填写</text>
@@ -24,7 +23,7 @@
     <input class="input" placeholder="请输入姓名" bindinput="onInputChange" data-field="name" />
   </view>
   <view class="form-item">
-    <text class="label">所在地</text>
+    <text class="label">所在地<text class="required">*</text></text>
     <picker mode="region" bindchange="onRegionChange">
       <view class="picker">{{region || '请选择所在地'}}</view>
     </picker>
@@ -34,7 +33,7 @@
     <input class="input" placeholder="请输入工作单位" bindinput="onInputChange" data-field="company" />
   </view>
   <view class="form-item">
-    <text class="label">职务</text>
+    <text class="label">职务<text class="required">*</text></text>
     <input class="input" placeholder="请输入职务" bindinput="onInputChange" data-field="position" />
   </view>
   <view class="form-item">
@@ -48,6 +47,11 @@
     <input class="input" placeholder="请输入专业" bindinput="onInputChange" data-field="major" />
   </view>
 
+  <view class="form-item">
+    <text class="label">联系方式</text>
+    <input class="input" placeholder="请输入联系方式" bindinput="onInputChange" data-field="phone" />
+  </view>
+
   <block wx:for="{{category}}" wx:key="*this">
     <view class="form-item" wx:if="{{item === '其他'}}">
       <text class="label">重大荣誉或事迹<text class="required">*</text></text>
@@ -58,7 +62,7 @@
   <view class="agreement">
     <checkbox-group bindchange="onAgreeChange">
       <label>
-        <checkbox value="agree" checked="{{isAgreed}}" /> 我已阅读并同意 <text class="link" bindtap="showAgreement">《校友申报标准须知》</text>
+        <checkbox value="agree" checked="{{isAgreed}}" /> 我已阅读并同意 <text class="link" bindtap="showAgreement">《重点校友推荐标准须知》</text>
       </label>
     </checkbox-group>
   </view>
