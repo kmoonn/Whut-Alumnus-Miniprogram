@@ -1,4 +1,3 @@
-/* 必填字段的标识 */
 .required {
   color: red;
 }
@@ -120,6 +119,9 @@ checkbox .wx-checkbox-input {
   margin-right: 10rpx;
 }
 
+.long-content .content-container {
+  white-space: pre-line;
+}
 
 
 

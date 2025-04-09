@@ -1,24 +1,24 @@
 Page({
   data: {
+    imageBaseUrl: '',
     sourceInfo: null,       // 源校友库信息
-    pendingInfo: null,      // 待审核校友信息
-    pendingCount: 0,         // 待审核数量
-    selectedDepartments: []
+    pendingInfo: null,      // 疑似校友信息
+    pendingCount: 0,        // 待审核数量
+    selectedDepartments: [] // 所选择学院
   },
 
-  // 页面生命周期：onLoad 拉取数据，onShow 展示须知
-  onLoad() {
-    this.fetchPendingMatches();
+  onLoad: function() {
+    const app = getApp();
+    this.setData({
+      imageBaseUrl: app.globalData.imageBaseUrl
+    });
   },
 
   onShow() {
-    console.log(this.data.selectedDepartments);
-    if (!this.data.selectedDepartments || this.data.selectedDepartments.length < 2) {
-      this.showAgreement(() => {
-        this.selectDepartment();  // 用户阅读须知后再选学院
-      });
+    if (this.data.selectedDepartments.length < 2) {
+      this.showAgreement(this.selectDepartment);
     } else {
-      this.fetchPendingMatches();  // 已经选过学院则直接拉数据
+      this.fetchPendingMatches();
     }
   },
 
@@ -28,13 +28,12 @@ Page({
     });
   },
 
-  // 弹出审核须知
   showAgreement(callback) {
     wx.showModal({
-      title: '校友审核要求须知',
-      content: '这里是校友审核要求的内容哦。',
+      title: '疑似校友确认要求',
+      content: '这里是校友审核要求的内容。',
       showCancel: false,
-      confirmText: '我已阅读',
+      confirmText: '我已知晓',
       success: () => {
         if (typeof callback === 'function') {
           callback();
@@ -43,68 +42,55 @@ Page({
     });
   },
 
-  // 获取一组待匹配的校友信息
-  fetchPendingMatches() {
+  async fetchPendingMatches() {
     const reviewerId = wx.getStorageSync('userInfo').id;
-
-    wx.cloud.callFunction({
-      name: 'check',
-      data: {
-        action: 'getPendingMatches',
-        reviewerId
-      },
-      success: res => {
-        if (res.result.code === 200) {
-          let { sourceAlumnus, pendingAlumnus, pendingCount } = res.result.data;
-
-          // 格式化出生日期（源与待审核）
-          const formatDate = date => {
-            let d = new Date(date);
-            return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
-          };
-
-          pendingAlumnus.birthday = formatDate(pendingAlumnus.birthday);
-          sourceAlumnus.birthday = formatDate(sourceAlumnus.birthday);
-
-          this.setData({
-            sourceInfo: sourceAlumnus,
-            pendingInfo: pendingAlumnus,
-            pendingCount
-          });
-        } else {
-          wx.showToast({
-            title: res.result.message || '获取数据失败',
-            icon: 'none'
-          });
+    try {
+      const res = await wx.cloud.callFunction({
+        name: 'check',
+        data: {
+          action: 'getPendingMatches',
+          reviewerId
         }
-      },
-      fail: err => {
-        console.error('获取待匹配数据失败', err);
-        wx.showToast({
-          title: '获取数据失败',
-          icon: 'none'
+      });
+
+      if (res.result.code === 200) {
+        const { sourceAlumnus, pendingAlumnus, pendingCount } = res.result.data;
+        pendingAlumnus.birthday = this.formatDate(pendingAlumnus.birthday);
+        sourceAlumnus.birthday = this.formatDate(sourceAlumnus.birthday);
+
+        this.setData({
+          sourceInfo: sourceAlumnus,
+          pendingInfo: pendingAlumnus,
+          pendingCount
         });
+      } else {
+        this.showError(res.result.message || '获取数据失败');
       }
-    });
+    } catch (err) {
+      console.error('获取待匹配数据失败', err);
+      this.showError('获取数据失败');
+    }
   },
 
-  // 审核通过
+  formatDate(date) {
+    const d = new Date(date);
+    return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
+  },
+
   approveMatch() {
     this.submitMatch('approved');
   },
 
-  // 审核不通过
   rejectMatch() {
     this.submitMatch('rejected');
   },
 
-  // 提交审核结果
-  submitMatch(status) {
+  async submitMatch(status) {
     const { sourceInfo, pendingInfo } = this.data;
     const reviewerId = wx.getStorageSync('userInfo').id;
 
     if (!sourceInfo || !pendingInfo) {
-      wx.showToast({ title: '没有待匹配数据', icon: 'none' });
+      this.showError('没有待匹配数据');
       return;
     }
 
@@ -113,27 +99,33 @@ Page({
       content: status === 'approved'
         ? '确认这两条信息匹配吗？'
         : '确认这两条信息不匹配吗？',
-      success: (res) => {
+      success: async (res) => {
         if (res.confirm) {
-          wx.cloud.callFunction({
-            name: 'check',
-            data: {
-              action: 'submitMatch',
-              pendingId: pendingInfo.id,
-              reviewerId,
-              status
-            },
-            success: res => {
-              wx.showToast({ title: res.result.message || '提交成功', icon: 'success' });
-              this.fetchPendingMatches(); // 加载下一组
-            },
-            fail: err => {
-              console.error('提交匹配结果失败', err);
-              wx.showToast({ title: '提交失败', icon: 'none' });
-            }
-          });
+          try {
+            const res = await wx.cloud.callFunction({
+              name: 'check',
+              data: {
+                action: 'submitMatch',
+                pendingId: pendingInfo.id,
+                reviewerId,
+                status
+              }
+            });
+            wx.showToast({ title: res.result.message || '提交成功', icon: 'success' });
+            this.fetchPendingMatches();
+          } catch (err) {
+            console.error('提交匹配结果失败', err);
+            this.showError('提交失败');
+          }
         }
       }
+    });
+  },
+
+  showError(message) {
+    wx.showToast({
+      title: message,
+      icon: 'none'
     });
   }
 });

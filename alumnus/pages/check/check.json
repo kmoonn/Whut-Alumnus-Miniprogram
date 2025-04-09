@@ -1,9 +1,6 @@
 {
-  "component": true,
   "usingComponents": {
     "t-link": "tdesign-miniprogram/link/link"
   },
-  "enablePullDownRefresh": true,
-  "backgroundColor": "#f8f8f8",
-  "backgroundTextStyle": "dark"
+  "enablePullDownRefresh": true
 }

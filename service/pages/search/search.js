@@ -9,8 +9,11 @@ Page({
     loading: false
   },
 
-  onLoad(options) {
-    // 获取搜索历史
+  onLoad: function() {
+    const app = getApp();
+    this.setData({
+      imageBaseUrl: app.globalData.imageBaseUrl
+    });
     const history = wx.getStorageSync('searchHistory') || []
     this.setData({ searchHistory: history })
   },

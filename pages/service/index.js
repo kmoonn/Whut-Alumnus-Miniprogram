@@ -1,41 +1,44 @@
 Page({
   data: {
-    preImageUrl: 'https://636c-cloud1-6gsqyvkd3f24bdd8-1311119192.tcb.qcloud.la/images/',
+    imageBaseUrl: '',
     fullServiceList: [],
     visibleServiceList: []
   },
 
-  onLoad() {
-    const preImageUrl = this.data.preImageUrl;
+  onLoad: function() {
+    const app = getApp();
+    this.setData({
+      imageBaseUrl: app.globalData.imageBaseUrl
+    });
 
     const fullList = [
       {
         name: '重点校友推荐',
-        icon: preImageUrl + 'apply.png',
+        icon: 'apply.png',
         path: '/alumnus/pages/apply/apply',
         key: 'apply'
       },
       {
         name: '疑似校友确认',
-        icon: preImageUrl + 'check.png',
+        icon: 'check.png',
         path: '/alumnus/pages/check/check',
         key: 'check'
       },
       {
         name: '知名校友',
-        icon: preImageUrl + 'famous.png',
+        icon: 'famous.png',
         path: '/alumnus/pages/famous/famous',
         key: 'famous'
       },
       {
         name: '找校友',
-        icon: preImageUrl + 'search.png',
+        icon: 'search.png',
         path: '/service/pages/search/search',
         key: 'search'
       },
       {
         name: '校友地图',
-        icon: preImageUrl + 'map.png',
+        icon: 'map.png',
         path: '/service/pages/map/map',
         key: 'map'
       }

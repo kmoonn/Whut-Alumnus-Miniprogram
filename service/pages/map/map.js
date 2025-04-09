@@ -1,5 +1,6 @@
 Page({
   data: {
+    imageBaseUrl: '',
     latitude: 0,
     longitude: 0,
     markers: [], // 地图上的标记
@@ -7,7 +8,11 @@ Page({
     nearestUnits: [] // 最近的单位
   },
 
-  onLoad() {
+  onLoad: function() {
+    const app = getApp();
+    this.setData({
+      imageBaseUrl: app.globalData.imageBaseUrl
+    });
     this.getUserLocation();
   },
 
@@ -41,7 +46,7 @@ Page({
             latitude: unit.lat,
             longitude: unit.lng,
             title: unit.company, // 公司名称
-            iconPath: 'https://636c-cloud1-6gsqyvkd3f24bdd8-1311119192.tcb.qcloud.la/images/%E5%85%AC%E5%8F%B8.png?sign=06652e48ea9e5c1caf665e1cfea6de93&t=1743831210', // 图标路径
+            iconPath: '{{imageBaseUrl}}%E5%85%AC%E5%8F%B8.png?sign=06652e48ea9e5c1caf665e1cfea6de93&t=1743831210', // 图标路径
             width: 30,
             height: 30
           }));

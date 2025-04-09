@@ -1,5 +1,5 @@
 <view class="top-bar">
-  <image src="https://636c-cloud1-6gsqyvkd3f24bdd8-1311119192.tcb.qcloud.la/images/logo.png" class="logo"></image>
+  <image src="{{imageBaseUrl}}logo.png" class="logo"></image>
   <text class="title">重点校友推荐</text>
 </view>
 <view class="header">
@@ -55,17 +55,29 @@
   <block wx:for="{{category}}" wx:key="*this">
     <view class="form-item" wx:if="{{item === '其他'}}">
       <text class="label">重大荣誉或事迹<text class="required">*</text></text>
-      <textarea class="input" style="line-height: 24px; height: 90px; width: 95%; "placeholder="请输入相关重大荣誉或事迹" bindinput="onInputChange" data-field="deeds" />
+      <textarea class="input" style="line-height: 24px; height: 90px; width: 95%; " placeholder="请输入相关重大荣誉或事迹" bindinput="onInputChange" data-field="deeds" />
     </view>
   </block>
 
   <view class="agreement">
     <checkbox-group bindchange="onAgreeChange">
       <label>
-        <checkbox value="agree" checked="{{isAgreed}}" /> 我已阅读并同意 <text class="link" bindtap="showAgreement">《重点校友推荐标准须知》</text>
+        <checkbox value="agree" checked="{{isAgreed}}" /> 我已阅读并知晓 <text class="link" bind:tap="showDialog" block data-key="showMultiTextAndTitle">《重点校友推荐标准须知》</text>
       </label>
     </checkbox-group>
   </view>
-  
+
+  <t-dialog visible="{{showMultiTextAndTitle}}" title="重点校友推荐标准" confirm-btn="{{ confirmBtn }}" bind:confirm="closeDialog">
+    <scroll-view slot="content" type="list" scroll-y class="long-content">
+      <view class="content-container">1. 中央机关及其直属机构工作人员；
+        2. 各地方机关及有关单位副处级及以上人员；
+        3. 高校和科研机构副高级职称及以上人员；
+        4. 目前运行良好的各类企业高管及以上负责人员；
+        5. 获省部级及以上奖励和荣誉称号人员；
+        6. 其他重点校友。
+      </view>
+    </scroll-view>
+  </t-dialog>
+
   <button class="submit-btn" bindtap="submitForm" disabled="{{!isAgreed}}">提交</button>
 </view>

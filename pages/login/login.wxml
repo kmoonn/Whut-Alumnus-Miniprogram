@@ -1,6 +1,4 @@
 <view class="login-container">
-  <image class="background-image" src="https://636c-cloud1-6gsqyvkd3f24bdd8-1311119192.tcb.qcloud.la/images/login-bg.png" mode="aspectFill"></image>
-
   <view class="logo-container">
     <image class="logo" src="https://alumni.whut.edu.cn/xyh/d5695da9-0e35-45de-b232-d886065efaa3/static/home-new/school-logo-blue.png" mode="widthFix"></image>
   </view>

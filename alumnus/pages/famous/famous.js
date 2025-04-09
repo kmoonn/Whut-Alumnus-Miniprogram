@@ -1,5 +1,6 @@
 Page({
   data: {
+    imageBaseUrl: '',
     tabList: [
       { label: '政界', value: '政界' },
       { label: '商界', value: '商界' },
@@ -10,10 +11,13 @@ Page({
     alumniList: [] // 校友列表
   },
 
-  onLoad() {
+  onLoad: function() {
+    const app = getApp();
+    this.setData({
+      imageBaseUrl: app.globalData.imageBaseUrl
+    });
     this.fetchFamousAlumni('政界');
   },
-
 
   onTabsChange(e) {
     const selectedTab = e.detail.value;

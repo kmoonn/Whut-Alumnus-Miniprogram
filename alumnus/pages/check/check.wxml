@@ -1,15 +1,15 @@
 <view class="top-bar" style="height: 160rpx; display: flex; box-sizing: border-box">
-  <image src="https://636c-cloud1-6gsqyvkd3f24bdd8-1311119192.tcb.qcloud.la/images/logo.png" class="logo"></image>
-  <text class="title">校友审核</text>
+  <image src="{{imageBaseUrl}}logo.png" class="logo"></image>
+  <text class="title">疑似校友确认</text>
 </view>
 
 <view class="header">
-  <view class="count">待审核: {{pendingCount}}</view>
+  <view class="count">待确认: {{pendingCount}}</view>
 </view>
 
 <view class="empty-state" wx:if="{{noMoreData}}">
-  <image src="https://636c-cloud1-6gsqyvkd3f24bdd8-1311119192.tcb.qcloud.la/images/empty.png" mode="aspectFit" class="empty-image"></image>
-  <text class="empty-text">暂无待审核数据</text>
+  <image src="{{imageBaseUrl}}empty.png" mode="aspectFit" class="empty-image"></image>
+  <text class="empty-text">暂无待确认数据</text>
   <button class="refresh-btn" bindtap="fetchPendingMatches">刷新</button>
 </view>
 
@@ -48,7 +48,7 @@
 </view>
 <!-- 点击链接，跳转到来源网页  -->
 <view class="source-info">
-  <text class="label">信息来源：</text>
+  <text class="label">疑似校友信息来源：</text>
   <navigator 
     url="/alumnus/pages/review_sourse/review_sourse?url={{pendingInfo.source}}" 
     class="link"

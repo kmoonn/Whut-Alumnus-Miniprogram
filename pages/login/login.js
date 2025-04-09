@@ -11,9 +11,6 @@ Page({
     // 弹窗控制
     confirmBtn: { content: '知道了', variant: 'base' },
     dialogKey: '',
-    showText: false,
-    showMultiText: false,
-    showTextAndTitle: false,
     showMultiTextAndTitle: false,
 
     // 初始密码修改弹窗
@@ -37,16 +34,6 @@ Page({
   },
   onAgreeChange(e) {
     this.setData({ isAgreed: e.detail.value.length > 0 });
-  },
-
-  // 服务协议弹窗
-  showAgreement() {
-    wx.showModal({
-      title: '用户服务协议',
-      content: ``,
-      showCancel: false,
-      confirmText: '我知道了'
-    });
   },
 
   // 登录逻辑

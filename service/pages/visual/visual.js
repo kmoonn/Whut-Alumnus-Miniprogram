@@ -117,6 +117,7 @@ Page({
     }
   },
   data: {
+    imageBaseUrl: '',
     mapEc: {
       onInit: initMapChart
     },
@@ -126,5 +127,12 @@ Page({
   },
 
   onReady() {
-  }
+  },
+
+  onLoad: function() {
+    const app = getApp();
+    this.setData({
+      imageBaseUrl: app.globalData.imageBaseUrl
+    });
+  },
 });

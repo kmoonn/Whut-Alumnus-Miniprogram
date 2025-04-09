@@ -1,6 +1,6 @@
 Page({
   data: {
-    defaultAvatar: 'https://636c-cloud1-6gsqyvkd3f24bdd8-1311119192.tcb.qcloud.la/images/%E6%A0%A1%E5%8F%8B%E5%A4%B4%E5%83%8F.png',
+    defaultAvatar: '{{imageBaseUrl}}%E6%A0%A1%E5%8F%8B%E5%A4%B4%E5%83%8F.png',
     company: '',
     alumniList: [] // 校友列表
   },
