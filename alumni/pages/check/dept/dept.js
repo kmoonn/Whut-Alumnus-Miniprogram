@@ -1,7 +1,10 @@
 Page({
   data: {
-    departmentList: ['计算机学院', '自动化学院', '材料学院', '交通学院', '管理学院'],
+    departmentList: [],
     selectedDepartments: []
+  },
+  onLoad: function() {
+    this.deptList();
   },
 
   onCheckboxChange(e) {
@@ -10,21 +13,34 @@ Page({
     });
   },
 
-  onConfirm() {
-    const selected = this.data.selectedDepartments;
-    if (selected.length < 2) {
-      wx.showToast({
-        title: '请至少选择两个学院',
-        icon: 'none'
+ 
+    // 调用云函数显示学院列表
+    deptList() {
+      wx.showLoading({ title: '加载中' });
+      wx.cloud.callFunction({
+        name: 'service',
+        data: {
+          action: 'listDept',
+        },
+        success: res => {
+          if (res.result.code === 200) {
+            const deptList = res.result.result.map(item => item.dept_name);
+            this.setData({
+              departmentList: deptList
+            });
+          }
+        },
+        fail: err => {
+          console.error('获取学院列表失败', err);
+          wx.showToast({
+            title: '获取数据失败',
+            icon: 'none'
+          });
+        },
+        complete: () => {
+          wx.hideLoading();
+        }
       });
-      return;
     }
-
-    // 构建查询参数，将选中的学院信息用逗号连接
-    const selectedStr = selected.join(',');
-    // 跳转到 check 页面并传递选中的学院信息，同时销毁当前页面
-    wx.redirectTo({
-      url: `/alumni/pages/check/check?selectedDepartments=${encodeURIComponent(selectedStr)}`
-    });
-  }
+  
 });    
