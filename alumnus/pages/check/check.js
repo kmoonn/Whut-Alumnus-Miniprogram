@@ -92,34 +92,69 @@ Page({
       this.showError('没有待匹配数据');
       return;
     }
+    const options = ['查询档案', '本人认识', '询问他人', '其他'];
 
-    wx.showModal({
-      title: '确认提交',
-      content: status === 'approved'
-        ? '确认这两条信息匹配吗？'
-        : '确认这两条信息不匹配吗？',
+    wx.showActionSheet({
+      itemList: options,
+      title: '审核依据',
       success: async (res) => {
-        if (res.confirm) {
-          try {
-            const res = await wx.cloud.callFunction({
-              name: 'check',
-              data: {
-                action: 'submitMatch',
-                pendingId: pendingInfo.id,
-                reviewerId,
-                status
-              }
+        let reviewBasis;
+        if (res.tapIndex === options.length - 1) {
+          const inputRes = await new Promise(resolve => {
+            wx.showModal({
+              title: '审核依据 - 其他',
+              editable: true,
+              placeholderText: '请输入具体内容',
+              confirmText: '确认',
+              cancelText: '取消',
+              success: resolve
             });
-            wx.showToast({ title: res.result.message || '提交成功', icon: 'success' });
+          });
+          if (inputRes.confirm) {
+            reviewBasis = inputRes.content;
+          } else {
+            return;
+          }
+        } else {
+          reviewBasis = options[res.tapIndex];
+        }
+        if (reviewBasis) {
+          const confirmRes = await new Promise(resolve => {
+            wx.showModal({
+              title: '确认选择',
+              content: `你选择的审核依据是：${reviewBasis}`,
+              confirmText: '确认',
+              cancelText: '取消',
+              success: resolve
+            });
+          });
+          if (!confirmRes.confirm) {
+            return;
+          }
+          try {
+            const cloudRes = await wx.cloud.callFunction({
+              name: 'check',
+                data: {
+                  action: 'submitMatch',
+                  pendingId: pendingInfo.id,
+                  reviewerId,
+                  status,
+                  reviewBasis
+                }
+            });
+            wx.showToast({ title: cloudRes.result.message || '提交成功', icon: 'success' });
             this.fetchPendingMatches();
           } catch (err) {
             console.error('提交匹配结果失败', err);
             this.showError('提交失败');
           }
         }
-      }
+      },
+      fail: (err) => console.error('显示操作菜单失败', err)
     });
+    
   },
+    
 
   showError(message) {
     wx.showToast({
