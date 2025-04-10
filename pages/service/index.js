@@ -15,23 +15,23 @@ Page({
       {
         name: '重点校友推荐',
         icon: 'apply.png',
-        path: '/alumnus/pages/apply/apply',
+        path: '/alumni/pages/apply/apply',
         key: 'apply'
       },
       {
         name: '疑似校友确认',
         icon: 'check.png',
-        path: '/alumnus/pages/check/selectDepartment/selectDepartment',
+        path: '/alumni/pages/check/dept/dept',
         key: 'check'
       },
       {
         name: '知名校友',
         icon: 'famous.png',
-        path: '/alumnus/pages/famous/famous',
+        path: '/alumni/pages/famous/famous',
         key: 'famous'
       },
       {
-        name: '找校友',
+        name: '校友搜索',
         icon: 'search.png',
         path: '/service/pages/search/search',
         key: 'search'

@@ -1,5 +1,4 @@
 <view class="top-bar" style="height: 160rpx; display: flex; box-sizing: border-box">
-  <image src="{{imageBaseUrl}}logo.png" class="logo"></image>
   <text class="top-title">校友查找</text>
 </view>
 <!-- 搜索栏 -->

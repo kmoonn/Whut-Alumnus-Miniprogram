@@ -1,5 +1,4 @@
 <view class="top-bar">
-  <image src="{{imageBaseUrl}}logo.png" class="logo"></image>
   <text class="title">重点校友推荐</text>
 </view>
 <view class="header">
@@ -33,7 +32,7 @@
     <input class="input" placeholder="请输入工作单位" bindinput="onInputChange" data-field="company" />
   </view>
   <view class="form-item">
-    <text class="label">职务<text class="required">*</text></text>
+    <text class="label">职务/职位<text class="required">*</text></text>
     <input class="input" placeholder="请输入职务" bindinput="onInputChange" data-field="position" />
   </view>
   <view class="form-item">

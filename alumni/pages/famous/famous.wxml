@@ -1,5 +1,4 @@
 <view class="top-bar">
-  <image src="{{imageBaseUrl}}logo.png" class="logo"></image>
   <text class="title">知名校友</text>
 </view>
 

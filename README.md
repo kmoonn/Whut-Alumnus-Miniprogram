@@ -82,11 +82,11 @@
 
 ~~修改user表role字段，更改权限。~~
 
-~~修改famous_alumnus表，增加lat，lng经纬度字段。~~
+~~修改famous_alumni表，增加lat，lng经纬度字段。~~
 
 ~~知名校友增加一个deeds字段（存储重大荣誉或事迹）~~
 
-~~修改pending_alumnus表，增加deeds字段~~
+~~修改pending_alumni表，增加deeds字段~~
 
 ~~知名校友类别需要设置为多选，对应的云函数做出修改。~~
 

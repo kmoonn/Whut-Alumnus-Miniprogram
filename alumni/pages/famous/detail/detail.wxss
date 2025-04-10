@@ -22,7 +22,7 @@
   margin-top: 10%;
 }
 
-.alumnus-info text {
+.alumni-info text {
   display: flex; 
   margin-bottom: 10px;
   padding-right: 5%;
@@ -30,7 +30,7 @@
   max-width: 90%; /* 确保内容不超过右侧区域 */
 }
 
-.alumnus-info text[data-label]::before {
+.alumni-info text[data-label]::before {
   content: attr(data-label);
   width: 35%;
   color: #007AFF;

@@ -24,7 +24,7 @@ Page({
     const selectedStr = selected.join(',');
     // 跳转到 check 页面并传递选中的学院信息，同时销毁当前页面
     wx.redirectTo({
-      url: `/alumnus/pages/check/check?selectedDepartments=${encodeURIComponent(selectedStr)}`
+      url: `/alumni/pages/check/check?selectedDepartments=${encodeURIComponent(selectedStr)}`
     });
   }
 });    

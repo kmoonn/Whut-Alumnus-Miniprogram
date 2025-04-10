@@ -48,18 +48,18 @@ Page({
         name: 'check',
         data: {
           action: 'getPendingMatches',
-          reviewerId
+          reviewerId: reviewerId
         }
       });
 
       if (res.result.code === 200) {
-        const { sourceAlumnus, pendingAlumnus, pendingCount } = res.result.data;
-        pendingAlumnus.birthday = this.formatDate(pendingAlumnus.birthday);
-        sourceAlumnus.birthday = this.formatDate(sourceAlumnus.birthday);
+        const { sourceAlumni, pendingAlumni, pendingCount } = res.result.data;
+        pendingAlumni.birthday = this.formatDate(pendingAlumni.birthday);
+        sourceAlumni.birthday = this.formatDate(sourceAlumni.birthday);
 
         this.setData({
-          sourceInfo: sourceAlumnus,
-          pendingInfo: pendingAlumnus,
+          sourceInfo: sourceAlumni,
+          pendingInfo: pendingAlumni,
           pendingCount
         });
       } else {

@@ -153,7 +153,7 @@ Page({
     const id = e.currentTarget.dataset.id;
     if (id) {
       wx.navigateTo({
-        url: `/alumnus/pages/famous_detail/famous_detail?id=${id}`
+        url: `/alumni/pages/famous_detail/famous_detail?id=${id}`
       });
     } else {
       console.error('未获取到有效的 id');

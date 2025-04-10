@@ -4,17 +4,17 @@
 </view>
 
 
-<view class="alumnus-info">
-  <text class="category" data-label="类别">{{alumnusDetail.category}}</text>
-  <text data-label="姓名">{{alumnusDetail.name}}</text>
-  <text data-label="所在地">{{alumnusDetail.region}}</text>
-  <text data-label="工作单位">{{alumnusDetail.company}}</text>
-  <text data-label="职务">{{alumnusDetail.position}}</text>
-  <text data-label="毕业年份">{{alumnusDetail.graduation_year}}</text>
-  <text data-label="专业">{{alumnusDetail.major}}</text>   
+<view class="alumni-info">
+  <text class="category" data-label="类别">{{alumniDetail.category}}</text>
+  <text data-label="姓名">{{alumniDetail.name}}</text>
+  <text data-label="所在地">{{alumniDetail.region}}</text>
+  <text data-label="工作单位">{{alumniDetail.company}}</text>
+  <text data-label="职务">{{alumniDetail.position}}</text>
+  <text data-label="毕业年份">{{alumniDetail.graduation_year}}</text>
+  <text data-label="专业">{{alumniDetail.major}}</text>   
   <!-- 只有当deeds不为空才显示 -->
-  <text wx:if="{{alumnusDetail.deeds && alumnusDetail.deeds.trim() !== ''}}" 
-    data-label="重大荣誉或事迹">{{alumnusDetail.deeds}}
+  <text wx:if="{{alumniDetail.deeds && alumniDetail.deeds.trim() !== ''}}" 
+    data-label="重大荣誉或事迹">{{alumniDetail.deeds}}
   </text>
   
 </view>

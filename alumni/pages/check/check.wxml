@@ -1,5 +1,4 @@
 <view class="top-bar" style="height: 160rpx; display: flex; box-sizing: border-box">
-  <image src="{{imageBaseUrl}}logo.png" class="logo"></image>
   <text class="title">疑似校友确认</text>
 </view>
 
