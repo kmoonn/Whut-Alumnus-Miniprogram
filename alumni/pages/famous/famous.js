@@ -32,7 +32,7 @@ Page({
   fetchFamousAlumni(category) {
     wx.showLoading({ title: '加载中' });
     wx.cloud.callFunction({
-      name: 'getAlumni',
+      name: 'service',
       data: {
         action: 'getFamousAlumni',
         category
@@ -75,7 +75,7 @@ Page({
     if (id) {
       wx.showLoading({ title: '加载中', mask: true });
       wx.navigateTo({
-        url: `/alumni/pages/famous_detail/famous_detail?id=${id}`
+        url: `/alumni/pages/famous/detail/detail?id=${id}`
       });
     } else {
       console.error('未获取到有效的 id');

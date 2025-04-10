@@ -36,7 +36,7 @@ Page({
 
   loadUnits(userLat = 30.5931, userLng = 114.3054) {
     wx.cloud.callFunction({
-      name: 'map',
+      name: 'service',
       data: { action: 'getCompanyList' }, // 获取所有单位
       success: res => {
         if (res.result.success === 200) {

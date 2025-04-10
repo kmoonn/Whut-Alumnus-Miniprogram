@@ -13,15 +13,15 @@ Page({
   fetchAlumniDetail(id) {
     wx.showLoading({ title: '加载中' });
     wx.cloud.callFunction({
-        name: 'getAlumniDetail', // 云函数名称，用于根据 id 查询校友详细信息
+        name: 'service', // 云函数名称，用于根据 id 查询校友详细信息
         data: {
-            id: id
+          action: 'getAlumniDetail',
+          id: id
         },
         success: res => {
             if (res.result.code === 200) {
                 
                 let alumniDetail = res.result.result;
-                // 确保 category 是字符串类型
                 this.setData({
                     alumniDetail: alumniDetail
                 });

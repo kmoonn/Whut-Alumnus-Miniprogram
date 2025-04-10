@@ -115,8 +115,9 @@ Page({
 
     try {
       const { result } = await wx.cloud.callFunction({
-        name: 'search',
+        name: 'service',
         data: {
+          action: 'search',
           keyword: searchValue,
           page,
           pageSize

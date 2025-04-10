@@ -45,7 +45,7 @@ Page({
     const reviewerId = wx.getStorageSync('userInfo').id;
     try {
       const res = await wx.cloud.callFunction({
-        name: 'check',
+        name: 'alumni',
         data: {
           action: 'getPendingMatches',
           reviewerId: reviewerId
@@ -133,7 +133,7 @@ Page({
           }
           try {
             const cloudRes = await wx.cloud.callFunction({
-              name: 'check',
+              name: 'alumni',
                 data: {
                   action: 'submitMatch',
                   pendingId: pendingInfo.id,

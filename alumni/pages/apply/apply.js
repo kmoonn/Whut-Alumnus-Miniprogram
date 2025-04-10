@@ -98,8 +98,9 @@ Page({
     wx.showLoading({ title: '提交中...' });
 
     wx.cloud.callFunction({
-      name: 'apply',
+      name: 'alumni',
       data: {
+        action: 'apply',
         category: this.data.category,
         name: this.data.name,
         region: this.data.region,

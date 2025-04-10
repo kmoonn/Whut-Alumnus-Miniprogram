@@ -53,8 +53,12 @@ Page({
     wx.showLoading({ title: '登录中...' });
 
     wx.cloud.callFunction({
-      name: 'login',
-      data: { username, password }
+      name: 'system',
+      data: { 
+        action:'login',
+        username, 
+        password 
+      }
     }).then(res => {
       wx.hideLoading();
 
@@ -133,8 +137,9 @@ Page({
     }
 
     wx.cloud.callFunction({
-      name: 'updatePwd',
+      name: 'system',
       data: {
+        action:'updatePwd',
         userId: userInfo.id,
         newPassword: newPwd
       }
