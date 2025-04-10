@@ -86,7 +86,7 @@ Page({
 
   async submitMatch(status) {
     const { sourceInfo, pendingInfo } = this.data;
-    const reviewerId = wx.getStorageSync('userInfo').id;
+    const user_id = wx.getStorageSync('userInfo').id;
 
     if (!sourceInfo || !pendingInfo) {
       this.showError('没有待匹配数据');
@@ -136,9 +136,9 @@ Page({
               name: 'alumni',
                 data: {
                   action: 'submitMatch',
-                  pendingId: pendingInfo.id,
-                  reviewerId,
-                  status,
+                  alum_id: pendingInfo.id,
+                  user_id,
+                  result,
                   reviewBasis
                 }
             });
