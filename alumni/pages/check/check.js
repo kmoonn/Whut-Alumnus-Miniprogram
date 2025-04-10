@@ -137,8 +137,8 @@ Page({
                 data: {
                   action: 'submitMatch',
                   alum_id: pendingInfo.id,
-                  user_id,
-                  result,
+                  reviewerId,
+                  status,
                   reviewBasis
                 }
             });
