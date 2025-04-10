@@ -1,31 +1,23 @@
 Page({
   data: {
-    // 登录
     activeTab: 'login',
-
-    // 登录数据
     username: '',
     password: '',
     isAgreed: false,
-
-    // 弹窗控制
     confirmBtn: { content: '知道了', variant: 'base' },
     dialogKey: '',
     showMultiTextAndTitle: false,
 
-    // 初始密码修改弹窗
     showPasswordModal: false,
     newPwd: '',
     confirmPwd: ''
   },
 
-  // Tab 切换
   switchTab(e) {
     const tab = e.currentTarget.dataset.tab;
     this.setData({ activeTab: tab });
   },
 
-  // 输入监听
   onUsernameChange(e) {
     this.setData({ username: e.detail.value });
   },
@@ -36,7 +28,6 @@ Page({
     this.setData({ isAgreed: e.detail.value.length > 0 });
   },
 
-  // 登录逻辑
   onLogin() {
     const { username, password, isAgreed } = this.data;
 

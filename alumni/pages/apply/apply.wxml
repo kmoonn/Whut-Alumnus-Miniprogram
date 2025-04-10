@@ -42,6 +42,10 @@
     </picker>
   </view>
   <view class="form-item">
+    <text class="label">所在学院</text>
+    <input class="input" placeholder="请输入学院" bindinput="onInputChange" data-field="department" />
+  </view>
+  <view class="form-item">
     <text class="label">专业</text>
     <input class="input" placeholder="请输入专业" bindinput="onInputChange" data-field="major" />
   </view>
