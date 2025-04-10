@@ -50,7 +50,7 @@
 <view class="source-info">
   <text class="label">疑似校友信息来源：</text>
   <navigator 
-    url="/alumnus/pages/review_sourse/review_sourse?url={{pendingInfo.source}}" 
+    url="/alumni/pages/check/source/source?url={{pendingInfo.source}}" 
     class="link"
   >
     <t-link size="small" theme="primary" content="跳转链接" prefixIcon="link" hover />

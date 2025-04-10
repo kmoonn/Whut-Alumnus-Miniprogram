@@ -10,7 +10,7 @@ Page({
     this.setData({
       imageBaseUrl: app.globalData.imageBaseUrl
     });
-
+    
     const fullList = [
       {
         name: '重点校友推荐',

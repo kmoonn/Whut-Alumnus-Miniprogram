@@ -46,7 +46,7 @@ Page({
             latitude: unit.lat,
             longitude: unit.lng,
             title: unit.company, // 公司名称
-            iconPath: '{{imageBaseUrl}}%E5%85%AC%E5%8F%B8.png?sign=06652e48ea9e5c1caf665e1cfea6de93&t=1743831210', // 图标路径
+            iconPath: '{{imageBaseUrl}}%E5%85%AC%E5%8F%B8.png', // 图标路径
             width: 30,
             height: 30
           }));
@@ -99,7 +99,7 @@ Page({
     const markerId = e.markerId;
     const company = this.data.units.find(item => item.id === markerId).company;
     wx.navigateTo({
-      url: `/service/pages/unit_alumnus/unit_alumnus?company=${company}`
+      url: `/service/pages/map/alumni/alumni?company=${company}`
     });
   },
 
@@ -109,7 +109,7 @@ Page({
     const company = this.data.units.find(item => item.id === id).company;
     console.log(company);
     wx.navigateTo({
-      url: `/service/pages/unit_alumnus/unit_alumnus?company=${company}`
+      url: `/service/pages/map/alumni/alumni?company=${company}`
     });
   }
 });

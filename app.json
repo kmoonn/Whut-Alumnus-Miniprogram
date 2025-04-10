@@ -5,14 +5,14 @@
   ],
   "subPackages": [
     {
-      "root": "alumnus",
+      "root": "alumni",
       "pages": [
         "pages/apply/apply",
         "pages/check/check",
-        "pages/check/selectDepartment/selectDepartment",
+        "pages/check/source/source",
+        "pages/check/dept/dept",
         "pages/famous/famous",
-        "pages/famous_detail/famous_detail",
-        "pages/review_sourse/review_sourse"
+        "pages/famous/detail/detail"
       ]
     },
     {
@@ -21,7 +21,7 @@
         "pages/search/search",
         "pages/visual/visual",
         "pages/map/map",
-        "pages/unit_alumnus/unit_alumnus"
+        "pages/map/alumni/alumni"
       ]
     }
   ],

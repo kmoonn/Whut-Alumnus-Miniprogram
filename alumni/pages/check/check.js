@@ -24,7 +24,7 @@ Page({
 
   selectDepartment() {
     wx.navigateTo({
-      url: '/alumnus/pages/check/selectDepartment/selectDepartment'
+      url: '/alumnus/pages/check/dept/dept'
     });
   },
 
