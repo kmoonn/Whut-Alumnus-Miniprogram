@@ -2,18 +2,21 @@
   <text class="title">疑似校友确认</text>
 </view>
 
-<view class="header">
-  <view class="count">待确认: {{pendingCount}}</view>
+<view class="header" wx:if="{{!noMoreData}}">
+  <view class="count">待确认数: {{pendingCount}}</view>
 </view>
 
 <view class="empty-state" wx:if="{{noMoreData}}">
-  <text class="empty-text">暂无待确认数据</text>
-  <button class="refresh-btn" bindtap="fetchPendingMatches">刷新</button>
+  <view class="empty-content">
+    <text class="empty-text">暂无待确认数据</text>
+    <button class="refresh-btn" bindtap="fetchPendingMatches">刷新</button>
+  </view>
 </view>
+
 
 <view class="comparison-container" wx:if="{{!noMoreData}}">
   <view class="info-comparison">
-    <view class="info-section" wx:if="{{sourceInfo && sourceInfo.name.length > 2}}">
+    <view class="info-section" wx:if="{{sourceInfo}}">
       <view class="section-title">校友库源信息</view>
       <view class="card">
         <text class="info">姓名: {{sourceInfo.name}}</text>
@@ -40,31 +43,13 @@
         <text class="info {{diffFields.includes('region') ? 'diff' : ''}}">所在地: {{pendingInfo.region}}</text>
         <text class="info {{diffFields.includes('company') ? 'diff' : ''}}">工作单位: {{pendingInfo.company}}</text>
         <text class="info {{diffFields.includes('position') ? 'diff' : ''}}">职务: {{pendingInfo.position}}</text>
-        <text class="info {{diffFields.includes('deeds') ? 'diff' : ''}}">重大荣誉或事迹: {{pendingInfo.deeds}}</text>
       </view>
     </view>
   </view>
 </view>
 
-<view class="comparison-container" wx:if="{{!noMoreData && sourceInfo && sourceInfo.name.length <= 2}}" style="display: flex; justify-content: center; align-items: center;">
-  <view class="info-section">
-    <view class="section-title">疑似校友信息</view>
-    <view class="card">
-      <text class="info">姓名: {{pendingInfo.name}}</text>
-      <text class="info {{diffFields.includes('gender') ? 'diff' : ''}}">性别: {{pendingInfo.gender}}</text>
-      <text class="info {{diffFields.includes('birthday') ? 'diff' : ''}}">生日: {{pendingInfo.birthday}}</text>
-      <text class="info {{diffFields.includes('graduation_year') ? 'diff' : ''}}">毕业年份: {{pendingInfo.graduation_year}}</text>
-      <text class="info {{diffFields.includes('department') ? 'diff' : ''}}">学院: {{pendingInfo.department}}</text>
-      <text class="info {{diffFields.includes('major') ? 'diff' : ''}}">专业: {{pendingInfo.major}}</text>
-      <text class="info {{diffFields.includes('region') ? 'diff' : ''}}">所在地: {{pendingInfo.region}}</text>
-      <text class="info {{diffFields.includes('company') ? 'diff' : ''}}">工作单位: {{pendingInfo.company}}</text>
-      <text class="info {{diffFields.includes('position') ? 'diff' : ''}}">职务: {{pendingInfo.position}}</text>
-      <text class="info {{diffFields.includes('deeds') ? 'diff' : ''}}">重大荣誉或事迹: {{pendingInfo.deeds}}</text>
-    </view>
-  </view>
-</view>
 
-<view class="source-info">
+<view class="source-info" wx:if="{{!noMoreData}}">
   <text class="label">疑似校友信息来源：</text>
   <navigator 
     url="/alumni/pages/check/source/source?url={{pendingInfo.source}}" 

@@ -33,43 +33,58 @@
   text-align: center;
 }
 
-/* 空状态 */
 .empty-state {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 40rpx;
-  background-color: #fff;
+  height: 80vh; /* 让整个页面高度填满屏幕 */
+  background: linear-gradient(to bottom, #f6f9fc, #e0e9f0); /* 渐变背景色 */
+  padding: 20px;
 }
 
-.empty-image {
-  width: 200rpx;
-  height: 200rpx;
-  margin-bottom: 20rpx;
+.empty-content {
+  text-align: center;
+  background-color: #ffffff; /* 背景为白色 */
+  border-radius: 20px; /* 圆角 */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* 轻微的阴影 */
+  padding: 40px;
+  width: 80%; /* 确保内容区域宽度适应屏幕 */
+  max-width: 600px; /* 最大宽度限制 */
 }
 
 .empty-text {
-  font-size: 24rpx;
-  color: #888;
-  margin-bottom: 30rpx;
+  font-size: 24px;
+  color: #333333;
+  margin-bottom: 30px;
+  font-weight: bold;
 }
 
 .refresh-btn {
-  background-color: #0066cc;
-  color: #fff;
-  padding: 10rpx 20rpx;
-  border-radius: 30rpx;
-  font-size: 22rpx;
+  background: linear-gradient(45deg, #4caf50, #81c784); /* 绿色渐变背景 */
+  color: white;
+  border: none;
+  padding: 8px 16px;  /* 保持较小的内边距 */
+  font-size: 16px;  /* 字体变小 */
+  border-radius: 20px; /* 圆角 */
   cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  width: 100px; /* 直接设置固定宽度 */
+  text-align: center; /* 确保文本居中 */
+}
+
+.refresh-btn:hover {
+  transform: scale(1.05); /* 鼠标悬停时轻微放大 */
+  background: linear-gradient(45deg, #388e3c, #66bb6a); /* 悬停时颜色变化 */
+}
+
+.refresh-btn:active {
+  transform: scale(0.98); /* 点击时稍微缩小 */
 }
 
 /* 信息对比容器 */
 .comparison-container {
   padding: 20rpx;
   background-color: #fff;
-  display: flex;
-  justify-content: center;
 }
 
 /* 每个信息区块 */

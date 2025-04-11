@@ -3,7 +3,11 @@ Page({
     sourceInfo: null,
     pendingInfo: null,
     pendingCount: 0,
-    departments: []
+    departments: [],
+    result:'',
+    remark:'',
+    reasonOptions: ['查询档案', '本人认识', '询问他人', '其他'],
+    noMoreData: false,
   },
 
   onLoad: function(options) {
@@ -15,6 +19,18 @@ Page({
 
   onShow() {
       this.fetchPendingMatches();
+  },
+
+  showError(message) {
+    wx.showToast({
+      title: message,
+      icon: 'none'
+    });
+  },
+
+  formatDate(date) {
+    const d = new Date(date);
+    return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
   },
 
   showAgreement(callback) {
@@ -31,126 +47,127 @@ Page({
     });
   },
 
-  async fetchPendingMatches() {
+  fetchPendingMatches() {
     const reviewerId = wx.getStorageSync('userInfo').id;
-    const departments = `(${this.data.departments.map(item => `"${item}"`).join(', ')})`;
-    try {
-      const res = await wx.cloud.callFunction({
-        name: 'alumni',
-        data: {
-          action: 'getPendingMatches',
-          reviewerId: reviewerId,
-          departments: departments
-        }
-      });
+    const departments = this.data.departments;
 
-      if (res.result.code === 200) {
+    wx.cloud.callFunction({
+      name: 'alumni',
+      data: {
+        action: 'getPendingMatches',
+        reviewerId: reviewerId,
+        departments: departments
+      }
+    }).then(res => {
+      if (res.result.code === 200 && res.result.data.pendingCount > 0) {
         const { sourceAlumni, pendingAlumni, pendingCount } = res.result.data;
-        pendingAlumni.birthday = this.formatDate(pendingAlumni.birthday);
-        sourceAlumni.birthday = this.formatDate(sourceAlumni.birthday);
+
+        if (pendingAlumni?.birthday) {
+          pendingAlumni.birthday = this.formatDate(pendingAlumni.birthday);
+        }
+        if (sourceAlumni?.birthday) {
+          sourceAlumni.birthday = this.formatDate(sourceAlumni.birthday);
+        }
 
         this.setData({
           sourceInfo: sourceAlumni,
           pendingInfo: pendingAlumni,
-          pendingCount: pendingCount
+          pendingCount: pendingCount,
+          noMoreData: false
         });
       } else {
         this.showError(res.result.message || '获取数据失败');
+        this.setData({
+          noMoreData: true
+        });
+        wx.showToast({
+          title: '暂无更多待确认数据',
+          icon: 'none',
+          duration: 1500
+        });
+
       }
-    } catch (err) {
+    }).catch(err => {
       console.error('获取待确认数据失败', err);
       this.showError('获取数据失败');
-    }
-  },
-
-  formatDate(date) {
-    const d = new Date(date);
-    return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
-  },
-
-  approveMatch() {
-    this.submitMatch('是校友');
+    });
   },
 
   rejectMatch() {
     this.submitMatch('非校友');
   },
 
-  async submitMatch(status) {
-    const { sourceInfo, pendingInfo } = this.data;
-    const user_id = wx.getStorageSync('userInfo').id;
-
-    if (!sourceInfo || !pendingInfo) {
-      this.showError('没有待确认数据');
-      return;
-    }
-    const options = ['查询档案', '本人认识', '询问他人', '其他'];
-
-    wx.showActionSheet({
-      itemList: options,
-      title: '审核依据',
-      success: async (res) => {
-        let reviewBasis;
-        if (res.tapIndex === options.length - 1) {
-          const inputRes = await new Promise(resolve => {
-            wx.showModal({
-              title: '审核依据 - 其他',
-              editable: true,
-              placeholderText: '请输入具体内容',
-              confirmText: '确认',
-              cancelText: '取消',
-              success: resolve
-            });
-          });
-          if (inputRes.confirm) {
-            reviewBasis = inputRes.content;
-          } else {
-            return;
-          }
-        } else {
-          reviewBasis = options[res.tapIndex];
-        }
-        if (reviewBasis) {
-          const confirmRes = await new Promise(resolve => {
-            wx.showModal({
-              title: '确认选择',
-              content: `你选择的审核依据是：${reviewBasis}`,
-              confirmText: '确认',
-              cancelText: '取消',
-              success: resolve
-            });
-          });
-          if (!confirmRes.confirm) {
-            return;
-          }
-          try {
-            const cloudRes = await wx.cloud.callFunction({
-              name: 'alumni',
-                data: {
-                  action: 'submitMatch',
-                  alum_id: pendingInfo.id,
-                  reviewerId,
-                  status,
-                  reviewBasis
-                }
-            });
-            wx.showToast({ title: cloudRes.result.message || '提交成功', icon: 'success' });
-            await this.fetchPendingMatches();
-          } catch (err) {
-            console.error('提交匹配结果失败', err);
-            this.showError('提交失败');
-          }
-        }
-      },
-      fail: (err) => console.error('显示操作菜单失败', err)
-    });
-    
+  nonMatch() {
+    this.submitMatch('不确定');
   },
 
-  showError(message) {
-    wx.showToast({
-      title: message,
-      icon: 'none'
+  approveMatch() {
+    this.submitMatch('是校友');
+  },
+
+
+  submitMatch(result) {
+
+    if (result === '不确定') {
+      this.doSubmit(result, '');
+      return;
+    }
+
+    const reasonList = this.data.reasonOptions;
+
+    wx.showActionSheet({
+      itemList: reasonList,
+      success: (res) => {
+        const selected = reasonList[res.tapIndex];
+
+        if (selected === '其他') {
+          wx.showModal({
+            title: '请输入其他理由',
+            editable: true,
+            placeholderText: '请输入审核理由',
+            success: modalRes => {
+              if (modalRes.confirm && modalRes.content.trim()) {
+                this.doSubmit(result, modalRes.content.trim());
+              } else {
+                this.showError('请输入有效的理由');
+              }
+            }
+          });
+        } else {
+          this.doSubmit(result, selected);
+        }
+      },
+      fail: (err) => {
+        console.log('用户取消选择或出错', err);
+      }
+    });
+  },
+
+  doSubmit(result, reason) {
+    const reviewerId = wx.getStorageSync('userInfo').id;
+
+    wx.cloud.callFunction({
+      name: 'alumni',
+      data: {
+        action: 'submitReviewResult',
+        alum_id: this.data.pendingInfo.id,
+        reviewerId,
+        result,
+        remark: reason
+      }
+    }).then(res => {
+      if (res.result.code === 200) {
+        wx.showToast({
+          title: '提交成功',
+          icon: 'success'
+        });
+        this.fetchPendingMatches();
+      } else {
+        this.showError(res.result.message || '提交失败');
+      }
+    }).catch(err => {
+      console.error('提交失败', err);
+      this.showError('提交失败');
     });
   }
 });
