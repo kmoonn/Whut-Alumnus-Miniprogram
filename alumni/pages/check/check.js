@@ -4,22 +4,14 @@ Page({
     sourceInfo: null,       // 源校友库信息
     pendingInfo: null,      // 疑似校友信息
     pendingCount: 0,        // 待审核数量
-    receivedDepartments: [] // 所选择学院
+    departments: [] // 所选择学院
   },
 
   onLoad: function(options) {
-    const app = getApp();
+    const departments = JSON.parse(decodeURIComponent(options.departments));
     this.setData({
-      imageBaseUrl: app.globalData.imageBaseUrl
+      departments: departments
     });
-    // 从查询参数中获取选中的学院信息
-    const selectedStr = options.selectedDepartments;
-    if (selectedStr) {
-      const receivedDepartments = decodeURIComponent(selectedStr).split(',');
-      this.setData({
-        receivedDepartments:receivedDepartments
-      });
-    }
   },
 
   onShow() {
@@ -43,12 +35,14 @@ Page({
 
   async fetchPendingMatches() {
     const reviewerId = wx.getStorageSync('userInfo').id;
+    const departments = this.data.departments;
     try {
       const res = await wx.cloud.callFunction({
         name: 'alumni',
         data: {
           action: 'getPendingMatches',
-          reviewerId: reviewerId
+          reviewerId: reviewerId,
+          departments: departments
         }
       });
 
@@ -143,7 +137,7 @@ Page({
                 }
             });
             wx.showToast({ title: cloudRes.result.message || '提交成功', icon: 'success' });
-            this.fetchPendingMatches();
+            await this.fetchPendingMatches();
           } catch (err) {
             console.error('提交匹配结果失败', err);
             this.showError('提交失败');

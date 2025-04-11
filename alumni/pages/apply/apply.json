@@ -1,6 +1,5 @@
 {
-  "component": true,
-  "usingComponents": {
-    "t-dialog": "tdesign-miniprogram/dialog/dialog"
+  "usingComponents" : {
+    "t-dialog" : "tdesign-miniprogram/dialog/dialog"
   }
 }

@@ -1,6 +1,6 @@
 {
-  "usingComponents": {
-    "t-link": "tdesign-miniprogram/link/link"
+  "usingComponents" : {
+    "t-link" : "tdesign-miniprogram/link/link"
   },
-  "enablePullDownRefresh": true
+  "enablePullDownRefresh" : true
 }

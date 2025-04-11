@@ -1,34 +1,47 @@
 .container {
   padding: 40rpx 30rpx;
-  background-color: #f9f9f9;
+  background: linear-gradient(to bottom right, #e6f0ff, #f9fbff);
   min-height: 100vh;
+  box-sizing: border-box;
 }
 
 .title {
-  font-size: 32rpx;
-  font-weight: bold;
-  margin-bottom: 40rpx;
+  font-size: 36rpx;
+  font-weight: 600;
   text-align: center;
-  color: #333;
+  color: #0a3d62;
+  margin-bottom: 10rpx;
+}
+
+.subtitle {
+  font-size: 26rpx;
+  text-align: center;
+  color: #1e90ff;
+  margin-bottom: 40rpx;
 }
 
 .checkbox-group {
   display: flex;
   flex-wrap: wrap;
-  gap: 10rpx;
   justify-content: space-between;
-  margin-bottom: 60rpx;
 }
 
 .checkbox-item {
-  width: 100%;
+  width: 48%;
+  background-color: #ffffff;
+  border: 2rpx solid #cce0ff;
+  border-radius: 16rpx;
+  box-shadow: 0 6rpx 12rpx rgba(0, 85, 170, 0.05);
+  padding: 20rpx;
+  box-sizing: border-box;
+  margin-bottom: 20rpx;
   display: flex;
   align-items: center;
-  padding: 20rpx;
-  background-color: #fff;
-  border: 2rpx solid #ccc;
-  border-radius: 12rpx;
-  box-shadow: 0 4rpx 8rpx rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease-in-out;
+}
+
+.checkbox-item:active {
+  transform: scale(0.98);
 }
 
 .checkbox {
@@ -38,14 +51,29 @@
 
 .checkbox-text {
   font-size: 30rpx;
-  color: #333;
+  color: #0a3d62;
+}
+
+.btn-wrapper {
+  margin-top: 60rpx;
+  display: flex;
+  justify-content: center;
 }
 
 .confirm-btn {
-  width: 40%;
-  background-color: #007aff;
+  width: 60%;
+  background: linear-gradient(to right, #1e90ff, #007aff);
   color: white;
-  font-size: 36rpx;
-  padding: 20rpx 0;
-  border-radius: 12rpx;
+  font-size: 32rpx;
+  padding: 16rpx 0;
+  border: none;
+  border-radius: 32rpx;
+  box-shadow: 0 8rpx 16rpx rgba(0, 122, 255, 0.2);
+  transition: background 0.3s ease;
+}
+
+.confirm-btn[disabled] {
+  background: #b0c4de;
+  color: #eee;
+  box-shadow: none;
 }

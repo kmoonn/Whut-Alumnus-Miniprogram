@@ -1,13 +1,22 @@
+<view class="container">
   <view class="title">请选择您要核实的学院</view>
-  <view class="title" style="color: red;">（至少选择两项）</view>
+  <view class="subtitle">（请至少选择两项）</view>
 
   <checkbox-group class="checkbox-group" bindchange="onCheckboxChange">
     <block wx:for="{{departmentList}}" wx:key="item">
       <label class="checkbox-item">
-        <checkbox value="{{item}}" class="checkbox" /> 
+        <checkbox value="{{item}}" class="checkbox" />
         <text class="checkbox-text">{{item}}</text>
       </label>
     </block>
   </checkbox-group>
 
-  <button class="confirm-btn" type="primary" bindtap="onConfirm">确认选择</button>
+  <view class="btn-wrapper">
+    <button
+            class="confirm-btn"
+            bindtap="onConfirm"
+            disabled="{{selectedDepartments.length < 2}}">
+      确认选择
+    </button>
+  </view>
+</view>

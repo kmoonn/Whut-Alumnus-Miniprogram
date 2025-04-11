@@ -106,7 +106,7 @@ Page({
 
   // 取消修改密码
   onCancelPasswordModal() {
-    wx.showToast({ title: '请修改密码后才能继续使用', icon: 'none' });
+    wx.showToast({ title: '请修改密码', icon: 'error' });
   },
 
   // 确认修改密码

@@ -51,14 +51,14 @@
 
   <view wx:if="{{showPasswordModal}}" class="modal-mask">
     <view class="modal-container">
-      <view class="modal-title">首次登录需修改密码</view>
+      <view class="modal-title">首次登录请修改密码</view>
       <view class="modal-body">
         <input placeholder="新密码" password bindinput="onNewPwdInput" />
         <input placeholder="确认密码" password bindinput="onConfirmPwdInput" />
       </view>
       <view class="modal-footer">
-        <button bindtap="onCancelPasswordModal">取消</button>
-        <button bindtap="onConfirmPasswordModal" type="primary">确认</button>
+        <button class="cancel-btn" bindtap="onCancelPasswordModal" hover-class="button-hover">取消</button>
+        <button class="submit-btn" bindtap="onConfirmPasswordModal" hover-class="button-hover">确认</button>
       </view>
     </view>
   </view>

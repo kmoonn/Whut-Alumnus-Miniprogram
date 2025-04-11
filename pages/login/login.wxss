@@ -160,6 +160,24 @@ checkbox .wx-checkbox-input {
   line-height: 1;
 }
 
+.cancel-btn {
+  width: 100%;
+  height: 88rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #27464a, #27464a);
+  color: white;
+  font-size: 32rpx;
+  font-weight: 500;
+  border-radius: 12rpx;
+  border: none;
+  transition: all 0.3s ease;
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+}
+
 .button-hover {
   transform: translateY(2rpx);
   box-shadow: 0 4rpx 8rpx rgba(0, 0, 0, 0.1);
@@ -241,7 +259,7 @@ checkbox .wx-checkbox-input {
 
 /* 标题部分 */
 .modal-title {
-  font-size: 36rpx;
+  font-size: 32rpx;
   font-weight: bold;
   text-align: center;
   margin-bottom: 40rpx;
