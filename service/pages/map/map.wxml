@@ -1,33 +1,76 @@
+<view class="container">
+  <!-- 顶部区域 -->
 <view class="top-bar">
-  <text class="top-title">校友地图</text>
+  <view class="left-section">
+    <text class="top-title">校友地图</text>
+    <view class="reset-btn" bindtap="resetLocation">
+      <text class="iconfont icon-reset"></text>
+      <text>重置</text>
+    </view>
+  </view>
+  <view class="city-picker" bindtap="showSelector">
+    <view class="picker-content">
+      <text>{{selectedCity || '选择城市'}}</text>
+      <text class="iconfont icon-arrow-down"></text>
+    </view>
+  </view>
+</view>
+  
+  <!-- 地图区域 -->
+  <map
+    id="map"
+    longitude="{{longitude}}"
+    latitude="{{latitude}}"
+    scale="{{scale}}"
+    markers="{{markers}}"
+    show-location
+    enable-poi="true"
+    class="map"
+    bindmarkertap="onMarkerTap">
+  </map>
+
+  <!-- 底部单位列表面板 -->
+<view class="bottom-sheet {{showPanel ? 'bottom-sheet-show' : ''}}">
+  <!-- 顶部把手区域 -->
+  <view class="bottom-sheet-header" bindtap="togglePanel">
+    <view class="handle-bar"></view>
+    <view class="header-content">
+      <text class="header-title">校友单位列表</text>
+      <text class="header-count">共 {{companies.length}} 家单位</text>
+    </view>
+  </view>
+  
+  <!-- 列表区域 -->
+  <scroll-view 
+    scroll-y 
+    class="company-list-container"
+    enhanced="{{true}}"
+    show-scrollbar="{{false}}"
+    bounces="{{true}}">
+    <view class="company-list">
+      <view 
+        class="company-item {{selectedCompany === item.id ? 'active' : ''}}"
+        wx:for="{{companies}}"
+        wx:key="id"
+        bindtap="onCompanyTap"
+        data-id="{{item.id}}">
+        <view class="company-info">
+          <text class="company-name">{{item.company}}</text>
+        </view>
+        <view class="alumni-count">
+          <text>{{item.total}}位校友</text>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
 </view>
 
-<map
-  id="map"
-  longitude="{{longitude}}"
-  latitude="{{latitude}}"
-  scale="12"
-  markers="{{markers}}"
-  show-location
-  enable-poi="false"
-  class="map"
-  bindmarkertap="onMarkerTap">
-</map>
+  <selector-component
+  show="{{selectorVisible}}"
+  key="B4MBZ-4AAKG-YVYQY-QOKDS-TXVHV-Y5FPA"
+  referer="whut"
+  bindselect="onSelectCity"
+  hotCitys="北京,上海,广州,深圳,武汉"
+></selector-component>
 
-<view class="unit-list">
-  <view class="title">📍附近校友单位</view>
-
-  <t-cell-group>
-    <t-cell
-      wx:for="{{nearestUnits}}"
-      wx:key="id"
-      title="{{item.company}}"
-      arrow
-      hover
-      bind:click="onUnitTap"
-      data-id="{{item.id}}"
-    />
-  </t-cell-group>
 </view>
-
-

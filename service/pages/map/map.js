@@ -3,20 +3,46 @@ Page({
     imageBaseUrl: '',
     latitude: 0,
     longitude: 0,
-    markers: [], // 地图上的标记
-    units: [], // 存储单位数据
-    nearestUnits: [] // 最近的单位
+    scale: 5,
+    markers: [],
+    companies: [],
+    selectorVisible: false,
+    selectedProvince: null,
+    selectedCity: null,
+    showPanel: false,
   },
 
-  onLoad: function() {
+  onLoad: function () {
     const app = getApp();
     this.setData({
       imageBaseUrl: app.globalData.imageBaseUrl
     });
     this.getUserLocation();
+    this.loadCompanies();
   },
 
-  // 获取用户当前位置
+  showSelector() {
+    this.setData({
+      selectorVisible: true,
+    });
+  },
+
+  onSelectCity(e) {
+    const { province,city } = e.detail;
+    this.setData({
+      selectedProvince: province.fullname,
+      selectedCity: city.fullname,
+      latitude: city.location.latitude,
+      longitude: city.location.longitude,
+      scale: 10
+    });
+    if(this.data.selectedCity == '深圳市' ) {
+      this.loadCompanies('深圳市');
+    } else {
+    this.loadCompanies(this.data.selectedProvince);
+  }
+  },
+
   getUserLocation() {
     wx.getLocation({
       type: 'gcj02',
@@ -25,46 +51,33 @@ Page({
           latitude: res.latitude,
           longitude: res.longitude
         });
-        this.loadUnits(res.latitude, res.longitude);
       },
       fail: () => {
         wx.showToast({ title: '无法获取位置', icon: 'none' });
-        this.loadUnits(); // fallback
       }
     });
   },
 
-  loadUnits(userLat = 30.5931, userLng = 114.3054) {
+  loadCompanies(region = '%') {
     wx.cloud.callFunction({
       name: 'service',
-      data: { action: 'getCompanyList' }, // 获取所有单位
+      data: { action: 'getCompanyList',
+      region: region
+     },
       success: res => {
         if (res.result.success === 200) {
-          const units = res.result.result;
-          const markers = units.map(unit => ({
-            id: unit.id,
-            latitude: unit.lat,
-            longitude: unit.lng,
-            title: unit.company, // 公司名称
-            iconPath: '{{imageBaseUrl}}%E5%85%AC%E5%8F%B8.png', // 图标路径
+          const companies = res.result.result;
+          const markers = companies.map(company => ({
+            id: company.id,
+            latitude: company.lat,
+            longitude: company.lng,
+            iconPath: this.data.imageBaseUrl+'公司.png',
             width: 30,
             height: 30
           }));
-
-          // 排序最近单位
-          const unitsWithDistance = units.map(unit => ({
-            ...unit,
-            distance: this.getDistance(userLat, userLng, unit.lat, unit.lng)
-          }));
-
-          const nearestUnits = unitsWithDistance
-            .sort((a, b) => a.distance - b.distance)
-            .slice(0, 5); // 获取最近的5个单位
-
           this.setData({
             markers,
-            units,
-            nearestUnits
+            companies
           });
         } else {
           wx.showToast({
@@ -75,41 +88,46 @@ Page({
       },
       fail: error => {
         wx.showToast({
-          title: '加载单位数据失败',
+          title: '加载数据失败',
           icon: 'none'
         });
       }
     });
   },
 
-  getDistance(lat1, lon1, lat2, lon2) {
-    const rad = d => d * Math.PI / 180;
-    const R = 6371; // 地球半径 km
-    const dLat = rad(lat2 - lat1);
-    const dLon = rad(lon2 - lon1);
-    const a = Math.sin(dLat / 2) ** 2 +
-      Math.cos(rad(lat1)) * Math.cos(rad(lat2)) *
-      Math.sin(dLon / 2) ** 2;
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    return R * c;
-  },
-
   // 地图标记点击事件
   onMarkerTap(e) {
     const markerId = e.markerId;
-    const company = this.data.units.find(item => item.id === markerId).company;
+    const company = this.data.companies.find(item => item.id === markerId).company;
     wx.navigateTo({
       url: `/service/pages/map/alumni/alumni?company=${company}`
     });
   },
 
-  // 单位列表点击事件
-  onUnitTap(e) {
-    const id = e.currentTarget.dataset.id;;
-    const company = this.data.units.find(item => item.id === id).company;
+  togglePanel() {
+    this.setData({
+      showPanel: !this.data.showPanel
+    });
+  },
+
+  // 点击列表项
+  onCompanyTap(e) {
+    const id = e.currentTarget.dataset.id;
+    const company = this.data.companies.find(item => item.id === id).company;
     console.log(company);
     wx.navigateTo({
       url: `/service/pages/map/alumni/alumni?company=${company}`
     });
+  },
+
+  resetLocation() {
+    this.setData({
+      scale: 12,
+      selectedCity: null,  // 清除选中的城市
+      selectedProvince: null  // 清除选中的省份
+    });
+    this.getUserLocation();
+    this.loadCompanies();
   }
+
 });

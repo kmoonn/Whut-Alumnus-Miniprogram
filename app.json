@@ -35,6 +35,12 @@
     "kbone": true,
     "weui": true
   },
+  "plugins": {
+    "citySelector": {
+      "version": "1.0.2",
+      "provider": "wx63ffb7b7894e99ae"
+    }
+  },
   "sitemapLocation": "sitemap.json",
   "lazyCodeLoading": "requiredComponents",
   "permission": {

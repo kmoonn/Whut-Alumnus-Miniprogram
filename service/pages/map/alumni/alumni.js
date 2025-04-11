@@ -1,12 +1,15 @@
 Page({
   data: {
-    defaultAvatar: '{{imageBaseUrl}}%E6%A0%A1%E5%8F%8B%E5%A4%B4%E5%83%8F.png',
+    imageBaseUrl: '',
     company: '',
     alumniList: [] // 校友列表
   },
 
   onLoad(options) {
-    console.log(options)
+    const app = getApp();
+    this.setData({
+      imageBaseUrl: app.globalData.imageBaseUrl
+    });
     this.setData({
       company: options.company // 获取传递过来的公司名称
     });
@@ -15,7 +18,7 @@ Page({
 
   loadAlumni(company) {
     wx.cloud.callFunction({
-      name: 'map',
+      name: 'service',
       data: { action: 'getAlumniByCompany', company: company }, // 获取该公司校友信息
       success: res => {
         if (res.result.success === 200) {
@@ -55,7 +58,7 @@ Page({
     if (id) {
       wx.showLoading({ title: '加载中', mask: true });
       wx.navigateTo({
-        url: `/alumni/pages/famous_detail/famous_detail?id=${id}`
+        url: `/alumni/pages/famous/detaildetail?id=${id}`
       });
     } else {
       console.error('未获取到有效的 id');
