@@ -1,10 +1,9 @@
 Page({
   data: {
-    imageBaseUrl: '',
-    sourceInfo: null,       // 源校友库信息
-    pendingInfo: null,      // 疑似校友信息
-    pendingCount: 0,        // 待审核数量
-    departments: [] // 所选择学院
+    sourceInfo: null,
+    pendingInfo: null,
+    pendingCount: 0,
+    departments: []
   },
 
   onLoad: function(options) {
@@ -17,7 +16,6 @@ Page({
   onShow() {
       this.fetchPendingMatches();
   },
-
 
   showAgreement(callback) {
     wx.showModal({
@@ -35,7 +33,7 @@ Page({
 
   async fetchPendingMatches() {
     const reviewerId = wx.getStorageSync('userInfo').id;
-    const departments = this.data.departments;
+    const departments = `(${this.data.departments.map(item => `"${item}"`).join(', ')})`;
     try {
       const res = await wx.cloud.callFunction({
         name: 'alumni',
@@ -54,13 +52,13 @@ Page({
         this.setData({
           sourceInfo: sourceAlumni,
           pendingInfo: pendingAlumni,
-          pendingCount
+          pendingCount: pendingCount
         });
       } else {
         this.showError(res.result.message || '获取数据失败');
       }
     } catch (err) {
-      console.error('获取待匹配数据失败', err);
+      console.error('获取待确认数据失败', err);
       this.showError('获取数据失败');
     }
   },
@@ -71,11 +69,11 @@ Page({
   },
 
   approveMatch() {
-    this.submitMatch('approved');
+    this.submitMatch('是校友');
   },
 
   rejectMatch() {
-    this.submitMatch('rejected');
+    this.submitMatch('非校友');
   },
 
   async submitMatch(status) {
@@ -83,7 +81,7 @@ Page({
     const user_id = wx.getStorageSync('userInfo').id;
 
     if (!sourceInfo || !pendingInfo) {
-      this.showError('没有待匹配数据');
+      this.showError('没有待确认数据');
       return;
     }
     const options = ['查询档案', '本人认识', '询问他人', '其他'];
@@ -148,7 +146,6 @@ Page({
     });
     
   },
-    
 
   showError(message) {
     wx.showToast({

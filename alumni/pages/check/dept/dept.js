@@ -13,7 +13,6 @@ Page({
         });
     },
 
-
     deptList() {
         wx.showLoading({ title: '加载中' });
         wx.cloud.callFunction({

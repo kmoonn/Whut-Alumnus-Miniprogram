@@ -68,6 +68,8 @@
 .comparison-container {
   padding: 20rpx;
   background-color: #fff;
+  display: flex;
+  justify-content: center;
 }
 
 /* 每个信息区块 */
@@ -104,7 +106,7 @@
 }
 
 .diff {
-  color: #ff3300; 
+  color: #ff3300;
 }
 
 /* 来源信息 */
