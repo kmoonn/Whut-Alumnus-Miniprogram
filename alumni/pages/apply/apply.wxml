@@ -23,7 +23,7 @@
   </view>
   <view class="form-item">
     <text class="label">所在地<text class="required">*</text></text>
-    <picker mode="region" bindchange="onRegionChange">
+    <picker mode="region" level="city" bindchange="onRegionChange">
       <view class="picker">{{region || '请选择所在地'}}</view>
     </picker>
   </view>
